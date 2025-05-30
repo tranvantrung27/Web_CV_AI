@@ -32,35 +32,38 @@
                     <span></span>
                     <span></span>
                 </button>
-
+                @{
+                    var currentController = ViewContext.RouteData.Values["controller"]?.ToString().ToLower() ?? "";
+                    var currentAction = ViewContext.RouteData.Values["action"]?.ToString().ToLower() ?? "";
+                }
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <!-- Main Navigation -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home me-1"></i>
-                                Trang chủ
+                            <a class="nav-link nav-link-custom @(currentController == "home" && currentAction == "index" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="CV" asp-action="Index">
-                                <i class="fas fa-file-alt me-1"></i>
-                                Sơ yếu lý lịch
+                            <a class="nav-link nav-link-custom @(currentController == "cv" && currentAction == "index" ? "active" : "")"
+                               asp-area="" asp-controller="CV" asp-action="Index">
+                                <i class="fas fa-file-alt me-1"></i> Sơ yếu lý lịch
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link nav-link-custom dropdown-toggle" href="#" id="servicesDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-cogs me-1"></i>
-                                Dịch vụ
+                            <a class="nav-link nav-link-custom dropdown-toggle" href="#" id="servicesDropdown" role="button">
+                                <i class="fas fa-cogs me-1"></i> Dịch vụ
                             </a>
                             <ul class="dropdown-menu custom-dropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-robot me-2"></i>Tạo CV bằng AI</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Chỉnh sửa CV</a></li>
+                                <li><a class="dropdown-item" asp-controller="CreateCVWithAI" asp-action="Index"><i class="fas fa-robot me-2"></i>Tạo CV bằng AI</a></li>
+                                <li><a class="dropdown-item" asp-controller="EditCV" asp-action="Index"><i class="fas fa-edit me-2"></i>Chỉnh sửa CV</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Tải mẫu CV</a></li>
+                                <li><a class="dropdown-item" asp-controller="DownloadTemplates" asp-action="Index"><i class="fas fa-download me-2"></i>Tải mẫu CV</a></li>
                             </ul>
+
                         </li>
+
                     </ul>
 
                     <!-- Search Bar -->
@@ -78,24 +81,22 @@
                     <!-- Right side utilities -->
                     <div class="navbar-utilities">
                         <!-- Notifications -->
-<div class="nav-item dropdown">
-    <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button"
-       data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-bell"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
-            3
-        </span>
-    </a>
-                            <ul class="dropdown-menu notification-dropdown dropdown-menu-start">
+
+                            <div class="nav-item dropdown">
+                                <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">3</span>
+                                </a>
+                            <ul class="dropdown-menu notification-dropdown dropdown-menu-start" aria-labelledby="notificationDropdown">
 
 
-        <li class="dropdown-header">Thông báo mới</li>
-        <li>
-            <a class="dropdown-item notification-item" href="#">
-                <div class="notification-content">
-                    <div class="notification-text">CV của bạn đã được tạo thành công</div>
-                    <small class="text-muted">2 phút trước</small>
-                </div>
+                                <li class="dropdown-header">Thông báo mới</li>
+                                <li>
+                                    <a class="dropdown-item notification-item" href="#">
+                                        <div class="notification-content">
+                                            <div class="notification-text">CV của bạn đã được tạo thành công</div>
+                                            <small class="text-muted">2 phút trước</small>
+                                        </div>
             </a>
         </li>
         <li>
@@ -113,13 +114,12 @@
 
 <!-- User Profile -->
 <div class="nav-item dropdown">
-    <a class="nav-link p-0" href="#" id="userDropdown"
-       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <div class="user-avatar">
-            <i class="fas fa-user"></i>
-        </div>
-    </a>
-                            <ul class="dropdown-menu user-dropdown dropdown-menu-start">
+                            <a class="nav-link p-0" href="#" id="userDropdown" role="button" aria-expanded="false">
+                                <div class="user-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu user-dropdown dropdown-menu-start" aria-labelledby="userDropdown">
 
 
         <li class="user-profile-header">
@@ -140,7 +140,6 @@
             </a>
         </li>
         <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>CV đã tạo</a></li>
         <li><hr class="dropdown-divider"></li>
         <li>
             <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">

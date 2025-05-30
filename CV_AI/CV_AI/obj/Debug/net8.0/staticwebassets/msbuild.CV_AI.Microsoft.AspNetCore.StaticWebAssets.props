@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gb6fo0djo4</Fingerprint>
-      <Integrity>RIqjJD+0zF2xJRUVLxKcXo/emKnO1YdznNICjc5W4KM=</Integrity>
+      <Fingerprint>3atcn9uv1m</Fingerprint>
+      <Integrity>xQUjNd6ihYv/U33eBEP6/vUQfL7X4t52Ak+XHClMGMU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</OriginalItemSpec>
@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>t3yspw4uge</Fingerprint>
-      <Integrity>V2v2OBC3ym2j7Sqy3BnwN1TNEimM7xlzxertfwK9ewc=</Integrity>
+      <Fingerprint>mfp301t8wt</Fingerprint>
+      <Integrity>fuj3LjG7O06VdPUtu9uaLMydMPAOQjODHhgnv2IQnD8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logo\cv_logo.png'))</OriginalItemSpec>
@@ -120,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>32fg5pw8lu</Fingerprint>
-      <Integrity>xSZ5yHa872adMLQzj7m6pQITvVs+rbQUN3eWjXuhUT0=</Integrity>
+      <Fingerprint>z2pxbw15el</Fingerprint>
+      <Integrity>O7gu7yYDCxBg5CQtPsUNQkC4NM34f547RlulbpgzOFU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\header.js'))</OriginalItemSpec>

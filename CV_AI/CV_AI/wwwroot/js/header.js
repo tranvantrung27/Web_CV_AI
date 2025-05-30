@@ -25,6 +25,7 @@ function initializeHeader() {
 
     // Handle dropdown menus
     initializeDropdowns();
+
 }
 
 /**
@@ -33,12 +34,12 @@ function initializeHeader() {
 function setActiveNavigationItem() {
     const currentPath = window.location.pathname.toLowerCase();
 
-    $('.nav-link-custom').each(function () {
-        const href = $(this).attr('href');
-        if (href && currentPath.includes(href.toLowerCase())) {
-            $(this).addClass('active');
-        }
+
+    $('.nav-link-custom').on('click', function () {
+        $('.nav-link-custom').removeClass('active');
+        $(this).addClass('active');
     });
+
 }
 
 /**
@@ -55,25 +56,75 @@ function initializeTooltips() {
  * Initialize dropdown menus with custom behavior
  */
 function initializeDropdowns() {
-    // Close dropdown when clicking outside
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('.dropdown').length) {
-            $('.dropdown-menu').removeClass('show');
+    let timeoutId;
+
+    // Khi hover vào nút hoặc dropdown menu thì mở menu
+    $('.nav-item.dropdown').on('mouseenter', function () {
+        clearTimeout(timeoutId); 
+        $(this).addClass('show');
+        $(this).find('.dropdown-menu').addClass('show');
+    });
+
+    // Khi chuột rời cả nút và dropdown menu, delay 300ms mới đóng
+    $('.nav-item.dropdown').on('mouseleave', function () {
+        const $this = $(this);
+        timeoutId = setTimeout(function () {
+            $this.removeClass('show');
+            $this.find('.dropdown-menu').removeClass('show');
+        }, 100); // Thời gian delay 300ms
+    });
+}
+
+function initializeNotificationsAndUserDropdowns() {
+    const notificationDropdown = $('#notificationDropdown').parent();
+    const userDropdown = $('#userDropdown').parent();
+
+    // Click mở/đóng menu Thông báo
+    $('#notificationDropdown').on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (notificationDropdown.hasClass('show')) {
+            closeDropdown(notificationDropdown);
+        } else {
+            openDropdown(notificationDropdown);
+            closeDropdown(userDropdown);
         }
     });
 
-    // Add hover effect for desktop
-    if (window.innerWidth > 991) {
-        $('.dropdown').hover(
-            function () {
-                $(this).find('.dropdown-menu').addClass('show');
-            },
-            function () {
-                $(this).find('.dropdown-menu').removeClass('show');
-            }
-        );
+    // Click mở/đóng menu User
+    $('#userDropdown').on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (userDropdown.hasClass('show')) {
+            closeDropdown(userDropdown);
+        } else {
+            openDropdown(userDropdown);
+            closeDropdown(notificationDropdown);
+        }
+    });
+
+    // Click ra ngoài đóng cả 2 dropdown
+    $(document).on('click', function () {
+        closeDropdown(notificationDropdown);
+        closeDropdown(userDropdown);
+    });
+
+    function openDropdown(dropdown) {
+        dropdown.addClass('show');
+        dropdown.find('.dropdown-menu').addClass('show');
+        dropdown.find('> a').attr('aria-expanded', 'true');
+    }
+
+    function closeDropdown(dropdown) {
+        dropdown.removeClass('show');
+        dropdown.find('.dropdown-menu').removeClass('show');
+        dropdown.find('> a').attr('aria-expanded', 'false');
     }
 }
+
+
 
 /**
  * Theme toggle functionality
@@ -545,7 +596,7 @@ function initializeAllHeaderFeatures() {
     initializeAdvancedSearch();
     initializeAccessibility();
     initializePerformanceMonitoring();
-
+    initializeNotificationsAndUserDropdowns(); // <-- thêm dòng này
     // Add custom CSS for additional features
     addCustomStyles();
 }

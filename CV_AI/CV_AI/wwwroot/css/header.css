@@ -62,6 +62,9 @@
 .navbar-nav {
     gap: 0.5rem;
 }
+.nav-item.dropdown.show > .dropdown-menu {
+    display: block;
+}
 
 /* Navigation Links */
 .nav-link-custom {
