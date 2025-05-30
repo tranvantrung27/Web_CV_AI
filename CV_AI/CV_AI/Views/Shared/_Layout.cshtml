@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CV_AI</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CV_AI.styles.css" asp-append-version="true" />
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <!-- /Logo -->
+                <a class="cv-logo" href="/">
+                    <img src="~/images/logo/cv_logo.png" alt="CV_AI Logo" />
+                </a>
+
+
+
+                <!-- Mobile toggle button -->
+                <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Main Navigation -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>
+                                Trang chủ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="CV" asp-action="Index">
+                                <i class="fas fa-file-alt me-1"></i>
+                                Sơ yếu lý lịch
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-link-custom dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cogs me-1"></i>
+                                Dịch vụ
+                            </a>
+                            <ul class="dropdown-menu custom-dropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-robot me-2"></i>Tạo CV bằng AI</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Chỉnh sửa CV</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Tải mẫu CV</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <div class="search-container me-4">
+                        <form class="d-flex search-form">
+                            <div class="search-wrapper">
+                                <input class="form-control search-input" type="search" placeholder="Tìm kiếm mẫu CV, hướng dẫn..." aria-label="Search">
+                                <button class="btn search-btn" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Right side utilities -->
+                    <div class="navbar-utilities">
+                        <!-- Notifications -->
+<div class="nav-item dropdown">
+    <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button"
+       data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bell"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+            3
+        </span>
+    </a>
+                            <ul class="dropdown-menu notification-dropdown dropdown-menu-start">
+
+
+        <li class="dropdown-header">Thông báo mới</li>
+        <li>
+            <a class="dropdown-item notification-item" href="#">
+                <div class="notification-content">
+                    <div class="notification-text">CV của bạn đã được tạo thành công</div>
+                    <small class="text-muted">2 phút trước</small>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item notification-item" href="#">
+                <div class="notification-content">
+                    <div class="notification-text">Có template mới được cập nhật</div>
+                    <small class="text-muted">1 giờ trước</small>
+                </div>
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-center" href="#">Xem tất cả thông báo</a></li>
+    </ul>
+</div>
+
+<!-- User Profile -->
+<div class="nav-item dropdown">
+    <a class="nav-link p-0" href="#" id="userDropdown"
+       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="user-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+    </a>
+                            <ul class="dropdown-menu user-dropdown dropdown-menu-start">
+
+
+        <li class="user-profile-header">
+            <div class="d-flex align-items-center">
+                <div class="user-avatar-small me-3">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <div class="fw-bold">Nguyễn Văn A</div>
+                    <small class="text-muted">user@example.com</small>
+                </div>
+            </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
+                <i class="fas fa-user-circle me-2"></i>Hồ sơ cá nhân
+            </a>
+        </li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>CV đã tạo</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">
+                <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập
+            </a>
+        </li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+    </ul>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid main-content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - CV_AI -
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a> |
+            <a href="#">Điều khoản sử dụng</a> |
+            <a href="#">Liên hệ</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/header.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
