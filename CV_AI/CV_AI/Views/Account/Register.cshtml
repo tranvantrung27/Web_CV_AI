@@ -1,0 +1,129 @@
+@model CV_AI.Models.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Đăng ký tài khoản</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="FullName" class="control-label">Họ tên</label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Password" class="control-label">Mật khẩu</label>
+                                    <input asp-for="Password" class="form-control" type="password" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="ConfirmPassword" class="control-label">Xác nhận mật khẩu</label>
+                                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Role" class="control-label">Vai trò</label>
+                            <select asp-for="Role" class="form-control" id="roleSelect">
+                                <option value="">Chọn vai trò</option>
+                                <option value="Candidate">Ứng viên</option>
+                                <option value="Employer">Nhà tuyển dụng</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Candidate fields -->
+                        <div id="candidateFields" style="display: none;">
+                            <div class="form-group mb-3">
+                                <label asp-for="Phone" class="control-label">Số điện thoại</label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Employer fields -->
+                        <div id="employerFields" style="display: none;">
+                            <div class="form-group mb-3">
+                                <label asp-for="CompanyName" class="control-label">Tên công ty</label>
+                                <input asp-for="CompanyName" class="form-control" />
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="CompanyWebsite" class="control-label">Website công ty</label>
+                                <input asp-for="CompanyWebsite" class="form-control" />
+                                <span asp-validation-for="CompanyWebsite" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="CompanyAddress" class="control-label">Địa chỉ công ty</label>
+                                <input asp-for="CompanyAddress" class="form-control" />
+                                <span asp-validation-for="CompanyAddress" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Description" class="control-label">Mô tả công ty</label>
+                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <p>Đã có tài khoản? <a asp-action="Login">Đăng nhập</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            $('#roleSelect').change(function() {
+                var role = $(this).val();
+                if (role === 'Candidate') {
+                    $('#candidateFields').show();
+                    $('#employerFields').hide();
+                } else if (role === 'Employer') {
+                    $('#candidateFields').hide();
+                    $('#employerFields').show();
+                } else {
+                    $('#candidateFields').hide();
+                    $('#employerFields').hide();
+                }
+            });
+        });
+    </script>
+} 

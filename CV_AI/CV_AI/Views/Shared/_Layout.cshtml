@@ -23,8 +23,6 @@
                     <img src="~/images/logo/cv_logo.png" alt="CV_AI Logo" />
                 </a>
 
-
-
                 <!-- Mobile toggle button -->
                 <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +33,9 @@
                 @{
                     var currentController = ViewContext.RouteData.Values["controller"]?.ToString().ToLower() ?? "";
                     var currentAction = ViewContext.RouteData.Values["action"]?.ToString().ToLower() ?? "";
+                    var userRole = Context.Session.GetString("UserRole");
+                    var userName = Context.Session.GetString("UserName");
+                    var userEmail = Context.Session.GetString("UserEmail");
                 }
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <!-- Main Navigation -->
@@ -45,6 +46,36 @@
                                 <i class="fas fa-home me-1"></i> Trang chủ
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "index" ? "active" : "")"
+                               asp-area="" asp-controller="Job" asp-action="Index">
+                                <i class="fas fa-briefcase me-1"></i> Tìm việc làm
+                            </a>
+                        </li>
+                        @if (userRole == "Employer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "create" ? "active" : "")"
+                                   asp-area="" asp-controller="Job" asp-action="Create">
+                                    <i class="fas fa-plus me-1"></i> Đăng tin tuyển dụng
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "myjobs" ? "active" : "")"
+                                   asp-area="" asp-controller="Job" asp-action="MyJobs">
+                                    <i class="fas fa-list me-1"></i> Tin đã đăng
+                                </a>
+                            </li>
+                        }
+                        @if (userRole == "Candidate")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "myapplications" ? "active" : "")"
+                                   asp-area="" asp-controller="Job" asp-action="MyApplications">
+                                    <i class="fas fa-file-alt me-1"></i> Đơn ứng tuyển
+                                </a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link nav-link-custom @(currentController == "cv" && currentAction == "index" ? "active" : "")"
                                asp-area="" asp-controller="CV" asp-action="Index">
@@ -61,16 +92,14 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" asp-controller="DownloadTemplates" asp-action="Index"><i class="fas fa-download me-2"></i>Tải mẫu CV</a></li>
                             </ul>
-
                         </li>
-
                     </ul>
 
                     <!-- Search Bar -->
                     <div class="search-container me-4">
-                        <form class="d-flex search-form">
+                        <form class="d-flex search-form" asp-controller="Job" asp-action="Index" method="get">
                             <div class="search-wrapper">
-                                <input class="form-control search-input" type="search" placeholder="Tìm kiếm mẫu CV, hướng dẫn..." aria-label="Search">
+                                <input class="form-control search-input" type="search" name="searchTerm" placeholder="Tìm kiếm việc làm..." aria-label="Search">
                                 <button class="btn search-btn" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -80,76 +109,87 @@
 
                     <!-- Right side utilities -->
                     <div class="navbar-utilities">
-                        <!-- Notifications -->
-
+                        @if (!string.IsNullOrEmpty(userRole))
+                        {
+                            <!-- Notifications -->
                             <div class="nav-item dropdown">
                                 <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button" aria-expanded="false">
                                     <i class="fas fa-bell"></i>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">3</span>
                                 </a>
-                            <ul class="dropdown-menu notification-dropdown dropdown-menu-start" aria-labelledby="notificationDropdown">
+                                <ul class="dropdown-menu notification-dropdown dropdown-menu-start" aria-labelledby="notificationDropdown">
+                                    <li class="dropdown-header">Thông báo mới</li>
+                                    <li>
+                                        <a class="dropdown-item notification-item" href="#">
+                                            <div class="notification-content">
+                                                <div class="notification-text">CV của bạn đã được tạo thành công</div>
+                                                <small class="text-muted">2 phút trước</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item notification-item" href="#">
+                                            <div class="notification-content">
+                                                <div class="notification-text">Có template mới được cập nhật</div>
+                                                <small class="text-muted">1 giờ trước</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-center" href="#">Xem tất cả thông báo</a></li>
+                                </ul>
+                            </div>
 
-
-                                <li class="dropdown-header">Thông báo mới</li>
-                                <li>
-                                    <a class="dropdown-item notification-item" href="#">
-                                        <div class="notification-content">
-                                            <div class="notification-text">CV của bạn đã được tạo thành công</div>
-                                            <small class="text-muted">2 phút trước</small>
+                            <!-- User Profile -->
+                            <div class="nav-item dropdown">
+                                <a class="nav-link p-0" href="#" id="userDropdown" role="button" aria-expanded="false">
+                                    <div class="user-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu user-dropdown dropdown-menu-start" aria-labelledby="userDropdown">
+                                    <li class="user-profile-header">
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-avatar-small me-3">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="user-info">
+                                                <div class="fw-bold">@userName</div>
+                                                <small class="text-muted">@userEmail</small>
+                                                <div class="badge bg-primary">@userRole</div>
+                                            </div>
                                         </div>
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item notification-item" href="#">
-                <div class="notification-content">
-                    <div class="notification-text">Có template mới được cập nhật</div>
-                    <small class="text-muted">1 giờ trước</small>
-                </div>
-            </a>
-        </li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-center" href="#">Xem tất cả thông báo</a></li>
-    </ul>
-</div>
-
-<!-- User Profile -->
-<div class="nav-item dropdown">
-                            <a class="nav-link p-0" href="#" id="userDropdown" role="button" aria-expanded="false">
-                                <div class="user-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu user-dropdown dropdown-menu-start" aria-labelledby="userDropdown">
-
-
-        <li class="user-profile-header">
-            <div class="d-flex align-items-center">
-                <div class="user-avatar-small me-3">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-info">
-                    <div class="fw-bold">Nguyễn Văn A</div>
-                    <small class="text-muted">user@example.com</small>
-                </div>
-            </div>
-        </li>
-        <li><hr class="dropdown-divider"></li>
-        <li>
-            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
-                <i class="fas fa-user-circle me-2"></i>Hồ sơ cá nhân
-            </a>
-        </li>
-        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li>
-            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">
-                <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập
-            </a>
-        </li>
-        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
-    </ul>
-</div>
-
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
+                                            <i class="fas fa-user-circle me-2"></i>Hồ sơ cá nhân
+                                        </a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- Login/Register buttons -->
+                            <div class="nav-item">
+                                <a class="nav-link nav-btn" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                                </a>
+                            </div>
+                            <div class="nav-item">
+                                <a class="nav-link nav-btn btn-primary" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-user-plus me-1"></i>Đăng ký
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -158,6 +198,20 @@
 
     <div class="container-fluid main-content">
         <main role="main" class="pb-3">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
             @RenderBody()
         </main>
     </div>

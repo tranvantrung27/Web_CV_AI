@@ -1,0 +1,143 @@
+@model CV_AI.Models.JobPost
+
+@{
+    ViewData["Title"] = Model.Title;
+    var userRole = Context.Session.GetString("UserRole");
+    var hasApplied = ViewBag.HasApplied ?? false;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Job Details -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>@Model.Title</h2>
+                    <h5 class="text-muted">@Model.Employer.CompanyName</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <strong>Địa điểm:</strong> @(Model.Location ?? "Không xác định")
+                        </div>
+                        <div class="col-md-6">
+                            <i class="fas fa-money-bill-wave text-success"></i>
+                            <strong>Mức lương:</strong> @(Model.Salary ?? "Thương lượng")
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <i class="fas fa-clock text-info"></i>
+                            <strong>Đăng ngày:</strong> @Model.PostedDate.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="col-md-6">
+                            <i class="fas fa-calendar-alt text-warning"></i>
+                            <strong>Hạn nộp:</strong> @(Model.ExpirationDate?.ToString("dd/MM/yyyy") ?? "Không giới hạn")
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h5>Mô tả công việc</h5>
+                    <p>@Model.Description</p>
+
+                    @if (!string.IsNullOrEmpty(Model.Requirements))
+                    {
+                        <h5>Yêu cầu</h5>
+                        <p>@Model.Requirements</p>
+                    }
+
+                    <div class="mt-3">
+                        <h6>Ngành nghề:</h6>
+                        @foreach (var jobCategory in Model.JobPostCategories)
+                        {
+                            <span class="badge bg-primary me-1">@jobCategory.Category.Name</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Information -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Thông tin công ty</h5>
+                </div>
+                <div class="card-body">
+                    <h6>@Model.Employer.CompanyName</h6>
+                    @if (!string.IsNullOrEmpty(Model.Employer.CompanyAddress))
+                    {
+                        <p><i class="fas fa-map-marker-alt"></i> @Model.Employer.CompanyAddress</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Employer.CompanyWebsite))
+                    {
+                        <p><i class="fas fa-globe"></i> <a href="@Model.Employer.CompanyWebsite" target="_blank">@Model.Employer.CompanyWebsite</a></p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Employer.Description))
+                    {
+                        <p>@Model.Employer.Description</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Action Buttons -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>Hành động</h5>
+                </div>
+                <div class="card-body">
+                    @if (userRole == "Candidate")
+                    {
+                        if (hasApplied)
+                        {
+                            <div class="alert alert-info">
+                                <i class="fas fa-check-circle"></i> Bạn đã ứng tuyển công việc này
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-action="Apply" asp-route-id="@Model.ID_JobPost" method="post">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 mb-2">
+                                    <i class="fas fa-paper-plane"></i> Ứng tuyển ngay
+                                </button>
+                            </form>
+                        }
+                        
+                        <button class="btn btn-outline-secondary w-100 mb-2">
+                            <i class="fas fa-heart"></i> Lưu tin tuyển dụng
+                        </button>
+                        
+                        <button class="btn btn-outline-info w-100">
+                            <i class="fas fa-share"></i> Chia sẻ
+                        </button>
+                    }
+                    else if (userRole == "Employer")
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle"></i> Chỉ ứng viên mới có thể ứng tuyển
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Vui lòng <a asp-controller="Account" asp-action="Login">đăng nhập</a> để ứng tuyển
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Similar Jobs -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>Việc làm tương tự</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Tính năng này sẽ được phát triển sau</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

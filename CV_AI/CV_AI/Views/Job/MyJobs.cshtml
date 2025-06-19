@@ -1,0 +1,51 @@
+@model IEnumerable<CV_AI.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Tin đã đăng";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Danh sách tin tuyển dụng của bạn</h2>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Bạn chưa đăng tin tuyển dụng nào.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Tiêu đề</th>
+                    <th>Ngày đăng</th>
+                    <th>Hạn nộp</th>
+                    <th>Trạng thái</th>
+                    <th>Ứng viên</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@job.ID_JobPost">@job.Title</a>
+                        </td>
+                        <td>@job.PostedDate.ToString("dd/MM/yyyy")</td>
+                        <td>@(job.ExpirationDate?.ToString("dd/MM/yyyy") ?? "Không giới hạn")</td>
+                        <td>
+                            @(job.IsActive ? "Đang hiển thị" : "Đã ẩn")
+                        </td>
+                        <td>
+                            @job.Applications?.Count() ?? 0
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="btn btn-sm btn-primary">Xem</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div> 

@@ -1,0 +1,156 @@
+@model IEnumerable<CV_AI.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Danh sách tin tuyển dụng";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Tìm việc làm</h2>
+    
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" asp-action="Index">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Từ khóa</label>
+                            <input type="text" name="searchTerm" class="form-control" value="@ViewBag.SearchTerm" placeholder="Nhập từ khóa tìm kiếm...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Địa điểm</label>
+                            <input type="text" name="location" class="form-control" value="@ViewBag.Location" placeholder="Nhập địa điểm...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Ngành nghề</label>
+                            <select name="categoryId" class="form-control">
+                                <option value="">Tất cả ngành nghề</option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    var selected = ViewBag.CategoryId != null && ViewBag.CategoryId.ToString() == category.ID_Category.ToString();
+                                    <option value="@category.ID_Category" selected="@selected">@category.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="btn btn-primary form-control">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Job Listings -->
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Không tìm thấy tin tuyển dụng nào phù hợp với tiêu chí tìm kiếm.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var job in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="text-decoration-none">
+                                    @job.Title
+                                </a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@job.Employer.CompanyName</h6>
+                            
+                            <p class="card-text">
+                                @if (job.Description.Length > 150)
+                                {
+                                    @job.Description.Substring(0, 150)@:...
+                                }
+                                else
+                                {
+                                    @job.Description
+                                }
+                            </p>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <small class="text-muted">
+                                        <i class="fas fa-map-marker-alt"></i> @(job.Location ?? "Không xác định")
+                                    </small>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">
+                                        <i class="fas fa-money-bill-wave"></i> @(job.Salary ?? "Thương lượng")
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-2">
+                                @foreach (var jobCategory in job.JobPostCategories.Take(3))
+                                {
+                                    <span class="badge bg-secondary me-1">@jobCategory.Category.Name</span>
+                                }
+                                @if (job.JobPostCategories.Count > 3)
+                                {
+                                    <span class="badge bg-secondary">+@(job.JobPostCategories.Count - 3)</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i> Đăng ngày @job.PostedDate.ToString("dd/MM/yyyy")
+                            </small>
+                            <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="btn btn-sm btn-outline-primary float-end">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @if (ViewBag.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" 
+                               asp-route-searchTerm="@ViewBag.SearchTerm" asp-route-location="@ViewBag.Location" 
+                               asp-route-categoryId="@ViewBag.CategoryId">Trước</a>
+                        </li>
+                    }
+                    
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-page="@i" 
+                               asp-route-searchTerm="@ViewBag.SearchTerm" asp-route-location="@ViewBag.Location" 
+                               asp-route-categoryId="@ViewBag.CategoryId">@i</a>
+                        </li>
+                    }
+                    
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" 
+                               asp-route-searchTerm="@ViewBag.SearchTerm" asp-route-location="@ViewBag.Location" 
+                               asp-route-categoryId="@ViewBag.CategoryId">Sau</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div> 

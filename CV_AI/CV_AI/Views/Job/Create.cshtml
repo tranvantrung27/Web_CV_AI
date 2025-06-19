@@ -1,0 +1,98 @@
+@model CV_AI.Models.ViewModels.JobPostViewModel
+
+@{
+    ViewData["Title"] = "Đăng tin tuyển dụng";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Đăng tin tuyển dụng mới</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Title" class="control-label">Tiêu đề công việc *</label>
+                                    <input asp-for="Title" class="form-control" placeholder="VD: Lập trình viên .NET" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Salary" class="control-label">Mức lương</label>
+                                    <input asp-for="Salary" class="form-control" placeholder="VD: 15-20 triệu" />
+                                    <span asp-validation-for="Salary" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Location" class="control-label">Địa điểm</label>
+                                    <input asp-for="Location" class="form-control" placeholder="VD: Hà Nội, TP.HCM" />
+                                    <span asp-validation-for="Location" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="ExpirationDate" class="control-label">Hạn nộp hồ sơ</label>
+                                    <input asp-for="ExpirationDate" class="form-control" type="date" />
+                                    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="control-label">Mô tả công việc *</label>
+                            <textarea asp-for="Description" class="form-control" rows="6" placeholder="Mô tả chi tiết về công việc, trách nhiệm..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Requirements" class="control-label">Yêu cầu</label>
+                            <textarea asp-for="Requirements" class="form-control" rows="4" placeholder="Yêu cầu về kinh nghiệm, kỹ năng, bằng cấp..."></textarea>
+                            <span asp-validation-for="Requirements" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="control-label">Ngành nghề</label>
+                            <div class="row">
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="CategoryIds" value="@category.ID_Category" id="category_@category.ID_Category">
+                                            <label class="form-check-label" for="category_@category.ID_Category">
+                                                @category.Name
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane"></i> Đăng tin tuyển dụng
+                            </button>
+                            <a asp-action="MyJobs" class="btn btn-secondary btn-lg ms-2">
+                                <i class="fas fa-list"></i> Xem tin đã đăng
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

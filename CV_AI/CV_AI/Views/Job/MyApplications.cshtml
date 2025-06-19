@@ -1,0 +1,63 @@
+@model IEnumerable<CV_AI.Models.Application>
+
+@{
+    ViewData["Title"] = "Đơn ứng tuyển của tôi";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Đơn ứng tuyển của bạn</h2>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Bạn chưa ứng tuyển công việc nào.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Công việc</th>
+                    <th>Công ty</th>
+                    <th>Ngày ứng tuyển</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var app in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Job" asp-action="Details" asp-route-id="@app.JobPost.ID_JobPost">
+                                @app.JobPost.Title
+                            </a>
+                        </td>
+                        <td>@app.JobPost.Employer.CompanyName</td>
+                        <td>@app.AppliedDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @switch (app.Status)
+                            {
+                                case "Pending":
+                                    <span class="badge bg-warning text-dark">Chờ duyệt</span>
+                                    break;
+                                case "Accepted":
+                                    <span class="badge bg-success">Đã nhận</span>
+                                    break;
+                                case "Rejected":
+                                    <span class="badge bg-danger">Từ chối</span>
+                                    break;
+                                default:
+                                    <span class="badge bg-secondary">@app.Status</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Job" asp-action="Details" asp-route-id="@app.JobPost.ID_JobPost" class="btn btn-sm btn-primary">Xem tin</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div> 
