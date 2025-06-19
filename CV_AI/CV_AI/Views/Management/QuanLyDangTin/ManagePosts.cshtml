@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    ViewData["Title"] = "Quản lý Đăng tin";
+}
+@{
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    ViewData["Title"] = "Quản lý Đăng tin";
+}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="text-primary"><i class="fas fa-newspaper me-2"></i>Quản lý Đăng tin</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-tabs mb-3" id="managePostsTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">
+                                <i class="fas fa-list me-1"></i> Tất cả tin
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button" role="tab" aria-controls="add" aria-selected="false">
+                                <i class="fas fa-plus me-1"></i> Thêm mới
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="hidden-tab" data-bs-toggle="tab" data-bs-target="#hidden" type="button" role="tab" aria-controls="hidden" aria-selected="false">
+                                <i class="fas fa-eye-slash me-1"></i> Đã ẩn
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="managePostsTabContent">
+                        <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                            <p>Danh sách tất cả các tin tuyển dụng sẽ hển thị ở đây.</p>
+                            @foreach (var post in (List<CV_AI.Models.JobPost>)ViewBag.JobPosts)
+                            {
+                                @await Html.PartialAsync("_JobPostCard", post)
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+                        
+                            @await Html.PartialAsync("QuanLyDangTin/Create")
+                        </div>
+                        <div class="tab-pane fade" id="hidden" role="tabpanel" aria-labelledby="hidden-tab">
+                            <p>Danh sách các tin đã ẩn sẽ hiển thị ở đây.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

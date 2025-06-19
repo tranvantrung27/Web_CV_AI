@@ -19,22 +19,21 @@
                 <img src="~/images/logo/cv_logo.png" alt="CV_AI Logo" />
             </a>
             <nav class="sidebar-nav">
-                <a href="/Management" class="@@(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                <a asp-controller="Management" asp-action="Index" class="@(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
                     <i class="fas fa-home me-2"></i>Trang quản lý
-                </a>    
+                </a>
                 <a href="#">
                     <i class="fas fa-user-cog me-2"></i>Quản lý tài khoản
-                </a>                <a href="#">
-                    <i class="fas fa-newspaper me-2"></i>Quản lý Đăng tin
-
                 </a>
-
+                <a asp-controller="Management" asp-action="ManagePosts" class="@(ViewContext.RouteData.Values["action"].ToString() == "ManagePosts" ? "active" : "")">
+                    <i class="fas fa-newspaper me-2"></i>Quản lý Đăng tin
+                </a>
                 <a href="#">
                     <i class="fas fa-briefcase me-2"></i>Quản lý việc làm
-</a>                <a href="/" class="sidebar-link">
+                </a>
+                <a href="/" class="sidebar-link">
                     <i class="fas fa-sign-out-alt me-2"></i>Quay về trang web
                 </a>
-
                 <!-- Thêm các chức năng khác ở đây -->
             </nav>
             <div class="sidebar-bottom">

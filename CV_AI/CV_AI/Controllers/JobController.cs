@@ -100,8 +100,7 @@ namespace CV_AI.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var categories = await _context.Categories.ToListAsync();
-            ViewBag.Categories = categories;
+            ViewBag.Categories = _context.Categories.ToList();
             return View();
         }
 
@@ -153,8 +152,7 @@ namespace CV_AI.Controllers
                 return RedirectToAction("MyJobs");
             }
 
-            var categories = await _context.Categories.ToListAsync();
-            ViewBag.Categories = categories;
+            ViewBag.Categories = _context.Categories.ToList();
             return View(model);
         }
 
@@ -235,6 +233,12 @@ namespace CV_AI.Controllers
                 .ToListAsync();
 
             return View(applications);
+        }
+
+        public IActionResult ManagePosts()
+        {
+            ViewBag.Categories = _context.Categories.ToList();
+            return View();
         }
     }
 } 

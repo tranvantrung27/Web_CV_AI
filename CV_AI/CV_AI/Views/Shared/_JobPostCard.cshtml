@@ -1,0 +1,26 @@
+@model CV_AI.Models.JobPost
+
+<div class="job-card shadow-sm rounded-3 p-3 mb-3 d-flex align-items-center" style="background: #fff; min-width: 320px;">
+    <div class="me-3">
+        <span class="d-inline-block bg-light rounded" style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;">
+            <i class="fas fa-image fa-2x text-secondary"></i>
+        </span>
+    </div>
+    <div class="flex-grow-1">
+        <div class="fw-bold fs-6 mb-1 text-truncate" style="max-width: 260px;">
+            @Model.Title
+        </div>
+        <div class="text-muted mb-2" style="font-size: 0.95em;">
+            @Model.Employer?.CompanyName
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-light text-dark border">@Model.Salary</span>
+            <span class="badge bg-light text-dark border">@Model.Location</span>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-outline-success rounded-circle" title="Lưu tin">
+            <i class="fas fa-heart"></i>
+        </button>
+    </div>
+</div>

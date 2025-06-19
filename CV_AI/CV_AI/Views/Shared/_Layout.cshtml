@@ -57,12 +57,6 @@
                         @if (userRole == "Employer")
                         {
                             <li class="nav-item">
-                                <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "create" ? "active" : "")"
-                                   asp-area="" asp-controller="Job" asp-action="Create">
-                                    <i class="fas fa-plus me-1"></i> Đăng tin tuyển dụng
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "myjobs" ? "active" : "")"
                                    asp-area="" asp-controller="Job" asp-action="MyJobs">
                                     <i class="fas fa-list me-1"></i> Tin đã đăng

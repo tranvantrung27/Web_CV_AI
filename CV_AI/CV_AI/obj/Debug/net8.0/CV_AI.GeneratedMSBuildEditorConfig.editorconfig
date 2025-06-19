@@ -52,10 +52,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Job/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Job/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -76,8 +72,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Management/QuanLyDangTin/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxRdWFuTHlEYW5nVGluXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Management/QuanLyDangTin/ManagePosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxRdWFuTHlEYW5nVGluXE1hbmFnZVBvc3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Shared/_JobPostCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Kb2JQb3N0Q2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Học Phần Lập Trình Web/code/Web_CV_AI/CV_AI/CV_AI/Views/Shared/_ManagementLayout.cshtml]
