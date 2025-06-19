@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_AI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250619024948_cv")]
+    [Migration("20250619063800_cv")]
     partial class cv
     {
         /// <inheritdoc />

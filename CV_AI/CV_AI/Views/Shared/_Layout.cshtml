@@ -8,10 +8,12 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CV_AI.styles.css" asp-append-version="true" />
 
     <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
@@ -165,7 +167,13 @@
                                         <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
                                             <i class="fas fa-user-circle me-2"></i>Hồ sơ cá nhân
                                         </a>
+                                    </li>                                   
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Management" asp-action="Index">
+                                            <i class="fas fa-tools"></i>Hệ thống quản lý
+                                        </a>
                                     </li>
+
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
@@ -180,15 +188,11 @@
                         {
                             <!-- Login/Register buttons -->
                             <div class="nav-item">
-                                <a class="nav-link nav-btn" asp-controller="Account" asp-action="Login">
+                                <a class="nav-link btn-login" asp-controller="Account" asp-action="Login">
                                     <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
                                 </a>
                             </div>
-                            <div class="nav-item">
-                                <a class="nav-link nav-btn btn-primary" asp-controller="Account" asp-action="Register">
-                                    <i class="fas fa-user-plus me-1"></i>Đăng ký
-                                </a>
-                            </div>
+                            
                         }
                     </div>
                 </div>
@@ -215,13 +219,79 @@
             @RenderBody()
         </main>
     </div>
+    <!-- footer -->
+    <footer class="modern-footer">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - CV_AI -
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a> |
-            <a href="#">Điều khoản sử dụng</a> |
-            <a href="#">Liên hệ</a>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section brand-section">
+                    <div class="brand-logo">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="brand-name">CV_AI</span>
+                    </div>
+                    <p class="brand-description">
+                        Nền tảng tuyển dụng và tạo CV hàng đầu, kết nối nhà tuyển dụng với ứng viên tiềm năng.
+                        Tạo CV chuyên nghiệp, tìm việc làm phù hợp với AI thông minh.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Dịch vụ</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tạo CV miễn phí</a></li>
+                        <li><a href="#">Tìm việc làm</a></li>
+                        <li><a href="#">Đăng tin tuyển dụng</a></li>
+                        <li><a href="#">Mẫu CV chuyên nghiệp</a></li>
+                        <li><a href="#">Tư vấn nghề nghiệp</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Hỗ trợ</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Báo cáo lỗi</a></li>
+                        <li><a href="#">Góp ý</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Liên hệ</h3>
+                    <div class="contact-info">
+                        <div><i class="fas fa-map-marker-alt"></i> Hà Nội, Việt Nam</div>
+                        <div><i class="fas fa-phone"></i> +84 123 456 789</div>
+                        <div><i class="fas fa-envelope"></i> info@cvai.vn</div>
+                        <div><i class="fas fa-clock"></i> 24/7 Hỗ trợ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        &copy; 2025 - CV_AI - Tất cả quyền được bảo lưu.
+                    </div>
+                    <nav class="footer-nav">
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                        <a href="#">Liên hệ</a>
+                        <a href="#">Sitemap</a>
+                    </nav>
+                </div>
+            </div>
         </div>
     </footer>
 
