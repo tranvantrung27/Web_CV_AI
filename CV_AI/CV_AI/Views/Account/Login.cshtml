@@ -49,6 +49,12 @@
                     <div class="text-center mt-3">
                         <p>Chưa có tài khoản? <a asp-action="Register">Đăng ký ngay</a></p>
                     </div>
+
+                    <div class="text-center my-3">
+                        <a class="btn btn-danger btn-lg" href="@Url.Action("ExternalLogin", "Account", new { provider = "Google", returnUrl = "/" })">
+                            <i class="fab fa-google me-2"></i> Đăng nhập bằng Google
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

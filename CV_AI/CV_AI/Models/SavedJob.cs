@@ -2,7 +2,7 @@ namespace CV_AI.Models
 {
     public class SavedJob
     {
-        public int ID_Candidate { get; set; }
+        public string ID_Candidate { get; set; } = string.Empty;
         public int ID_JobPost { get; set; }
         public DateTime SavedDate { get; set; } = DateTime.Now;
 

@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using CV_AI.Data;
+using CV_AI.Models;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +22,23 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "Google";
+})
+.AddCookie("Cookies")
+.AddGoogle(options =>
+{
+    options.ClientId = "101698807333-s5gae6nqqlsofnukbbc1dnj4c058enc2.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+    options.CallbackPath = "/signin-google";
+});
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,7 +55,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseSession();
-
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Lax,
+    HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.SameAsRequest
+});
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

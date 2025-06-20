@@ -5,7 +5,7 @@ namespace CV_AI.Models
     public class Employer
     {
         [Key]
-        public int ID_Employer { get; set; }
+        public string ID_Employer { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Tên công ty không được để trống")]
         [StringLength(100, ErrorMessage = "Tên công ty không được vượt quá 100 ký tự")]

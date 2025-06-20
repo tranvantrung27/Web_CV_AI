@@ -1,22 +1,22 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CV_AI.Models;
 
 namespace CV_AI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Employer> Employers { get; set; }
         public DbSet<JobPost> JobPosts { get; set; }
-        public DbSet<JobPostCategory> JobPostCategories { get; set; }
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<JobPostCategory> JobPostCategories { get; set; }
         public DbSet<SavedJob> SavedJobs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

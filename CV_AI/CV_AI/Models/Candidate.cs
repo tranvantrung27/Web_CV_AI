@@ -5,7 +5,7 @@ namespace CV_AI.Models
     public class Candidate
     {
         [Key]
-        public int ID_Candidate { get; set; }
+        public string ID_Candidate { get; set; } = string.Empty;
 
         [StringLength(20)]
         public string? Phone { get; set; }

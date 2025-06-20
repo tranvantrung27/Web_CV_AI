@@ -24,7 +24,7 @@ namespace CV_AI.Controllers
             var userId = HttpContext.Session.GetString("UserID");
             // Lấy các tin do nhà tuyển dụng này đăng
             var jobPosts = _context.JobPosts
-                .Where(jp => jp.ID_Employer == int.Parse(userId))
+                .Where(jp => jp.ID_Employer == userId)
                 .OrderByDescending(jp => jp.PostedDate)
                 .ToList();
 
@@ -63,7 +63,7 @@ namespace CV_AI.Controllers
             {
                 var jobPost = new JobPost
                 {
-                    ID_Employer = int.Parse(userId),
+                    ID_Employer = userId ?? string.Empty,
                     Title = model.Title,
                     Description = model.Description,
                     Requirements = model.Requirements,

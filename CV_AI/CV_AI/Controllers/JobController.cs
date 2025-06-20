@@ -84,7 +84,7 @@ namespace CV_AI.Controllers
             if (!string.IsNullOrEmpty(userId) && userRole == "Candidate")
             {
                 var hasApplied = await _context.Applications
-                    .AnyAsync(a => a.ID_JobPost == id && a.ID_Candidate == int.Parse(userId));
+                    .AnyAsync(a => a.ID_JobPost == id && a.ID_Candidate == userId);
                 ViewBag.HasApplied = hasApplied;
             }
 
@@ -121,7 +121,7 @@ namespace CV_AI.Controllers
             {
                 var jobPost = new JobPost
                 {
-                    ID_Employer = int.Parse(userId),
+                   ID_Employer = userId ?? string.Empty,
                     Title = model.Title,
                     Description = model.Description,
                     Requirements = model.Requirements,
@@ -169,7 +169,7 @@ namespace CV_AI.Controllers
 
             var jobs = await _context.JobPosts
                 .Include(jp => jp.Applications)
-                .Where(jp => jp.ID_Employer == int.Parse(userId))
+.Where(jp => jp.Employer.ID_Employer == userId)
                 .OrderByDescending(jp => jp.PostedDate)
                 .ToListAsync();
 
@@ -191,7 +191,7 @@ namespace CV_AI.Controllers
 
             // Check if already applied
             var existingApplication = await _context.Applications
-                .FirstOrDefaultAsync(a => a.ID_JobPost == id && a.ID_Candidate == int.Parse(userId));
+                .FirstOrDefaultAsync(a => a.ID_JobPost == id && a.ID_Candidate == userId);
 
             if (existingApplication != null)
             {
@@ -202,7 +202,7 @@ namespace CV_AI.Controllers
             var application = new Application
             {
                 ID_JobPost = id,
-                ID_Candidate = int.Parse(userId),
+                ID_Candidate = userId ?? string.Empty,
                 AppliedDate = DateTime.Now,
                 Status = "Pending"
             };
@@ -228,7 +228,7 @@ namespace CV_AI.Controllers
             var applications = await _context.Applications
                 .Include(a => a.JobPost)
                 .ThenInclude(jp => jp.Employer)
-                .Where(a => a.ID_Candidate == int.Parse(userId))
+                .Where(a => a.ID_Candidate == userId)
                 .OrderByDescending(a => a.AppliedDate)
                 .ToListAsync();
 

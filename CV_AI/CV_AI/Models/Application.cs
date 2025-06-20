@@ -11,7 +11,7 @@ namespace CV_AI.Models
         public int ID_JobPost { get; set; }
 
         [Required]
-        public int ID_Candidate { get; set; }
+        public string ID_Candidate { get; set; } = string.Empty;
 
         public DateTime AppliedDate { get; set; } = DateTime.Now;
 

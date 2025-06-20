@@ -8,7 +8,7 @@ namespace CV_AI.Models
         public int ID_JobPost { get; set; }
 
         [Required]
-        public int ID_Employer { get; set; }
+        public string ID_Employer { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Tiêu đề không được để trống")]
         [StringLength(100, ErrorMessage = "Tiêu đề không được vượt quá 100 ký tự")]

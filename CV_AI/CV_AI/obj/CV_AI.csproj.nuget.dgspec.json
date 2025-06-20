@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Học Phần Lập Trình Web\\code\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
   },
   "projects": {
-    "D:\\Học Phần Lập Trình Web\\code\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Phần Lập Trình Web\\code\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectUniqueName": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "projectName": "CV_AI",
-        "projectPath": "D:\\Học Phần Lập Trình Web\\code\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "packagesPath": "C:\\Users\\os\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Phần Lập Trình Web\\code\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
+        "outputPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -59,6 +63,10 @@
               "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[8.0.0, )"
             },

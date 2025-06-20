@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace CV_AI.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int ID_User { get; set; }
-
         [Required(ErrorMessage = "Họ tên không được để trống")]
         [StringLength(100, ErrorMessage = "Họ tên không được vượt quá 100 ký tự")]
         public string FullName { get; set; } = string.Empty;
