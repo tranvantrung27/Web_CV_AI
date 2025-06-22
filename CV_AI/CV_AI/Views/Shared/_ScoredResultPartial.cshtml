@@ -1,0 +1,78 @@
+@model CV_AI.Models.CV.EvaluationResultViewModel
+
+<div class="row">
+    <!-- Overall Score -->
+    <div class="col-md-4 text-center">
+        <h4 class="text-primary mb-3">Điểm phù hợp tổng quan</h4>
+        <div class="progress-circle" data-progress="@Model.MatchScores.OverallMatch">
+            <span class="progress-value">@Model.MatchScores.OverallMatch%</span>
+        </div>
+        <p class="mt-3">Mức độ phù hợp của CV với mô tả công việc.</p>
+    </div>
+
+    <!-- Score Breakdown -->
+    <div class="col-md-8">
+        <h4 class="text-primary mb-3">Phân tích chi tiết</h4>
+        <div class="mb-3">
+            <strong>Kỹ năng</strong>
+            <div class="progress" style="height: 25px;">
+                <div class="progress-bar" role="progressbar" style="width: @(Model.MatchScores.SkillsMatch)%;" aria-valuenow="@Model.MatchScores.SkillsMatch" aria-valuemin="0" aria-valuemax="100">@Model.MatchScores.SkillsMatch%</div>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Explanations.SkillsMatch))
+            {
+                <div class="form-text mt-1 text-muted">@Model.Explanations.SkillsMatch</div>
+            }
+        </div>
+        
+        <div class="mb-3">
+            <strong>Kinh nghiệm</strong>
+            <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-success" role="progressbar" style="width: @(Model.MatchScores.ExperienceMatch)%;" aria-valuenow="@Model.MatchScores.ExperienceMatch" aria-valuemin="0" aria-valuemax="100">@Model.MatchScores.ExperienceMatch%</div>
+            </div>
+             @if (!string.IsNullOrEmpty(Model.Explanations.ExperienceMatch))
+            {
+                <div class="form-text mt-1 text-muted">@Model.Explanations.ExperienceMatch</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <strong>Học vấn</strong>
+            <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-info" role="progressbar" style="width: @(Model.MatchScores.EducationMatch)%;" aria-valuenow="@Model.MatchScores.EducationMatch" aria-valuemin="0" aria-valuemax="100">@Model.MatchScores.EducationMatch%</div>
+            </div>
+             @if (!string.IsNullOrEmpty(Model.Explanations.EducationMatch))
+            {
+                <div class="form-text mt-1 text-muted">@Model.Explanations.EducationMatch</div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+.progress-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#0d6efd var(--progress-value, 0deg), #e9ecef 0deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+    margin: auto;
+    transition: background 0.5s;
+}
+.progress-bar {
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const circle = document.querySelector('.progress-circle');
+    const progress = circle.getAttribute('data-progress');
+    circle.style.setProperty('--progress-value', (progress * 3.6) + 'deg');
+});
+</script> 

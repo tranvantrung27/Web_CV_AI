@@ -49,6 +49,15 @@ namespace CV_AI.Controllers
                     HttpContext.Session.SetString("UserRole", user.Role);
                     HttpContext.Session.SetString("UserName", user.FullName);
 
+                    // Mặc dù dùng session, vẫn tạo cookie xác thực để [Authorize] hoạt động
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Role, user.Role),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+                    await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -82,16 +91,17 @@ namespace CV_AI.Controllers
                 // Create user
                 var user = new User
                 {
-                    FullName = model.FullName,
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.Email,
                     Email = model.Email,
                     PasswordHash = HashPassword(model.Password),
                     Role = model.Role,
                     CreatedAt = DateTime.Now,
-                    IsActive = true
+                    IsActive = true,
+                    FullName = model.FullName
                 };
 
                 _context.Users.Add(user);
-                await _context.SaveChangesAsync();
 
                 // Create role-specific record
                 if (model.Role == "Candidate")
@@ -125,8 +135,9 @@ namespace CV_AI.Controllers
         }
 
         // GET: Account/Logout
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync("Cookies");
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
@@ -138,7 +149,7 @@ namespace CV_AI.Controllers
             return Challenge(properties, provider);
         }
 
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(string? returnUrl = null, string? remoteError = null)
         {
             if (remoteError != null)
             {
@@ -160,14 +171,13 @@ namespace CV_AI.Controllers
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null)
                 {
-                    // Đảm bảo luôn có Role là Candidate nếu chưa có
                     if (string.IsNullOrEmpty(user.Role))
                     {
                         user.Role = "Candidate";
                         await _userManager.UpdateAsync(user);
                     }
                     HttpContext.Session.SetString("UserID", user.Id);
-                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserEmail", user.Email ?? "");
                     HttpContext.Session.SetString("UserRole", user.Role);
                     HttpContext.Session.SetString("UserName", user.FullName);
                 }
@@ -208,17 +218,12 @@ namespace CV_AI.Controllers
 
                 // Set session
                 HttpContext.Session.SetString("UserID", user.Id);
-                HttpContext.Session.SetString("UserEmail", user.Email);
+                HttpContext.Session.SetString("UserEmail", user.Email ?? "");
                 HttpContext.Session.SetString("UserRole", user.Role);
                 HttpContext.Session.SetString("UserName", user.FullName);
 
                 return RedirectToAction("Index", "Home");
             }
-        }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            throw new NotImplementedException();
         }
 
         private string HashPassword(string password)

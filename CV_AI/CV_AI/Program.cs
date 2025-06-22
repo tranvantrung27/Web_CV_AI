@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using CV_AI.Data;
 using CV_AI.Models;
+using CV_AI.Services;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add HttpClient
+builder.Services.AddHttpClient();
+
+// Add Gemini Service
+builder.Services.AddScoped<IGeminiService, GeminiService>();
+
+// Comment out or remove HuggingFace Service
+// builder.Services.AddScoped<IHuggingFaceService, HuggingFaceService>();
 
 // Add Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -34,6 +44,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = "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";
     options.CallbackPath = "/signin-google";
 });
+
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()

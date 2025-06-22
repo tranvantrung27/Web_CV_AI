@@ -1,0 +1,63 @@
+@model CV_AI.Models.CV.ParsedCVData
+
+<div class="row">
+    <div class="col-12">
+        <h4 class="text-primary mb-3">Thông tin trích xuất từ CV</h4>
+        
+        <!-- Personal Info -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-user me-2"></i> Thông tin cá nhân
+            </div>
+            <div class="card-body">
+                <p><strong>Họ tên:</strong> @Model.CandidateName</p>
+                <p><strong>Email:</strong> @Model.CandidateEmail</p>
+                <p><strong>Điện thoại:</strong> @Model.CandidatePhone</p>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-briefcase me-2"></i> Kinh nghiệm làm việc
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var position in Model.Positions)
+                {
+                    <li class="list-group-item">
+                        <h5 class="mb-1">@position.PositionName</h5>
+                        <h6 class="text-muted">@position.CompanyName</h6>
+                        <p>@position.JobDetails</p>
+                        @if(position.Skills != null && position.Skills.Any())
+                        {
+                            <strong>Kỹ năng:</strong>
+                            <div>
+                                @foreach(var skill in position.Skills)
+                                {
+                                    <span class="badge bg-secondary me-1">@skill</span>
+                                }
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Education -->
+        <div class="card">
+            <div class="card-header">
+               <i class="fas fa-graduation-cap me-2"></i> Học vấn
+            </div>
+             <ul class="list-group list-group-flush">
+                @foreach (var edu in Model.EducationQualifications)
+                {
+                    <li class="list-group-item">
+                        <h5 class="mb-1">@edu.SchoolName</h5>
+                        <p class="mb-1"><strong>Bằng cấp:</strong> @edu.DegreeType</p>
+                        <p class="mb-0"><strong>Chuyên ngành:</strong> @edu.SpecializationSubjects</p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div> 

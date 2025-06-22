@@ -1,2 +1,132 @@
-﻿
-<p>cv</p>
+﻿@using System.Text.Json;
+@using CV_AI.Models.CV;
+
+@{
+    ViewData["Title"] = "Đánh giá CV";
+    string? evaluationResult = TempData["EvaluationResult"] as string;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Đánh giá CV với AI
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- Thông báo lỗi -->
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <!-- Form tải file -->
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="card border-primary h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-upload me-2"></i>
+                                        1. Nhập thông tin
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <form asp-action="EvaluateCV" method="post" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="cvFile" class="form-label fw-bold">Chọn file CV của bạn:</label>
+                                            <input type="file" class="form-control" id="cvFile" name="cvFile" 
+                                                   accept=".txt,.doc,.docx,.pdf" required>
+                                            <div class="form-text">
+                                                Hỗ trợ định dạng: .txt, .doc, .docx, .pdf
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="jobDescription" class="form-label fw-bold">Dán mô tả công việc (Job Description):</label>
+                                            <textarea class="form-control" id="jobDescription" name="jobDescription" rows="10" 
+                                                      placeholder="Dán toàn bộ mô tả công việc vào đây để AI có thể chấm điểm CV của bạn một cách chính xác nhất..." required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100" id="evaluateBtn">
+                                            <i class="fas fa-magic me-2"></i>
+                                            Đánh giá & Chấm điểm CV
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="card border-info h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        2. Xem kết quả
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    @if (string.IsNullOrEmpty(evaluationResult))
+                                    {
+                                        <p>Hệ thống AI sẽ:</p>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">
+                                                <i class="fas fa-check text-success me-2"></i>
+                                                Phân tích và trích xuất thông tin từ CV.
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="fas fa-check text-success me-2"></i>
+                                                So sánh với mô tả công việc bạn cung cấp.
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="fas fa-check text-success me-2"></i>
+                                                Chấm điểm mức độ phù hợp trên nhiều tiêu chí.
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="fas fa-check text-success me-2"></i>
+                                                Đưa ra nhận xét và đề xuất cải thiện.
+                                            </li>
+                                        </ul>
+                                        <div class="alert alert-warning mt-3">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>Lưu ý:</strong> Kết quả chỉ mang tính chất tham khảo.
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="evaluation-result">
+                                            @Html.Raw(evaluationResult)
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            const btn = document.getElementById('evaluateBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang đánh giá...';
+            btn.disabled = true;
+        });
+    </script>
+}
+
+<style>
+    .evaluation-result h3 {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 5px;
+        margin-top: 1rem;
+    }
+</style>

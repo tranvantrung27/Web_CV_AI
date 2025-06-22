@@ -143,8 +143,8 @@ D:\Học Phần Lập Trình Web\code\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\sta
 D:\Học Phần Lập Trình Web\code\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\appsettings.Development.json
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\appsettings.json
-D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.staticwebassets.endpoints.json
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.staticwebassets.runtime.json
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.staticwebassets.endpoints.json
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.exe
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.deps.json
 D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\CV_AI.runtimeconfig.json
@@ -283,4 +283,25 @@ D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\refint\CV_AI.dll
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\CV_AI.pdb
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\CV_AI.genruntimeconfig.cache
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\ref\CV_AI.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\DocumentFormat.OpenXml.Framework.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\itextsharp.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\System.IO.Packaging.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Json.More.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\JsonPointer.Net.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\JsonSchema.Net.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\JsonSchema.Net.Generation.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\Mscc.GenerativeAI.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\System.Text.Json.dll
+D:\Web_CV_AI\CV_AI\CV_AI\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
