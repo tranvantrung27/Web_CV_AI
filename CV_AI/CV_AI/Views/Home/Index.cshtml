@@ -8,3 +8,16 @@
     <h1 class="display-4">trang chủ</h1>
   
 </div>
+
+@model IEnumerable<CV_AI.Models.JobPost>
+<div class="container mt-4">
+    <h2 class="mb-4">Việc làm mới nhất</h2>
+    <div class="row">
+        @foreach (var job in Model)
+        {
+            <div class="col-md-6 mb-4">
+                @await Html.PartialAsync("_JobPostCard", job)
+            </div>
+        }
+    </div>
+</div>

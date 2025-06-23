@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_AI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623050141_CapNhat")]
-    partial class CapNhat
+    [Migration("20250623160528_UpdateJobPostTitleLength")]
+    partial class UpdateJobPostTitleLength
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,8 +160,8 @@ namespace CV_AI.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("ID_JobPost");
 

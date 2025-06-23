@@ -2,10 +2,6 @@
     Layout = "~/Views/Shared/_ManagementLayout.cshtml";
     ViewData["Title"] = "Quản lý Đăng tin";
 }
-@{
-    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
-    ViewData["Title"] = "Quản lý Đăng tin";
-}
 <div class="container py-4">
     <div class="row mb-4">
         <div class="col">
@@ -36,10 +32,7 @@
                     <div class="tab-content" id="managePostsTabContent">
                         <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                             <p>Danh sách tất cả các tin tuyển dụng sẽ hển thị ở đây.</p>
-                            @foreach (var post in (List<CV_AI.Models.JobPost>)ViewBag.JobPosts)
-                            {
-                                @await Html.PartialAsync("_JobPostCard", post)
-                            }
+                            @await Html.PartialAsync("_JobPostGridPartial", (IEnumerable<CV_AI.Models.JobPost>)ViewBag.JobPosts)
                         </div>
                         <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
                         

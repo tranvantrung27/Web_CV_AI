@@ -7,7 +7,7 @@ namespace CV_AI.Models.ViewModels
         public int ID_JobPost { get; set; }
 
         [Required(ErrorMessage = "Tiêu đề không được để trống")]
-        [StringLength(100, ErrorMessage = "Tiêu đề không được vượt quá 100 ký tự")]
+        [StringLength(255, ErrorMessage = "Tiêu đề không được vượt quá 255 ký tự")]
         public string Title { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Mô tả không được để trống")]

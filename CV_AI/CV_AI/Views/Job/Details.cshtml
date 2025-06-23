@@ -6,13 +6,28 @@
     var hasApplied = ViewBag.HasApplied ?? false;
 }
 
+<style>
+.card-header, .card-header h2, .job-detail-title {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    word-break: break-word;
+    display: block !important;
+}
+</style>
+
 <div class="container mt-4">
+ <partial name="_AnimatedBackground" />
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
     <div class="row">
         <div class="col-md-8">
             <!-- Job Details -->
             <div class="card">
                 <div class="card-header">
-                    <h2>@Model.Title</h2>
+                    <h2 class="job-detail-title">@Model.Title</h2>
                     <h5 class="text-muted">@Model.Employer.CompanyName</h5>
                 </div>
                 <div class="card-body">
@@ -114,11 +129,19 @@
                             <i class="fas fa-share"></i> Chia sẻ
                         </button>
                     }
-                    else if (userRole == "Employer")
+                    else if (userRole == "Employer" && Model.ID_Employer == Context.Session.GetString("UserID"))
                     {
-                        <div class="alert alert-warning">
+                        <div class="alert alert-warning mb-3">
                             <i class="fas fa-info-circle"></i> Chỉ ứng viên mới có thể ứng tuyển
                         </div>
+                        <form asp-action="Delete" asp-route-id="@Model.ID_JobPost" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin tuyển dụng này?');">
+                            <button type="submit" class="btn btn-danger w-100 mb-2">
+                                <i class="fas fa-trash-alt"></i> Xóa tin tuyển dụng
+                            </button>
+                        </form>
+                        <a asp-action="Edit" asp-route-id="@Model.ID_JobPost" class="btn btn-warning w-100 mb-2">
+                            <i class="fas fa-edit"></i> Sửa tin tuyển dụng
+                        </a>
                     }
                     else
                     {

@@ -5,6 +5,7 @@
 }
 
 <div class="container mt-4">
+ <partial name="_AnimatedBackground" />
     <h2 class="mb-4">Tìm việc làm</h2>
     
     <!-- Search Form -->
@@ -61,59 +62,7 @@
             @foreach (var job in Model)
             {
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="text-decoration-none">
-                                    @job.Title
-                                </a>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@job.Employer.CompanyName</h6>
-                            
-                            <p class="card-text">
-                                @if (job.Description.Length > 150)
-                                {
-                                    @job.Description.Substring(0, 150)@:...
-                                }
-                                else
-                                {
-                                    @job.Description
-                                }
-                            </p>
-                            
-                            <div class="row">
-                                <div class="col-6">
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt"></i> @(job.Location ?? "Không xác định")
-                                    </small>
-                                </div>
-                                <div class="col-6">
-                                    <small class="text-muted">
-                                        <i class="fas fa-money-bill-wave"></i> @(job.Salary ?? "Thương lượng")
-                                    </small>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-2">
-                                @foreach (var jobCategory in job.JobPostCategories.Take(3))
-                                {
-                                    <span class="badge bg-secondary me-1">@jobCategory.Category.Name</span>
-                                }
-                                @if (job.JobPostCategories.Count > 3)
-                                {
-                                    <span class="badge bg-secondary">+@(job.JobPostCategories.Count - 3)</span>
-                                }
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">
-                                <i class="fas fa-clock"></i> Đăng ngày @job.PostedDate.ToString("dd/MM/yyyy")
-                            </small>
-                            <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="btn btn-sm btn-outline-primary float-end">
-                                Xem chi tiết
-                            </a>
-                        </div>
-                    </div>
+                    @await Html.PartialAsync("_JobPostCard", job)
                 </div>
             }
         </div>

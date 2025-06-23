@@ -95,8 +95,10 @@ namespace CV_AI.Controllers
         public async Task<IActionResult> Create()
         {
             var userRole = HttpContext.Session.GetString("UserRole");
-            if (userRole != "Employer")
+            var userId = HttpContext.Session.GetString("UserID");
+            if (string.IsNullOrEmpty(userId) || !string.Equals(userRole, "Employer", StringComparison.OrdinalIgnoreCase))
             {
+                TempData["Debug"] = $"UserID: {userId}, UserRole: {userRole}";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -111,9 +113,9 @@ namespace CV_AI.Controllers
         {
             var userRole = HttpContext.Session.GetString("UserRole");
             var userId = HttpContext.Session.GetString("UserID");
-            
-            if (userRole != "Employer" || string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId) || !string.Equals(userRole, "Employer", StringComparison.OrdinalIgnoreCase))
             {
+                TempData["Debug"] = $"UserID: {userId}, UserRole: {userRole}";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -239,6 +241,111 @@ namespace CV_AI.Controllers
         {
             ViewBag.Categories = _context.Categories.ToList();
             return View();
+        }
+
+        // POST: Job/Delete/5 - Xóa tin tuyển dụng (chỉ Employer là chủ sở hữu)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            var userId = HttpContext.Session.GetString("UserID");
+            if (string.IsNullOrEmpty(userId) || !string.Equals(userRole, "Employer", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var jobPost = await _context.JobPosts.FindAsync(id);
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+            if (jobPost.ID_Employer != userId)
+            {
+                return Forbid(); // Không cho xóa nếu không phải chủ sở hữu
+            }
+            _context.JobPosts.Remove(jobPost);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Xóa tin tuyển dụng thành công!";
+            return RedirectToAction("MyJobs");
+        }
+
+        // GET: Job/Edit/5 - Sửa tin tuyển dụng (chỉ Employer là chủ sở hữu)
+        public async Task<IActionResult> Edit(int id)
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            var userId = HttpContext.Session.GetString("UserID");
+            if (string.IsNullOrEmpty(userId) || !string.Equals(userRole, "Employer", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var jobPost = await _context.JobPosts
+                .Include(jp => jp.JobPostCategories)
+                .FirstOrDefaultAsync(jp => jp.ID_JobPost == id);
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+            if (jobPost.ID_Employer != userId)
+            {
+                return Forbid();
+            }
+            var model = new JobPostViewModel
+            {
+                ID_JobPost = jobPost.ID_JobPost,
+                Title = jobPost.Title,
+                Description = jobPost.Description,
+                Requirements = jobPost.Requirements,
+                Location = jobPost.Location,
+                Salary = jobPost.Salary,
+                ExpirationDate = jobPost.ExpirationDate,
+                CategoryIds = jobPost.JobPostCategories.Select(jpc => jpc.ID_Category).ToList()
+            };
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("~/Views/Management/QuanLyDangTin/Create.cshtml", model);
+        }
+
+        // POST: Job/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(JobPostViewModel model)
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            var userId = HttpContext.Session.GetString("UserID");
+            if (string.IsNullOrEmpty(userId) || !string.Equals(userRole, "Employer", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var jobPost = await _context.JobPosts
+                .Include(jp => jp.JobPostCategories)
+                .FirstOrDefaultAsync(jp => jp.ID_JobPost == model.ID_JobPost);
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+            if (jobPost.ID_Employer != userId)
+            {
+                return Forbid();
+            }
+            // Cập nhật thông tin
+            jobPost.Title = model.Title;
+            jobPost.Description = model.Description;
+            jobPost.Requirements = model.Requirements;
+            jobPost.Location = model.Location;
+            jobPost.Salary = model.Salary;
+            jobPost.ExpirationDate = model.ExpirationDate;
+            // Cập nhật ngành nghề
+            jobPost.JobPostCategories.Clear();
+            foreach (var categoryId in model.CategoryIds)
+            {
+                jobPost.JobPostCategories.Add(new JobPostCategory
+                {
+                    ID_JobPost = jobPost.ID_JobPost,
+                    ID_Category = categoryId
+                });
+            }
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Cập nhật tin tuyển dụng thành công!";
+            return RedirectToAction("Details", new { id = jobPost.ID_JobPost });
         }
     }
 } 

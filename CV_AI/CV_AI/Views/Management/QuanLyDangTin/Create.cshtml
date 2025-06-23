@@ -1,9 +1,10 @@
-using CV_AI.Models.ViewModels;
+@using CV_AI.Models.ViewModels;
 
 @model CV_AI.Models.ViewModels.JobPostViewModel
 
 @{
-    ViewData["Title"] = "Đăng tin tuyển dụng";
+    var isEdit = Model != null && Model.ID_JobPost > 0;
+    ViewData["Title"] = isEdit ? "Chỉnh sửa tin tuyển dụng" : "Đăng tin tuyển dụng";
 }
 
 <div class="container mt-4">
@@ -11,10 +12,14 @@ using CV_AI.Models.ViewModels;
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <h3>Đăng tin tuyển dụng mới</h3>
+                    <h3>@(isEdit ? "Chỉnh sửa tin tuyển dụng" : "Đăng tin tuyển dụng mới")</h3>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Create" method="post">
+                    <form asp-action="@(isEdit ? "Edit" : "Create")" method="post">
+                        @if (isEdit)
+                        {
+                            <input type="hidden" asp-for="ID_JobPost" />
+                        }
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         
                         <div class="row">
@@ -82,7 +87,7 @@ using CV_AI.Models.ViewModels;
                         
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-paper-plane"></i> Đăng tin tuyển dụng
+                                <i class="fas fa-paper-plane"></i> @(isEdit ? "Cập nhật tin tuyển dụng" : "Đăng tin tuyển dụng")
                             </button>
                             <a asp-action="MyJobs" class="btn btn-secondary btn-lg ms-2">
                                 <i class="fas fa-list"></i> Xem tin đã đăng

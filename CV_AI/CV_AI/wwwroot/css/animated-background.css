@@ -18,20 +18,22 @@
 .floating-shape {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.05;
+    opacity: 0.14;
     animation: float 20s infinite linear;
+    filter: blur(1.5px);
+    box-shadow: 0 0 40px 10px rgba(0,0,0,0.08);
 }
 
 /* Specific Shapes: Size, Color, Position, Animation Delay */
 .shape-1 { 
     width: 300px; height: 300px; 
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5a67d8 0%, #805ad5 100%);
     top: 10%; left: 10%; 
     animation-delay: 0s;
 }
 .shape-2 { 
     width: 200px; height: 200px; 
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
     top: 60%; right: 15%; 
     animation-delay: -5s;
 }
@@ -43,19 +45,19 @@
 }
 .shape-4 { 
     width: 250px; height: 250px; 
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
     top: 30%; right: 30%; 
     animation-delay: -15s;
 }
 .shape-5 { 
     width: 100px; height: 100px; 
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    background: linear-gradient(135deg, #ff5858 0%, #f09819 100%);
     bottom: 40%; right: 10%; 
     animation-delay: -7s;
 }
 .shape-6 { 
     width: 180px; height: 180px; 
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    background: linear-gradient(135deg, #f953c6 0%, #b91d73 100%);
     top: 80%; left: 60%; 
     animation-delay: -12s;
 }

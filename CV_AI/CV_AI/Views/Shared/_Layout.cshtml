@@ -164,9 +164,12 @@
                                         </a>
                                     </li>                                   
                                     <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Management" asp-action="Index">
-                                            <i class="fas fa-tools"></i>Hệ thống quản lý
-                                        </a>
+                                        @if (userRole == "Employer")
+                                        {
+                                            <a class="dropdown-item" asp-area="" asp-controller="Management" asp-action="Index">
+                                                <i class="fas fa-tools"></i>Hệ thống quản lý
+                                            </a>
+                                        }
                                     </li>
 
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>

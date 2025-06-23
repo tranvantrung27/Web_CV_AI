@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
   },
   "projects": {
-    "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectUniqueName": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "projectName": "CV_AI",
-        "projectPath": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
+        "projectPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "packagesPath": "C:\\Users\\os\\.nuget\\packages\\",
+        "outputPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\os\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
