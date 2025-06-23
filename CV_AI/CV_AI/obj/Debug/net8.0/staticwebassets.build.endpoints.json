@@ -85,6 +85,170 @@
       ]
     },
     {
+      "Route": "css/animated-background.5j49dg2bzz.css",
+      "AssetFile": "css/animated-background.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:34:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5j49dg2bzz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ="
+        },
+        {
+          "Name": "label",
+          "Value": "css/animated-background.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/animated-background.css",
+      "AssetFile": "css/animated-background.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:34:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/cv.css",
+      "AssetFile": "css/cv.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:35:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc="
+        }
+      ]
+    },
+    {
+      "Route": "css/cv.yj7j8cmahx.css",
+      "AssetFile": "css/cv.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:35:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yj7j8cmahx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc="
+        },
+        {
+          "Name": "label",
+          "Value": "css/cv.css"
+        }
+      ]
+    },
+    {
       "Route": "css/footer.css",
       "AssetFile": "css/footer.css",
       "Selectors": [],

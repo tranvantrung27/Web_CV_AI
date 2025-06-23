@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "+8G0t4VQD8AxNj0yCn7ekAw+JCYJ9AonpE7wBBj1zzQ=",
+=======
+  "Hash": "XbRxafjWVK0amCOsGiZxbMEyYUWrMUCOVikmrl9i06A=",
+>>>>>>> 51a8a57 (update đánh giá cv)
   "Source": "CV_AI",
   "BasePath": "_content/CV_AI",
   "Mode": "Default",
@@ -59,7 +63,53 @@
       "OriginalItemSpec": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CV_AI.bundle.scp.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",
+=======
+      "Identity": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\animated-background.css",
+      "SourceId": "CV_AI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\",
+      "BasePath": "_content/CV_AI",
+      "RelativePath": "css/animated-background#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5j49dg2bzz",
+      "Integrity": "zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\animated-background.css"
+    },
+    {
+      "Identity": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\cv.css",
+      "SourceId": "CV_AI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\",
+      "BasePath": "_content/CV_AI",
+      "RelativePath": "css/cv#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yj7j8cmahx",
+      "Integrity": "/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\cv.css"
+    },
+    {
+      "Identity": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",
+>>>>>>> 51a8a57 (update đánh giá cv)
       "SourceId": "CV_AI",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\",
@@ -1446,6 +1496,170 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/animated-background.5j49dg2bzz.css",
+      "AssetFile": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\animated-background.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:34:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5j49dg2bzz"
+        },
+        {
+          "Name": "label",
+          "Value": "css/animated-background.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/animated-background.css",
+      "AssetFile": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\animated-background.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:34:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zzPYj/AolMKSsoVOznEcfT34+2aF1Eddq7EsIJ97nHQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/cv.css",
+      "AssetFile": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\cv.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:35:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc="
+        }
+      ]
+    },
+    {
+      "Route": "css/cv.yj7j8cmahx.css",
+      "AssetFile": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\cv.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 18:35:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yj7j8cmahx"
+        },
+        {
+          "Name": "label",
+          "Value": "css/cv.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/kSpicU3EOdNWVdn0ExxsLYMxbZq1nCr+67fAlP15rc="
+        }
+      ]
+    },
     {
       "Route": "css/footer.css",
       "AssetFile": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",

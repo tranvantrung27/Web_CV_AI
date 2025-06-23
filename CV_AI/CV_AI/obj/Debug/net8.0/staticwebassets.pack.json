@@ -5,7 +5,19 @@
       "PackagePath": "staticwebassets\\CV_AI.0w8af04k9r.bundle.scp.css"
     },
     {
+<<<<<<< HEAD
       "Id": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",
+=======
+      "Id": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\animated-background.css",
+      "PackagePath": "staticwebassets\\css\\animated-background.css"
+    },
+    {
+      "Id": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\cv.css",
+      "PackagePath": "staticwebassets\\css\\cv.css"
+    },
+    {
+      "Id": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",
+>>>>>>> 51a8a57 (update đánh giá cv)
       "PackagePath": "staticwebassets\\css\\footer.css"
     },
     {

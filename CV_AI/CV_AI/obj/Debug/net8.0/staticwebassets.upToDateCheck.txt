@@ -1,3 +1,5 @@
+wwwroot\css\animated-background.css
+wwwroot\css\cv.css
 wwwroot\css\footer.css
 wwwroot\css\header.css
 wwwroot\css\management.css

@@ -4,6 +4,34 @@ namespace CV_AI.Models.CV
 {
     public class EvaluationResultViewModel
     {
+        [JsonPropertyName("overallScore")]
+        public int OverallScore { get; set; }
+
+        [JsonPropertyName("matchPercentage")]
+        public int MatchPercentage { get; set; }
+
+        [JsonPropertyName("criteriaComparison")]
+        public List<CriteriaComparison>? CriteriaComparison { get; set; }
+
+        [JsonPropertyName("strengths")]
+        public List<string>? Strengths { get; set; }
+
+        [JsonPropertyName("weaknesses")]
+        public List<string>? Weaknesses { get; set; }
+
+        [JsonPropertyName("improvements")]
+        public List<string>? Improvements { get; set; }
+
+        [JsonPropertyName("improvementScore")]
+        public int ImprovementScore { get; set; }
+
+        [JsonPropertyName("conclusion")]
+        public string? Conclusion { get; set; }
+
+        [JsonPropertyName("detailedAnalysis")]
+        public string? DetailedAnalysis { get; set; }
+
+        // Legacy properties for backward compatibility
         [JsonPropertyName("match_scores")]
         public MatchScores? MatchScores { get; set; }
 
@@ -15,6 +43,24 @@ namespace CV_AI.Models.CV
         public ParsedCVData? ParsedData { get; set; }
 
         public bool IsScored { get; set; } = false;
+    }
+
+    public class CriteriaComparison
+    {
+        [JsonPropertyName("criteria")]
+        public string? Criteria { get; set; }
+
+        [JsonPropertyName("jobRequirement")]
+        public string? JobRequirement { get; set; }
+
+        [JsonPropertyName("candidateProfile")]
+        public string? CandidateProfile { get; set; }
+
+        [JsonPropertyName("status")]
+        public string? Status { get; set; }
+
+        [JsonPropertyName("score")]
+        public int Score { get; set; }
     }
 
     public class MatchScores

@@ -4,107 +4,392 @@
 @{
     ViewData["Title"] = "Đánh giá CV";
     string? evaluationResult = TempData["EvaluationResult"] as string;
+    string? evaluationModelJson = TempData["EvaluationModel"] as string;
+    EvaluationResultViewModel? evaluationModel = null;
+    
+    if (!string.IsNullOrEmpty(evaluationModelJson))
+    {
+        try
+        {
+            evaluationModel = JsonSerializer.Deserialize<EvaluationResultViewModel>(evaluationModelJson);
+        }
+        catch
+        {
+            // If deserialization fails, use the old format
+        }
+    }
 }
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">
-                        <i class="fas fa-file-alt me-2"></i>
-                        Đánh giá CV với AI
-                    </h3>
+<!-- Link tới file CSS riêng cho trang CV -->
+<link rel="stylesheet" href="~/css/cv.css" />
+
+<div class="cv-page">
+    <partial name="_AnimatedBackground" />
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="page-header">
+            <div class="header-content">
+                <div class="header-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-brain"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- Thông báo lỗi -->
-                    @if (TempData["Error"] != null)
-                    {
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            @TempData["Error"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
+                <h1 class="page-title">Đánh giá CV với AI</h1>
+                <p class="page-subtitle">
+                    Sử dụng trí tuệ nhân tạo để phân tích và đánh giá CV của bạn một cách chính xác
+                    <span class="highlight-text">hoàn toàn miễn phí</span>
+                </p>
+            </div>
+        </div>
 
-                    <!-- Form tải file -->
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="card border-primary h-100">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-upload me-2"></i>
-                                        1. Nhập thông tin
-                                    </h5>
+        <!-- Main Form Card -->
+        <div class="main-form-card">
+            <form asp-action="EvaluateCV" method="post" enctype="multipart/form-data" class="cv-form">
+                <div class="form-grid">
+                    <!-- File Upload Section -->
+                    <div class="upload-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-file-upload"></i>Tải lên CV của bạn</h3>
+                            <p>Chọn file CV để bắt đầu quá trình đánh giá</p>
+                        </div>
+                        
+                        <div class="file-upload-area">
+                            <input type="file" class="file-input" id="cvFile" name="cvFile" accept=".txt,.doc,.docx,.pdf" required>
+                            <div class="file-upload-content">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
                                 </div>
-                                <div class="card-body">
-                                    <form asp-action="EvaluateCV" method="post" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="cvFile" class="form-label fw-bold">Chọn file CV của bạn:</label>
-                                            <input type="file" class="form-control" id="cvFile" name="cvFile" 
-                                                   accept=".txt,.doc,.docx,.pdf" required>
-                                            <div class="form-text">
-                                                Hỗ trợ định dạng: .txt, .doc, .docx, .pdf
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="jobDescription" class="form-label fw-bold">Dán mô tả công việc (Job Description):</label>
-                                            <textarea class="form-control" id="jobDescription" name="jobDescription" rows="10" 
-                                                      placeholder="Dán toàn bộ mô tả công việc vào đây để AI có thể chấm điểm CV của bạn một cách chính xác nhất..." required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary w-100" id="evaluateBtn">
-                                            <i class="fas fa-magic me-2"></i>
-                                            Đánh giá & Chấm điểm CV
-                                        </button>
-                                    </form>
+                                <div class="upload-text">
+                                    <span class="main-text">Kéo thả file hoặc click để chọn</span>
+                                    <span class="sub-text">Hỗ trợ: PDF, DOC, DOCX, TXT (tối đa 10MB)</span>
+                                </div>
+                            </div>
+                            <div class="file-selected">
+                                <i class="fas fa-file-check"></i>
+                                <span class="file-name"></span>
+                                <button type="button" class="remove-file">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="alert alert-error">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <strong>Đã xảy ra lỗi!</strong>
+                                    <p>@TempData["Error"]</p>
+                                </div>
+                                <button type="button" class="alert-close" onclick="this.parentElement.style.display='none'">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Job Description Section -->
+                    <div class="job-description-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-briefcase"></i>Mô tả công việc</h3>
+                            <p>Nhập mô tả công việc để AI có thể đánh giá độ phù hợp</p>
+                        </div>
+                        
+                        <div class="textarea-wrapper">
+                            <textarea class="job-description-input" id="jobDescription" name="jobDescription" 
+                                placeholder="Dán toàn bộ mô tả công việc vào đây...&#10;&#10;Ví dụ:&#10;- Vị trí: Frontend Developer&#10;- Yêu cầu: 2+ năm kinh nghiệm React, JavaScript&#10;- Kỹ năng: HTML, CSS, TypeScript&#10;- Bằng cấp: Đại học chuyên ngành IT" 
+                                required></textarea>
+                            <div class="textarea-footer">
+                                <span class="char-count">0 ký tự</span>
+                                <div class="textarea-actions">
+                                    <button type="button" class="btn-clear" title="Xóa nội dung">
+                                        <i class="fas fa-eraser"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-5">
-                            <div class="card border-info h-100">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        2. Xem kết quả
-                                    </h5>
+                        <div class="submit-section">
+                            <button type="submit" class="btn-evaluate" id="evaluateBtn">
+                                <span class="btn-content">
+                                    <i class="fas fa-magic"></i>
+                                    <span class="btn-text">Đánh giá CV ngay</span>
+                                </span>
+                                <div class="btn-loading">
+                                    <div class="loading-spinner"></div>
+                                    <span>Đang phân tích...</span>
                                 </div>
-                                <div class="card-body">
-                                    @if (string.IsNullOrEmpty(evaluationResult))
-                                    {
-                                        <p>Hệ thống AI sẽ:</p>
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2">
-                                                <i class="fas fa-check text-success me-2"></i>
-                                                Phân tích và trích xuất thông tin từ CV.
-                                            </li>
-                                            <li class="mb-2">
-                                                <i class="fas fa-check text-success me-2"></i>
-                                                So sánh với mô tả công việc bạn cung cấp.
-                                            </li>
-                                            <li class="mb-2">
-                                                <i class="fas fa-check text-success me-2"></i>
-                                                Chấm điểm mức độ phù hợp trên nhiều tiêu chí.
-                                            </li>
-                                            <li class="mb-2">
-                                                <i class="fas fa-check text-success me-2"></i>
-                                                Đưa ra nhận xét và đề xuất cải thiện.
-                                            </li>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="results-grid">
+                <!-- Score Card -->
+                <div class="score-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie"></i>Điểm số tổng quan</h3>
+                    </div>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <div class="score-progress">
+                                <svg class="score-svg" viewBox="0 0 100 100">
+                                    <circle class="score-bg" cx="50" cy="50" r="45"></circle>
+                                    <circle class="score-fill" cx="50" cy="50" r="45" id="score-progress-circle"></circle>
+                                </svg>
+                                <div class="score-content">
+                                    <span id="score-value" class="score-number">--</span>
+                                    <span class="score-max">/100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="score-status">
+                            <span id="score-status-text">Chưa có kết quả</span>
+                        </div>
+                    </div>
+                    <div id="score-detail" class="score-details">
+                        <div class="score-breakdown">
+                            <div class="score-item" id="experience-score">
+                                <div class="score-label">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Kinh nghiệm</span>
+                                </div>
+                                <div class="score-bar-container">
+                                    <div class="score-bar">
+                                        <div class="score-bar-fill experience-fill" data-score="0"></div>
+                                    </div>
+                                    <span class="score-value">0/100</span>
+                                </div>
+                            </div>
+                            
+                            <div class="score-item" id="skills-score">
+                                <div class="score-label">
+                                    <i class="fas fa-tools"></i>
+                                    <span>Kỹ năng</span>
+                                </div>
+                                <div class="score-bar-container">
+                                    <div class="score-bar">
+                                        <div class="score-bar-fill skills-fill" data-score="0"></div>
+                                    </div>
+                                    <span class="score-value">0/100</span>
+                                </div>
+                            </div>
+                            
+                            <div class="score-item" id="education-score">
+                                <div class="score-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Học vấn</span>
+                                </div>
+                                <div class="score-bar-container">
+                                    <div class="score-bar">
+                                        <div class="score-bar-fill education-fill" data-score="0"></div>
+                                    </div>
+                                    <span class="score-value">0/100</span>
+                                </div>
+                            </div>
+                            
+                            <div class="score-item" id="relevance-score">
+                                <div class="score-label">
+                                    <i class="fas fa-bullseye"></i>
+                                    <span>Độ phù hợp</span>
+                                </div>
+                                <div class="score-bar-container">
+                                    <div class="score-bar">
+                                        <div class="score-bar-fill relevance-fill" data-score="0"></div>
+                                    </div>
+                                    <span class="score-value">0/100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="results-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clipboard-list"></i>Kết quả phân tích chi tiết</h3>
+                    </div>
+                    <div class="results-content">
+                        @if (evaluationModel != null)
+                        {
+                            <div id="result-box" class="analysis-results">
+                                <!-- Overall Score -->
+                                <div class="overall-score-section">
+                                    <h3>Điểm tổng thể: @evaluationModel.OverallScore/100</h3>
+                                    <h4>Mức độ phù hợp với công việc: @evaluationModel.MatchPercentage%</h4>
+                                </div>
+
+                                <!-- Criteria Comparison Table -->
+                                @if (evaluationModel.CriteriaComparison != null && evaluationModel.CriteriaComparison.Any())
+                                {
+                                    <div class="criteria-comparison">
+                                        <h4>🔍 So sánh tiêu chí (CV vs JD)</h4>
+                                        <div class="table-responsive">
+                                            <table class="comparison-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tiêu chí</th>
+                                                        <th>Yêu cầu JD</th>
+                                                        <th>Hồ sơ ứng viên</th>
+                                                        <th>Trạng thái</th>
+                                                        <th>Điểm</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var criteria in evaluationModel.CriteriaComparison)
+                                                    {
+                                                        string statusClass = criteria.Status switch
+                                                        {
+                                                            "Đạt" => "status-success",
+                                                            "Chưa đạt" => "status-warning",
+                                                            "Ưu tiên" => "status-info",
+                                                            _ => "status-default"
+                                                        };
+
+                                                        <tr>
+                                                            <td><strong>@criteria.Criteria</strong></td>
+                                                            <td>@criteria.JobRequirement</td>
+                                                            <td>@criteria.CandidateProfile</td>
+                                                            <td><span class="status-badge @statusClass">@criteria.Status</span></td>
+                                                            <td><span class="score-badge">@criteria.Score/100</span></td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Strengths Section -->
+                                @if (evaluationModel.Strengths != null && evaluationModel.Strengths.Any())
+                                {
+                                    <div class="strengths-section">
+                                        <h4>💪 Điểm mạnh</h4>
+                                        <ul>
+                                            @foreach (var strength in evaluationModel.Strengths)
+                                            {
+                                                <li>@strength</li>
+                                            }
                                         </ul>
-                                        <div class="alert alert-warning mt-3">
-                                            <i class="fas fa-exclamation-triangle me-2"></i>
-                                            <strong>Lưu ý:</strong> Kết quả chỉ mang tính chất tham khảo.
+                                    </div>
+                                }
+
+                                <!-- Weaknesses Section -->
+                                @if (evaluationModel.Weaknesses != null && evaluationModel.Weaknesses.Any())
+                                {
+                                    <div class="weaknesses-section">
+                                        <h4>⚠️ Điểm yếu</h4>
+                                        <ul>
+                                            @foreach (var weakness in evaluationModel.Weaknesses)
+                                            {
+                                                <li>@weakness</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                                <!-- Improvements Section -->
+                                @if (evaluationModel.Improvements != null && evaluationModel.Improvements.Any())
+                                {
+                                    <div class="improvements-section">
+                                        <h4>🛠️ Gợi ý cải thiện</h4>
+                                        <ul>
+                                            @foreach (var improvement in evaluationModel.Improvements)
+                                            {
+                                                <li>@improvement</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                                <!-- Improvement Score -->
+                                @if (evaluationModel.ImprovementScore > 0)
+                                {
+                                    <div class="improvement-score">
+                                        <h4>📈 Điểm cải thiện: @evaluationModel.ImprovementScore/100</h4>
+                                    </div>
+                                }
+
+                                <!-- Conclusion Section -->
+                                @if (!string.IsNullOrEmpty(evaluationModel.Conclusion))
+                                {
+                                    <div class="conclusion-section">
+                                        <h4>📋 Kết luận</h4>
+                                        <p class="conclusion-text">@evaluationModel.Conclusion</p>
+                                    </div>
+                                }
+
+                                <!-- Detailed Analysis -->
+                                @if (!string.IsNullOrEmpty(evaluationModel.DetailedAnalysis))
+                                {
+                                    <div class="detailed-analysis">
+                                        <h4>📊 Phân tích chi tiết</h4>
+                                        <p>@evaluationModel.DetailedAnalysis</p>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else if (!string.IsNullOrEmpty(evaluationResult))
+                        {
+                            <div id="result-box" class="analysis-results">
+                                @Html.Raw(evaluationResult)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                                <h4>Chưa có kết quả phân tích</h4>
+                                <p>Tải lên CV và nhập mô tả công việc để bắt đầu đánh giá</p>
+                                
+                                <div class="features-preview">
+                                    <div class="feature-item">
+                                        <div class="feature-icon success">
+                                            <i class="fas fa-thumbs-up"></i>
                                         </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="evaluation-result">
-                                            @Html.Raw(evaluationResult)
+                                        <span>Phân tích điểm mạnh</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-icon warning">
+                                            <i class="fas fa-exclamation-triangle"></i>
                                         </div>
-                                    }
+                                        <span>Phát hiện điểm yếu</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-icon info">
+                                            <i class="fas fa-lightbulb"></i>
+                                        </div>
+                                        <span>Đề xuất cải thiện</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-icon primary">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <span>Đánh giá chi tiết</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-note">
+                                    <div class="note-icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="note-content">
+                                        <strong>Lưu ý:</strong> Kết quả đánh giá chỉ mang tính chất tham khảo. 
+                                        Hãy kết hợp với ý kiến chuyên gia để có quyết định tốt nhất.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -114,19 +399,445 @@
 
 @section Scripts {
     <script>
-        document.querySelector('form').addEventListener('submit', function() {
+        // Form submission handling with AJAX
+        document.querySelector('.cv-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
             const btn = document.getElementById('evaluateBtn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang đánh giá...';
+            const resultsContent = document.querySelector('.results-content');
+            
+            btn.classList.add('loading');
             btn.disabled = true;
+            
+            // Show loading state
+            resultsContent.innerHTML = `
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Đang phân tích CV với AI...</p>
+                </div>
+            `;
+            
+            fetch('/CV/EvaluateCV', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.data) {
+                    displayEvaluationResult(data.data);
+                } else {
+                    resultsContent.innerHTML = '<div class="alert alert-error">Có lỗi xảy ra khi phân tích CV</div>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsContent.innerHTML = '<div class="alert alert-error">Có lỗi xảy ra khi phân tích CV</div>';
+            })
+            .finally(() => {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            });
+        });
+
+        // Display evaluation result
+        function displayEvaluationResult(data) {
+            const resultsContent = document.querySelector('.results-content');
+            const scoreDetail = document.getElementById('score-detail');
+            
+            // Update overall score
+            if (data.overallScore) {
+                animateScore(data.overallScore);
+            }
+            
+            // Rebuild score bars to prevent them from disappearing
+            scoreDetail.innerHTML = `
+                <div class="score-breakdown">
+                    <div class="score-item" id="experience-score">
+                        <div class="score-label"><i class="fas fa-briefcase"></i><span>Kinh nghiệm</span></div>
+                        <div class="score-bar-container">
+                            <div class="score-bar"><div class="score-bar-fill experience-fill"></div></div>
+                            <span class="score-value">0/100</span>
+                        </div>
+                    </div>
+                    <div class="score-item" id="skills-score">
+                        <div class="score-label"><i class="fas fa-tools"></i><span>Kỹ năng</span></div>
+                        <div class="score-bar-container">
+                            <div class="score-bar"><div class="score-bar-fill skills-fill"></div></div>
+                            <span class="score-value">0/100</span>
+                        </div>
+                    </div>
+                    <div class="score-item" id="education-score">
+                        <div class="score-label"><i class="fas fa-graduation-cap"></i><span>Học vấn</span></div>
+                        <div class="score-bar-container">
+                            <div class="score-bar"><div class="score-bar-fill education-fill"></div></div>
+                            <span class="score-value">0/100</span>
+                        </div>
+                    </div>
+                    <div class="score-item" id="relevance-score">
+                        <div class="score-label"><i class="fas fa-bullseye"></i><span>Độ phù hợp</span></div>
+                        <div class="score-bar-container">
+                            <div class="score-bar"><div class="score-bar-fill relevance-fill"></div></div>
+                            <span class="score-value">0/100</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Update individual scores
+            updateScoreBars(data);
+            
+            // Generate HTML for results in the right-hand card
+            let html = '';
+            
+            // Overall Score (for right card)
+            if (data.overallScore) {
+                html += `<h3>Điểm tổng thể: ${data.overallScore}/100</h3>`;
+            }
+            
+            if (data.matchPercentage) {
+                html += `<h4>Mức độ phù hợp với công việc: ${data.matchPercentage}%</h4>`;
+            }
+
+            // Criteria Comparison Table
+            if (data.criteriaComparison && data.criteriaComparison.length > 0) {
+                html += `<div class="criteria-comparison">
+                    <h4>🔍 So sánh tiêu chí (CV vs JD)</h4>
+                    <div class="table-responsive">
+                        <table class="comparison-table">
+                            <thead><tr>
+                                <th>Tiêu chí</th>
+                                <th>Yêu cầu JD</th>
+                                <th>Hồ sơ ứng viên</th>
+                                <th>Trạng thái</th>
+                                <th>Điểm</th>
+                            </tr></thead><tbody>`;
+                
+                data.criteriaComparison.forEach(criteria => {
+                    let statusClass = 'status-default';
+                    switch(criteria.status) {
+                        case 'Đạt': statusClass = 'status-success'; break;
+                        case 'Chưa đạt': statusClass = 'status-warning'; break;
+                        case 'Ưu tiên': statusClass = 'status-info'; break;
+                    }
+                    
+                    html += `<tr>
+                        <td><strong>${criteria.criteria}</strong></td>
+                        <td>${criteria.jobRequirement}</td>
+                        <td>${criteria.candidateProfile}</td>
+                        <td><span class="status-badge ${statusClass}">${criteria.status}</span></td>
+                        <td><span class="score-badge">${criteria.score}/100</span></td>
+                    </tr>`;
+                });
+                
+                html += `</tbody></table></div></div>`;
+            }
+
+            // Strengths
+            if (data.strengths && data.strengths.length > 0) {
+                html += `<div class="strengths-section">
+                    <h4>💪 Điểm mạnh</h4><ul>`;
+                data.strengths.forEach(strength => {
+                    html += `<li>${strength}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Weaknesses
+            if (data.weaknesses && data.weaknesses.length > 0) {
+                html += `<div class="weaknesses-section">
+                    <h4>⚠️ Điểm yếu</h4><ul>`;
+                data.weaknesses.forEach(weakness => {
+                    html += `<li>${weakness}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Improvements
+            if (data.improvements && data.improvements.length > 0) {
+                html += `<div class="improvements-section">
+                    <h4>🛠️ Gợi ý cải thiện</h4><ul>`;
+                data.improvements.forEach(improvement => {
+                    html += `<li>${improvement}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Improvement Score
+            if (data.improvementScore) {
+                html += `<div class="improvement-score">
+                    <h4>📈 Điểm cải thiện: ${data.improvementScore}/100</h4>
+                </div>`;
+            }
+
+            // Conclusion
+            if (data.conclusion) {
+                html += `<div class="conclusion-section">
+                    <h4>📋 Kết luận</h4>
+                    <p class="conclusion-text">${data.conclusion}</p>
+                </div>`;
+            }
+
+            // Detailed Analysis
+            if (data.detailedAnalysis) {
+                html += `<div class="detailed-analysis">
+                    <h4>📊 Phân tích chi tiết</h4>
+                    <p>${data.detailedAnalysis}</p>
+                </div>`;
+            }
+
+            resultsContent.innerHTML = `<div id="result-box" class="analysis-results">${html}</div>`;
+        }
+
+        // Update score bars
+        function updateScoreBars(data) {
+            const scores = {
+                experience: [],
+                skills: [],
+                education: []
+            };
+
+            const relevanceScore = data.matchPercentage || 0;
+
+            if (data.criteriaComparison) {
+                data.criteriaComparison.forEach(criteria => {
+                    const name = (criteria.criteria || '').toLowerCase();
+                    const score = criteria.score || 0;
+
+                    // More robust keyword matching
+                    if (name.includes('kinh nghiệm') || name.includes('experience')) {
+                        scores.experience.push(score);
+                    } else if (name.includes('học vấn') || name.includes('education') || name.includes('bằng cấp') || name.includes('degree')) {
+                        scores.education.push(score);
+                    } else if (score > 0) { // If not exp/edu, and has a score, treat as skill
+                        scores.skills.push(score);
+                    }
+                });
+            }
+
+            // Function to calculate average, returns 0 if no scores
+            const calculateAverage = (arr) => {
+                if (!arr || arr.length === 0) return 0;
+                const sum = arr.reduce((a, b) => a + b, 0);
+                return Math.round(sum / arr.length);
+            };
+
+            const experienceScore = calculateAverage(scores.experience);
+            const skillsScore = calculateAverage(scores.skills);
+            const educationScore = calculateAverage(scores.education);
+            
+            // Animate score bars
+            animateScoreBar('experience-score', experienceScore);
+            animateScoreBar('skills-score', skillsScore);
+            animateScoreBar('education-score', educationScore);
+            animateScoreBar('relevance-score', relevanceScore);
+        }
+
+        // Animate individual score bar
+        function animateScoreBar(elementId, targetScore) {
+            const scoreItem = document.getElementById(elementId);
+            if (!scoreItem) return;
+
+            const scoreBarFill = scoreItem.querySelector('.score-bar-fill');
+            const scoreValue = scoreItem.querySelector('.score-value');
+            
+            if (!scoreBarFill || !scoreValue) return;
+
+            // Add animation class
+            scoreItem.classList.add('animate');
+
+            // Animate the bar
+            let currentScore = 0;
+            const increment = targetScore / 30;
+            
+            const animation = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(animation);
+                }
+                
+                const percentage = (currentScore / 100) * 100;
+                scoreBarFill.style.width = `${percentage}%`;
+                scoreValue.textContent = `${Math.round(currentScore)}/100`;
+                scoreBarFill.setAttribute('data-score', Math.round(currentScore));
+            }, 30);
+        }
+
+        // File input handling
+        const fileInput = document.getElementById('cvFile');
+        const fileUploadArea = document.querySelector('.file-upload-area');
+        const fileSelected = document.querySelector('.file-selected');
+        const fileName = document.querySelector('.file-name');
+        const removeFileBtn = document.querySelector('.remove-file');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const file = this.files[0];
+                fileName.textContent = file.name;
+                fileUploadArea.classList.add('has-file');
+                fileSelected.style.display = 'flex';
+            } else {
+                resetFileInput();
+            }
+        });
+
+        removeFileBtn.addEventListener('click', function() {
+            fileInput.value = '';
+            resetFileInput();
+        });
+
+        function resetFileInput() {
+            fileUploadArea.classList.remove('has-file');
+            fileSelected.style.display = 'none';
+            fileName.textContent = '';
+        }
+
+        // Drag and drop handling
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+
+        fileUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+        });
+
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                fileInput.dispatchEvent(new Event('change'));
+            }
+        });
+
+        fileUploadArea.addEventListener('click', function() {
+            if (!this.classList.contains('has-file')) {
+                fileInput.click();
+            }
+        });
+
+        // Textarea character count
+        const textarea = document.getElementById('jobDescription');
+        const charCount = document.querySelector('.char-count');
+        const clearBtn = document.querySelector('.btn-clear');
+
+        textarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count + ' ký tự';
+            
+            if (count > 0) {
+                clearBtn.style.display = 'block';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            textarea.value = '';
+            charCount.textContent = '0 ký tự';
+            this.style.display = 'none';
+            textarea.focus();
+        });
+
+        // Score animation
+        function animateScore(targetScore) {
+            const scoreElement = document.getElementById('score-value');
+            const progressCircle = document.getElementById('score-progress-circle');
+            const statusText = document.getElementById('score-status-text');
+            
+            let currentScore = 0;
+            const increment = targetScore / 50;
+            const circumference = 2 * Math.PI * 45;
+            
+            const animation = setInterval(function() {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(animation);
+                }
+                
+                scoreElement.textContent = Math.round(currentScore);
+                const progress = (currentScore / 100) * circumference;
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference - progress;
+                
+                // Update status text based on score
+                if (currentScore >= 80) {
+                    statusText.textContent = 'Xuất sắc';
+                    statusText.className = 'score-status excellent';
+                } else if (currentScore >= 60) {
+                    statusText.textContent = 'Tốt';
+                    statusText.className = 'score-status good';
+                } else if (currentScore >= 40) {
+                    statusText.textContent = 'Khá';
+                    statusText.className = 'score-status fair';
+                } else {
+                    statusText.textContent = 'Cần cải thiện';
+                    statusText.className = 'score-status poor';
+                }
+            }, 20);
+        }
+
+        // Initialize page with existing results
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var resultBox = document.getElementById('result-box');
+                var scoreValue = document.getElementById('score-value');
+                var scoreDetail = document.getElementById('score-detail');
+                
+                if (resultBox && scoreValue && scoreDetail) {
+                    var html = resultBox.innerHTML;
+
+                    // Extract overall score
+                    var matchScore = html.match(/Điểm tổng thể:\s*(\d+)\s*\/\s*\d+/i);
+                    if (matchScore) {
+                        const score = parseInt(matchScore[1]);
+                        animateScore(score);
+                    }
+
+                    // Extract compatibility percentage
+                    var matchPercent = html.match(/Mức độ phù hợp với công việc:\s*(\d+)%/i);
+                    if (matchPercent) {
+                        const relevanceScore = parseInt(matchPercent[1]);
+                        animateScoreBar('relevance-score', relevanceScore);
+                    }
+
+                    // Extract scores from criteria comparison table
+                    const criteriaRows = resultBox.querySelectorAll('.comparison-table tbody tr');
+                    let experienceScore = 0;
+                    let skillsScore = 0;
+                    let educationScore = 0;
+
+                    criteriaRows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        if (cells.length >= 5) {
+                            const criteriaName = cells[0].textContent?.toLowerCase() || '';
+                            const scoreText = cells[4].textContent || '';
+                            const score = parseInt(scoreText.match(/(\d+)/)?.[1] || '0');
+                            
+                            if (criteriaName.includes('kinh nghiệm') || criteriaName.includes('experience')) {
+                                experienceScore = Math.max(experienceScore, score);
+                            } else if (criteriaName.includes('kỹ năng') || criteriaName.includes('skill')) {
+                                skillsScore = Math.max(skillsScore, score);
+                            } else if (criteriaName.includes('học vấn') || criteriaName.includes('education')) {
+                                educationScore = Math.max(educationScore, score);
+                            }
+                        }
+                    });
+
+                    // Animate score bars
+                    animateScoreBar('experience-score', experienceScore);
+                    animateScoreBar('skills-score', skillsScore);
+                    animateScoreBar('education-score', educationScore);
+                }
+            }, 200);
         });
     </script>
 }
-
-<style>
-    .evaluation-result h3 {
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd;
-        padding-bottom: 5px;
-        margin-top: 1rem;
-    }
-</style>

@@ -58,42 +58,61 @@ namespace CV_AI.Services
         private string CreateAnalysisPrompt(string cvText, string jobDescription)
         {
             return $@"
-                Analyze the following CV based on the provided job description. 
-                **Your response MUST be in Vietnamese.** 
-                However, keep all technical terms and programming-related keywords (e.g., ReactJS, Node.js, API, Docker, etc.) in their original English form.
-                Return the result in a strict JSON format.
+                Phân tích CV dựa trên mô tả công việc và trả về kết quả theo format JSON nghiêm ngặt bằng tiếng Việt.
+                Giữ nguyên các thuật ngữ kỹ thuật bằng tiếng Anh (ReactJS, Node.js, API, Docker, etc.).
 
-                **Job Description:**
+                **Mô tả công việc:**
                 ---
                 {jobDescription}
                 ---
 
-                **CV Content:**
+                **Nội dung CV:**
                 ---
                 {cvText}
                 ---
 
-                **JSON Output Format:**
-                Please provide a detailed analysis in the following JSON structure. Do not add any text before or after the JSON object.
+                **Yêu cầu format JSON:**
+                Trả về kết quả theo cấu trúc JSON sau đây, không thêm text trước hoặc sau JSON:
+
                 {{
-                  ""overallScore"": <A number from 0 to 100 representing the overall match>,
-                  ""scores"": {{
-                    ""Experience"": <A score from 0 to 100 for experience>,
-                    ""Skills"": <A score from 0 to 100 for skills>,
-                    ""Education"": <A score from 0 to 100 for education>,
-                    ""Relevance"": <A score from 0 to 100 for job relevance>
-                  }},
+                  ""overallScore"": <Điểm tổng thể từ 0-100>,
+                  ""matchPercentage"": <Phần trăm phù hợp từ 0-100>,
+                  ""criteriaComparison"": [
+                    {{
+                      ""criteria"": ""<Tên tiêu chí - PHẢI chứa 'Kinh nghiệm', 'Kỹ năng' hoặc 'Học vấn'>"",
+                      ""jobRequirement"": ""<Yêu cầu từ JD>"",
+                      ""candidateProfile"": ""<Hồ sơ ứng viên>"",
+                      ""status"": ""<Đạt/Chưa đạt/Ưu tiên>"",
+                      ""score"": <Điểm từ 0-100>
+                    }}
+                  ],
                   ""strengths"": [
-                    ""A summary of the candidate's first strength in Vietnamese."",
-                    ""A summary of the candidate's second strength in Vietnamese.""
+                    ""<Điểm mạnh 1>"",
+                    ""<Điểm mạnh 2>"",
+                    ""<Điểm mạnh 3>""
                   ],
                   ""weaknesses"": [
-                    ""A summary of the candidate's first weakness in Vietnamese."",
-                    ""A summary of the candidate's second weakness in Vietnamese.""
+                    ""<Điểm yếu 1>"",
+                    ""<Điểm yếu 2>"",
+                    ""<Điểm yếu 3>""
                   ],
-                  ""matchPercentage"": <A number from 0 to 100 for the match percentage>,
-                  ""detailedAnalysis"": ""A comprehensive text analysis of the CV against the job description in Vietnamese.""
-                }}";
+                  ""improvements"": [
+                    ""<Gợi ý cải thiện 1>"",
+                    ""<Gợi ý cải thiện 2>"",
+                    ""<Gợi ý cải thiện 3>""
+                  ],
+                  ""improvementScore"": <Điểm cải thiện từ 0-100>,
+                  ""conclusion"": ""<Kết luận tổng quan về khả năng phù hợp>"",
+                  ""detailedAnalysis"": ""<Phân tích chi tiết bằng tiếng Việt>""
+                }}
+
+                **Hướng dẫn phân tích:**
+                1. So sánh từng tiêu chí giữa yêu cầu công việc và hồ sơ ứng viên. Bảng 'criteriaComparison' PHẢI bao gồm ít nhất một tiêu chí cho mỗi loại sau: 'Kinh nghiệm', 'Kỹ năng', và 'Học vấn'.
+                2. Đánh giá điểm mạnh dựa trên kinh nghiệm, kỹ năng phù hợp
+                3. Chỉ ra điểm yếu cần khắc phục
+                4. Đưa ra gợi ý cải thiện cụ thể
+                5. Kết luận về khả năng đạt được vị trí
+                6. Điểm tổng thể dựa trên mức độ phù hợp tổng quan";
         }
 
         private string ExtractJsonFromResponse(string? text)
