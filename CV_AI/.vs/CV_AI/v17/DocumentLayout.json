@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "D:\\Web_CV_AI\\CV_AI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160528_UpdateJobPostTitleLength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CV_AI\\Migrations\\20250623160528_UpdateJobPostTitleLength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\cv_ai.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\cv_ai.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160443_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CV_AI\\Migrations\\20250623160443_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\shared\\_jobpostgridpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_jobpostgridpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\shared\\_jobpostcard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_jobpostcard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\20250623160528_updatejobposttitlelength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\20250623160528_updatejobposttitlelength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -75,10 +87,6 @@
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\shared\\_jobpostcard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_jobpostcard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -100,10 +108,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.201\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\cv_ai.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\cv_ai.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\management\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -140,6 +144,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\wwwroot\\css\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\wwwroot\\css\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\20250623160443_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\20250623160443_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -149,7 +157,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -193,7 +201,84 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CV_AI\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CV_AI\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAEwFEAAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T19:03:52.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_JobPostGridPartial.cshtml",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
+              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
+              "RelativeToolTip": "CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAABMAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T15:28:48.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ParsedResultPartial.cshtml",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
+              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
+              "RelativeToolTip": "CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T14:54:45.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_JobPostCard.cshtml",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
+              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
+              "RelativeToolTip": "CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T14:43:05.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CV_AI.csproj",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+              "RelativeDocumentMoniker": "CV_AI\\CV_AI.csproj",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+              "RelativeToolTip": "CV_AI\\CV_AI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-23T14:43:05.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CV_AI\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CV_AI\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAmwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:16:42.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "20250623160528_UpdateJobPostTitleLength.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160528_UpdateJobPostTitleLength.cs",
               "RelativeDocumentMoniker": "CV_AI\\Migrations\\20250623160528_UpdateJobPostTitleLength.cs",
@@ -206,33 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20250623160443_InitialCreate.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
-              "RelativeDocumentMoniker": "CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
-              "RelativeToolTip": "CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
-              "ViewState": "AgIAAJQBAAAAAAAAAAAUwLABAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T16:04:43.678Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_JobPostGridPartial.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
-              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
-              "RelativeToolTip": "CV_AI\\Views\\Shared\\_JobPostGridPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T15:28:48.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Job\\Details.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Job\\Details.cshtml",
@@ -240,25 +299,23 @@
               "RelativeToolTip": "CV_AI\\Views\\Job\\Details.cshtml",
               "ViewState": "AgIAAAIAAAAAAAAAAAAUwBoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:56:46.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:56:46.579Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "_ParsedResultPartial.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
-              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
-              "RelativeToolTip": "CV_AI\\Views\\Shared\\_ParsedResultPartial.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:54:45.266Z",
-              "EditorCaption": ""
+              "DocumentIndex": 36,
+              "Title": "20250623160443_InitialCreate.cs",
+              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
+              "RelativeDocumentMoniker": "CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
+              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
+              "RelativeToolTip": "CV_AI\\Migrations\\20250623160443_InitialCreate.cs",
+              "ViewState": "AgIAAJQBAAAAAAAAAAAUwLABAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T16:04:43.678Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Program.cs",
               "RelativeDocumentMoniker": "CV_AI\\Program.cs",
@@ -266,12 +323,11 @@
               "RelativeToolTip": "CV_AI\\Program.cs",
               "ViewState": "AgIAAEUAAAAAAAAAAAAmwE8AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T14:43:05.114Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:43:05.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "ManagePosts.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\ManagePosts.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Management\\QuanLyDangTin\\ManagePosts.cshtml",
@@ -279,12 +335,11 @@
               "RelativeToolTip": "CV_AI\\Views\\Management\\QuanLyDangTin\\ManagePosts.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:43:05.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:43:05.2Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": ".md",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\.md",
               "RelativeDocumentMoniker": "CV_AI\\.md",
@@ -292,12 +347,11 @@
               "RelativeToolTip": "CV_AI\\.md",
               "ViewState": "AgIAAE4AAAAAAAAAAAAQwFoAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-06-23T14:43:05.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:43:05.212Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\Create.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Management\\QuanLyDangTin\\Create.cshtml",
@@ -305,12 +359,11 @@
               "RelativeToolTip": "CV_AI\\Views\\Management\\QuanLyDangTin\\Create.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:43:05.201Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:43:05.201Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "CV_AI.csproj.Backup.tmp",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj.Backup.tmp",
               "RelativeDocumentMoniker": "CV_AI\\CV_AI.csproj.Backup.tmp",
@@ -322,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CV\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\CV\\Index.cshtml",
@@ -334,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\appsettings.json",
               "RelativeDocumentMoniker": "CV_AI\\appsettings.json",
@@ -346,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "_ManagementLayout.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ManagementLayout.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_ManagementLayout.cshtml",
@@ -354,12 +407,11 @@
               "RelativeToolTip": "CV_AI\\Views\\Shared\\_ManagementLayout.cshtml",
               "ViewState": "AgIAACcAAAAAAAAAAAAAABQAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:43:05.124Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:43:05.124Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\EditCV\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\EditCV\\Index.cshtml",
@@ -371,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
@@ -383,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Home\\Privacy.cshtml",
@@ -395,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "CVController.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\CVController.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\CVController.cs",
@@ -407,19 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_JobPostCard.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
-              "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
-              "RelativeToolTip": "CV_AI\\Views\\Shared\\_JobPostCard.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T14:43:05.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\AccountController.cs",
@@ -431,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_Layout.cshtml",
@@ -443,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "ManagementController.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
@@ -455,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "JobController.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\JobController.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\JobController.cs",
@@ -467,20 +507,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "CV_AI.csproj",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
-              "RelativeDocumentMoniker": "CV_AI\\CV_AI.csproj",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
-              "RelativeToolTip": "CV_AI\\CV_AI.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-23T14:43:05.132Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "Candidate.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Candidate.cs",
               "RelativeDocumentMoniker": "CV_AI\\Models\\Candidate.cs",
@@ -492,7 +519,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "Microsoft.NET.Sdk.DefaultItems.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.targets",
               "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.targets",
@@ -502,7 +529,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "20250620141031_AddIdentityTables.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250620141031_AddIdentityTables.cs",
               "RelativeDocumentMoniker": "CV_AI\\Migrations\\20250620141031_AddIdentityTables.cs",
@@ -514,7 +541,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Management\\Index.cshtml",
@@ -526,7 +553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Account\\Login.cshtml",
@@ -538,7 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "Register.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Account\\Register.cshtml",
@@ -550,7 +577,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "JobPost.cs",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\JobPost.cs",
               "RelativeDocumentMoniker": "CV_AI\\Models\\JobPost.cs",
@@ -562,7 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -574,7 +601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "management.css",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\management.css",
               "RelativeDocumentMoniker": "CV_AI\\wwwroot\\css\\management.css",
@@ -586,7 +613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "header.css",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\header.css",
               "RelativeDocumentMoniker": "CV_AI\\wwwroot\\css\\header.css",
@@ -598,7 +625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "responsive.css",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\responsive.css",
               "RelativeDocumentMoniker": "CV_AI\\wwwroot\\css\\responsive.css",
@@ -610,7 +637,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "footer.css",
               "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\wwwroot\\css\\footer.css",
               "RelativeDocumentMoniker": "CV_AI\\wwwroot\\css\\footer.css",

@@ -3,14 +3,23 @@
 <div class="job-grid-container row g-0">
     @foreach (var job in Model)
     {
+        string faviconUrl = Url.Content("~/images/logo/cv_logo.png");
+        if (job.Employer != null && !string.IsNullOrWhiteSpace(job.Employer.CompanyWebsite)
+            && (job.Employer.CompanyWebsite.StartsWith("http://") || job.Employer.CompanyWebsite.StartsWith("https://")))
+        {
+            var host = new Uri(job.Employer.CompanyWebsite).Host;
+            faviconUrl = $"https://www.google.com/s2/favicons?domain={host}";
+        }
         <div class="col-12 col-sm-6 col-md-4 mb-4">
             <a asp-controller="Job" asp-action="Details" asp-route-id="@job.ID_JobPost" class="job-feature-card d-flex align-items-center shadow-sm text-decoration-none text-dark">
                 <div class="job-feature-logo d-flex align-items-center justify-content-center flex-shrink-0">
-                    <img src="@((job.Employer != null && !string.IsNullOrEmpty(job.Employer.CompanyWebsite)) ? $"https://www.google.com/s2/favicons?domain={new Uri(job.Employer.CompanyWebsite).Host}" : Url.Content("~/images/logo/cv_logo.png"))" alt="Logo" />
+                    <img src="@faviconUrl" alt="Logo" />
                 </div>
                 <div class="flex-grow-1 overflow-hidden px-2">
-                    <div class="fw-bold job-title mb-1 job-title-2line">@job.Title</div>
-                    <div class="company-name text-truncate mb-1">@job.Employer?.CompanyName</div>
+                    <div class="fw-bold job-title mb-1 job-title-2line" style="text-transform:none !important;">@job.Title</div>
+                    <div class="company-name text-secondary text-truncate mb-1">
+                        @(string.IsNullOrWhiteSpace(job.Employer?.CompanyName) ? "Không rõ công ty" : job.Employer.CompanyName)
+                    </div>
                     <div class="d-flex flex-wrap gap-2 align-items-center mb-1">
                         @if (!string.IsNullOrEmpty(job.Salary))
                         {
@@ -83,6 +92,7 @@
     font-size: 1.05em;
     font-weight: 600;
     color: #222;
+    text-transform: none !important;
 }
 .badge-soft {
     background: #f5f6fa;

@@ -1,23 +1,99 @@
-﻿@{
+﻿@model IEnumerable<CV_AI.Models.JobPost>
+@{
     ViewData["Title"] = "Home Page";
+    var categories = ViewData["Categories"] as List<CV_AI.Models.Category> ?? new List<CV_AI.Models.Category>();
 }
 
 <partial name="_AnimatedBackground" />
 
-<div class="text-center">
-    <h1 class="display-4">trang chủ</h1>
-  
-</div>
-
-@model IEnumerable<CV_AI.Models.JobPost>
-<div class="container mt-4">
-    <h2 class="mb-4">Việc làm mới nhất</h2>
-    <div class="row">
-        @foreach (var job in Model)
-        {
-            <div class="col-md-6 mb-4">
-                @await Html.PartialAsync("_JobPostCard", job)
-            </div>
-        }
+<style>
+    .search-form-home {
+        background: #fff;
+        border-radius: 32px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+        padding: 1.2rem 1.5rem;
+        max-width: 900px;
+        margin: 0 auto 2.5rem auto;
+    }
+    .search-form-home .form-group {
+        margin-bottom: 0;
+    }
+    .search-form-home .form-select,
+    .search-form-home .form-control {
+        border: 1px solid #e0e0e0;
+        background: #f8fafc;
+        font-weight: 500;
+        color: #222;
+        box-shadow: none;
+        border-radius: 18px;
+        min-height: 44px;
+    }
+    .search-form-home .form-control::placeholder {
+        color: #aaa;
+        font-weight: 400;
+    }
+    .search-form-home .input-group-text {
+        background: #f8fafc;
+        border: 1px solid #e0e0e0;
+        color: #00b894;
+        font-size: 1.1rem;
+        border-radius: 18px 0 0 18px;
+    }
+    .search-form-home .btn-success {
+        background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+        border: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.6rem 2.2rem;
+        box-shadow: 0 2px 8px rgba(25,195,125,0.10);
+        border-radius: 22px;
+        transition: background 0.2s;
+    }
+    .search-form-home .btn-success:hover {
+        background: linear-gradient(90deg, #00b894 0%, #19c37d 100%);
+    }
+    @@media (max-width: 991.98px) {
+        .search-form-home { padding: 1rem; }
+    }
+</style>
+<h1 class="fw-bold mb-3" style="color: #19c37d; font-size: 2rem; text-align:center;">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc</h1>
+    <div class="mb-4" style="color: #555; font-size: 1.1rem; text-align:center;">
+        Tiếp cận <b>60,000+</b> tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam
     </div>
+<div class="container mt-4">
+    <form class="search-form-home mb-4" autocomplete="off" method="get">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-3 col-12">
+                <div class="form-group mb-0">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-list"></i></span>
+                        <select class="form-select" name="categoryId">
+                            <option value="">Ngành nghề</option>
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.ID_Category">@category.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group mb-0">
+                    <input type="text" class="form-control" name="keyword" placeholder="Từ khóa (VD: bán hàng, marketing...)" />
+                </div>
+            </div>
+            <div class="col-md-3 col-12">
+                <div class="form-group mb-0">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        <input type="text" class="form-control" name="location" placeholder="Địa điểm (VD: Hà Nội)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-12 d-grid">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search me-2"></i>Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+    @await Html.PartialAsync("_JobPostGridPartial", (IEnumerable<CV_AI.Models.JobPost>)Model)
 </div>

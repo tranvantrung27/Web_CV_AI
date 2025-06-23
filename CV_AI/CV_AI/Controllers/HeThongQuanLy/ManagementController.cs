@@ -3,6 +3,7 @@ using CV_AI.Data;
 using System.Linq;
 using CV_AI.Models.ViewModels;
 using CV_AI.Models;
+using Microsoft.EntityFrameworkCore;
 namespace CV_AI.Controllers
 {
     public class ManagementController : Controller
@@ -22,8 +23,9 @@ namespace CV_AI.Controllers
         public IActionResult ManagePosts()
         {
             var userId = HttpContext.Session.GetString("UserID");
-            // Lấy các tin do nhà tuyển dụng này đăng
+            // Lấy các tin do nhà tuyển dụng này đăng, kèm thông tin công ty
             var jobPosts = _context.JobPosts
+                .Include(jp => jp.Employer)
                 .Where(jp => jp.ID_Employer == userId)
                 .OrderByDescending(jp => jp.PostedDate)
                 .ToList();
