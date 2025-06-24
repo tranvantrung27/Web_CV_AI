@@ -309,16 +309,16 @@
                     $count.text(data.notifications.length);
                     $('#notification-empty').hide();
                     data.notifications.forEach(function (n) {
-                        $list.find('hr').first().before(
-                            $('<li class="notification-item">').html(
-                                `<a class="dropdown-item" href='#'>
-                                    <div class="notification-content">
-                                        <div class="notification-text">${n.Message}</div>
-                                        <small class="text-muted">${n.TimeAgo}</small>
-                                    </div>
-                                </a>`
-                            )
-                        );
+                        // $list.find('hr').first().before(
+                        //     $('<li class="notification-item">').html(
+                        //         `<a class="dropdown-item" href='#'>
+                        //             <div class="notification-content">
+                        //                 <div class="notification-text">${n.Message}</div>
+                        //                 <small class="text-muted">${n.TimeAgo}</small>
+                        //             </div>
+                        //         </a>`
+                        //     )
+                        // );
                     });
                 } else {
                     $count.text('0');

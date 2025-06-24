@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CV_AI.Migrations
 {
     /// <inheritdoc />
-    public partial class CV : Migration
+    public partial class CapNhat : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

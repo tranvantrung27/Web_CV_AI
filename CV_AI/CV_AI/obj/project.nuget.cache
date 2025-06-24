@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5jq8DHYqGS0=",
+  "dgSpecHash": "8QPB6jGKUr4=",
   "success": true,
-  "projectFilePath": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+  "projectFilePath": "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

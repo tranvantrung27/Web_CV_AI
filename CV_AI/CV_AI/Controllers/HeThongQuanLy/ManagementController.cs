@@ -160,7 +160,7 @@ namespace CV_AI.Controllers
                     var notification = new Notification
                     {
                         UserId = application.Candidate.User.Id,
-                        Message = $"Bạn đã được chấp nhận vào vị trí \"{application.JobPost?.Title}\".",
+                        Message = $"Chúc mừng! Đơn ứng tuyển của bạn cho vị trí \"{application.JobPost?.Title}\" đã được chấp nhận.",
                         CreatedAt = DateTime.Now,
                         IsRead = false
                     };
@@ -205,7 +205,7 @@ namespace CV_AI.Controllers
                     var notification = new Notification
                     {
                         UserId = application.Candidate.User.Id,
-                        Message = $"Bạn đã bị từ chối cho vị trí \"{application.JobPost?.Title}\".",
+                        Message = $"Rất tiếc, đơn ứng tuyển của bạn cho vị trí \"{application.JobPost?.Title}\" đã bị từ chối.",
                         CreatedAt = DateTime.Now,
                         IsRead = false
                     };

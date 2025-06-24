@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_AI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250624122512_CV")]
-    partial class CV
+    [Migration("20250624132529_CapNhat")]
+    partial class CapNhat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

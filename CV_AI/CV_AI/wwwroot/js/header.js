@@ -3,6 +3,7 @@
  * Handles theme toggle, sticky header, search functionality, and responsive behavior
  */
 
+/*
 $(document).ready(function () {
     // Initialize header functionality
     initializeHeader();
@@ -12,6 +13,7 @@ $(document).ready(function () {
     initializeNotifications();
     initializeResponsiveMenu();
 });
+*/
 
 /**
  * Initialize main header functionality
@@ -273,57 +275,64 @@ function initializeStickyHeader() {
  */
 function initializeNotifications() {
     const notificationDropdown = $('#notificationDropdown');
-    const notificationBadge = $('.notification-badge');
+    const notificationList = $('#notification-list');
+    const notificationBadge = $('#notification-count');
 
-    // Load notifications
+    if (notificationDropdown.length === 0) {
+        return;
+    }
     loadNotifications();
 
-    // Mark notifications as read when dropdown is opened
-    notificationDropdown.on('shown.bs.dropdown', function () {
-        markNotificationsAsRead();
-    });
-
     function loadNotifications() {
-        // Simulate loading notifications (replace with actual API call)
-        const notifications = [
-            {
-                id: 1,
-                message: 'CV của bạn đã được tạo thành công',
-                time: '2 phút trước',
-                read: false
-            },
-            {
-                id: 2,
-                message: 'Có template mới được cập nhật',
-                time: '1 giờ trước',
-                read: false
-            },
-            {
-                id: 3,
-                message: 'Hệ thống sẽ bảo trì vào 2:00 AM',
-                time: '3 giờ trước',
-                read: true
-            }
-        ];
+        $.ajax({
+            url: '/Notifications/GetLatest',
+            method: 'GET',
+            success: function(response) {
+                if (response && response.notifications && Array.isArray(response.notifications)) {
+                    updateNotificationBadge(response.count);
 
-        updateNotificationBadge(notifications);
+                    // Clear existing notifications, keeping the structure
+                    notificationList.empty();
+
+                    // Add header
+                    notificationList.append('<li class="dropdown-header">Thông báo mới</li>');
+
+                    if (response.notifications.length > 0) {
+                        response.notifications.forEach(function(notification) {
+                            const notificationHtml = `
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="fw-bold">${notification.message || 'N/A'}</div>
+                                        <small class="text-muted">${notification.timeAgo || ''}</small>
+                                    </a>
+                                </li>`;
+                            notificationList.append(notificationHtml);
+                        });
+                    } else {
+                        notificationList.append('<li><div class="text-center text-muted py-2">Không có thông báo mới</div></li>');
+                    }
+
+                    // Add footer
+                    notificationList.append('<li><hr class="dropdown-divider"></li>');
+                    notificationList.append('<li><a class="dropdown-item text-center" href="#">Xem tất cả thông báo</a></li>');
+
+                } else {
+                    updateNotificationBadge(0);
+                    notificationList.html('<li><div class="text-center text-muted py-2">Không có thông báo mới</div></li>');
+                }
+            },
+            error: function() {
+                notificationList.html('<li><a class="dropdown-item text-danger" href="#">Lỗi khi tải thông báo</a></li>');
+            }
+        });
     }
 
-    function updateNotificationBadge(notifications) {
-        const unreadCount = notifications.filter(n => !n.read).length;
-
-        if (unreadCount > 0) {
-            notificationBadge.text(unreadCount).show();
+    function updateNotificationBadge(count) {
+        if (count > 0) {
+            notificationBadge.text(count).show();
         } else {
             notificationBadge.hide();
         }
-    }
-
-    function markNotificationsAsRead() {
-        // Simulate marking as read (replace with actual API call)
-        setTimeout(() => {
-            notificationBadge.hide();
-        }, 1000);
     }
 }
 
@@ -596,8 +605,7 @@ function initializeAllHeaderFeatures() {
     initializeAdvancedSearch();
     initializeAccessibility();
     initializePerformanceMonitoring();
-    initializeNotificationsAndUserDropdowns(); // <-- thêm dòng này
-    // Add custom CSS for additional features
+    initializeNotificationsAndUserDropdowns();
     addCustomStyles();
 }
 
