@@ -4,107 +4,207 @@
     ViewData["Title"] = "Đăng ký";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center">Đăng ký tài khoản</h3>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="auth-title">Tạo tài khoản</h2>
+        <p class="auth-subtitle">Bắt đầu hành trình mới của bạn với chúng tôi</p>
+
+        <form asp-action="Register" method="post" class="mt-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="FullName" class="form-control" placeholder="Họ tên" />
+                        <label asp-for="FullName">Họ và tên</label>
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form asp-action="Register" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label asp-for="FullName" class="control-label">Họ tên</label>
-                                    <input asp-for="FullName" class="form-control" />
-                                    <span asp-validation-for="FullName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label asp-for="Email" class="control-label">Email</label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label asp-for="Password" class="control-label">Mật khẩu</label>
-                                    <input asp-for="Password" class="form-control" type="password" />
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label asp-for="ConfirmPassword" class="control-label">Xác nhận mật khẩu</label>
-                                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
-                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group mb-3">
-                            <label asp-for="Role" class="control-label">Vai trò</label>
-                            <select asp-for="Role" class="form-control" id="roleSelect">
-                                <option value="">Chọn vai trò</option>
-                                <option value="Candidate">Ứng viên</option>
-                                <option value="Employer">Nhà tuyển dụng</option>
-                            </select>
-                            <span asp-validation-for="Role" class="text-danger"></span>
-                        </div>
-                        
-                        <!-- Candidate fields -->
-                        <div id="candidateFields" style="display: none;">
-                            <div class="form-group mb-3">
-                                <label asp-for="Phone" class="control-label">Số điện thoại</label>
-                                <input asp-for="Phone" class="form-control" />
-                                <span asp-validation-for="Phone" class="text-danger"></span>
-                            </div>
-                        </div>
-                        
-                        <!-- Employer fields -->
-                        <div id="employerFields" style="display: none;">
-                            <div class="form-group mb-3">
-                                <label asp-for="CompanyName" class="control-label">Tên công ty</label>
-                                <input asp-for="CompanyName" class="form-control" />
-                                <span asp-validation-for="CompanyName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="CompanyWebsite" class="control-label">Website công ty</label>
-                                <input asp-for="CompanyWebsite" class="form-control" />
-                                <span asp-validation-for="CompanyWebsite" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="CompanyAddress" class="control-label">Địa chỉ công ty</label>
-                                <input asp-for="CompanyAddress" class="form-control" />
-                                <span asp-validation-for="CompanyAddress" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Description" class="control-label">Mô tả công ty</label>
-                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary">Đăng ký</button>
-                        </div>
-                    </form>
-                    
-                    <div class="text-center mt-3">
-                        <p>Đã có tài khoản? <a asp-action="Login">Đăng nhập</a></p>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <label asp-for="Email">Địa chỉ Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Mật khẩu" />
+                        <label asp-for="Password">Mật khẩu</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                     <div class="form-floating">
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Xác nhận mật khẩu" />
+                        <label asp-for="ConfirmPassword">Xác nhận mật khẩu</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="form-floating mt-3">
+                <select asp-for="Role" class="form-select" id="roleSelect">
+                    <option value="" selected>Chọn vai trò của bạn</option>
+                    <option value="Candidate">Tôi là Ứng viên</option>
+                    <option value="Employer">Tôi là Nhà tuyển dụng</option>
+                </select>
+                <label asp-for="Role">Bạn là...</label>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <!-- Candidate fields -->
+            <div id="candidateFields" style="display: none;" class="mt-3">
+                <div class="form-floating">
+                    <input asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
+                    <label asp-for="Phone">Số điện thoại</label>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Employer fields -->
+            <div id="employerFields" style="display: none;" class="row g-3 mt-1">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="CompanyName" class="form-control" placeholder="Tên công ty" />
+                        <label asp-for="CompanyName">Tên công ty</label>
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="CompanyWebsite" class="form-control" placeholder="Website công ty" />
+                        <label asp-for="CompanyWebsite">Website công ty</label>
+                        <span asp-validation-for="CompanyWebsite" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12">
+                     <div class="form-floating">
+                        <input asp-for="CompanyAddress" class="form-control" placeholder="Địa chỉ công ty" />
+                        <label asp-for="CompanyAddress">Địa chỉ công ty</label>
+                        <span asp-validation-for="CompanyAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                 <div class="col-12">
+                     <div class="form-floating">
+                        <textarea asp-for="Description" class="form-control" placeholder="Mô tả công ty" style="height: 100px"></textarea>
+                        <label asp-for="Description">Mô tả ngắn về công ty</label>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary btn-lg auth-btn">Đăng ký</button>
+            </div>
+
+             <div class="text-center mt-4">
+                <p class="text-muted">Đã có tài khoản? <a asp-action="Login" class="auth-link">Đăng nhập ngay</a></p>
+            </div>
+        </form>
     </div>
 </div>
+
+<style>
+body {
+    background-color: #f8f9fa;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 2rem 0;
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 2.5rem 3rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+.auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-control, .form-select {
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #00b894;
+    box-shadow: 0 0 0 0.25rem rgba(0, 184, 148, 0.15);
+}
+/* Adjust floating label styles */
+.form-floating > .form-control,
+.form-floating > .form-select {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > label {
+    padding: 1rem 0.75rem;
+    color: #6c757d;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+    opacity: .65;
+    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+}
+
+
+.auth-btn {
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+}
+
+.auth-link {
+    color: #00b894;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+span.text-danger {
+    font-size: 0.875em;
+    padding-left: 0.25rem;
+}
+
+</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -114,14 +214,14 @@
             $('#roleSelect').change(function() {
                 var role = $(this).val();
                 if (role === 'Candidate') {
-                    $('#candidateFields').show();
-                    $('#employerFields').hide();
+                    $('#candidateFields').slideDown();
+                    $('#employerFields').slideUp();
                 } else if (role === 'Employer') {
-                    $('#candidateFields').hide();
-                    $('#employerFields').show();
+                    $('#candidateFields').slideUp();
+                    $('#employerFields').slideDown();
                 } else {
-                    $('#candidateFields').hide();
-                    $('#employerFields').hide();
+                    $('#candidateFields').slideUp();
+                    $('#employerFields').slideUp();
                 }
             });
         });

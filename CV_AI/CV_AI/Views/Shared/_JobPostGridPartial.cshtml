@@ -6,7 +6,7 @@
     var savedJobIds = ViewBag.SavedJobIds as HashSet<int> ?? new HashSet<int>();
 }
 
-<div class="job-grid-container row g-3">
+<div class="job-grid-container row g-4">
     @foreach (var job in Model)
     {
         string faviconUrl = Url.Content("~/images/logo/cv_logo.png");
@@ -14,77 +14,59 @@
         && (job.Employer.CompanyWebsite.StartsWith("http://") || job.Employer.CompanyWebsite.StartsWith("https://")))
         {
             var host = new Uri(job.Employer.CompanyWebsite).Host;
-            faviconUrl = $"https://www.google.com/s2/favicons?domain={host}";
+            faviconUrl = $"https://www.google.com/s2/favicons?domain={host}&sz=128";
         }
 
         var isSaved = savedJobIds.Contains(job.ID_JobPost);
         var savedClass = isSaved ? "favorited" : "";
 
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="job-card-wrapper">
-                <div class="job-card text-decoration-none">
-                    <div class="job-card-header">
-                        <div class="company-logo">
-                            <img src="@faviconUrl" alt="@(job.Employer?.CompanyName ?? "Company")" />
-                            <div class="logo-ring"></div>
-                        </div>
-                        <button class="favorite-btn @savedClass" title="Lưu việc làm" type="button" 
-                                data-job-id="@job.ID_JobPost"
-                                onclick="event.preventDefault(); event.stopPropagation(); toggleSaveJob(this);">
-                            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="job-card-body">
-                        <h3 class="job-title">
-                            <a asp-controller="Job" asp-action="Details" asp-route-id="@job.ID_JobPost">
-                                @job.Title
-                            </a>
-                        </h3>
-                        <p class="company-name">
-                            @(string.IsNullOrWhiteSpace(job.Employer?.CompanyName) ? "Không rõ công ty" : job.Employer.CompanyName)
-                        </p>
-                        <div class="job-tags d-flex flex-row flex-nowrap align-items-center gap-2">
-                            @if (!string.IsNullOrEmpty(job.Salary))
-                            {
-                                <span class="job-tag salary-tag">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
-                                        <path d="M12 18V6"></path>
-                                    </svg>
-                                    @job.Salary
-                                </span>
-                            }
-                            @if (!string.IsNullOrEmpty(job.Location))
-                            {
-                                <span class="job-tag location-tag">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                    @job.Location
-                                </span>
-                            }
-                            @if (isQuanLyDangTin)
-                            {
-                                <span class="job-tag applicant-tag">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M16 21v-2a4 4 0 0 0-8 0v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Số lượng ứng viên: @(soLuongUngVienDict.ContainsKey(job.ID_JobPost) ? soLuongUngVienDict[job.ID_JobPost] : 0)
-                                </span>
-                            }
-                        </div>
+        <div class="col-12 col-lg-6">
+            <div class="job-card-new">
+                <div class="job-logo-new">
+                    <img src="@faviconUrl" alt="@(job.Employer?.CompanyName ?? "Company") Logo" />
+                </div>
+                <div class="job-info-new">
+                    <h3 class="job-title-new">
+                        <a asp-controller="Job" asp-action="Details" asp-route-id="@job.ID_JobPost">
+                            @job.Title
+                        </a>
+                    </h3>
+                    <p class="company-name-new">
+                        @(string.IsNullOrWhiteSpace(job.Employer?.CompanyName) ? "Không rõ công ty" : job.Employer.CompanyName)
+                    </p>
+                    <div class="job-tags-new">
+                        @if (!string.IsNullOrEmpty(job.Salary))
+                        {
+                            <span class="job-tag-new salary-tag-new">@job.Salary</span>
+                        }
+                        @if (!string.IsNullOrEmpty(job.Location))
+                        {
+                            <span class="job-tag-new location-tag-new">@job.Location</span>
+                        }
                         @if (isQuanLyDangTin)
                         {
-                            <a class="btn btn-outline-success w-100 mt-3" href="@Url.Action("ManageApplicants", "Management", new { id = job.ID_JobPost })">
-                                Quản lý ứng viên
-                            </a>
+                            <span class="job-tag-new applicant-tag-new">
+                               <i class="fas fa-users"></i> @(soLuongUngVienDict.ContainsKey(job.ID_JobPost) ? soLuongUngVienDict[job.ID_JobPost] : 0) ứng viên
+                            </span>
+                        }
+                        @if (job.ID_JobPost % 3 == 0) { // Just for demonstration
+                             <span class="job-tag-new hot-tag-new">NỔI BẬT</span>
                         }
                     </div>
+                </div>
+                <div class="job-actions-new">
+                     @if (isQuanLyDangTin)
+                    {
+                        <a class="btn btn-sm btn-outline-success" href="@Url.Action("ManageApplicants", "Management", new { id = job.ID_JobPost })">
+                            Quản lý
+                        </a>
+                    } else {
+                        <button class="favorite-btn-new @savedClass" title="Lưu việc làm" type="button"
+                                data-job-id="@job.ID_JobPost"
+                                onclick="event.preventDefault(); event.stopPropagation(); toggleSaveJob(this);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="@(isSaved ? "#ef4444" : "none")" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                    }
                 </div>
             </div>
         </div>
@@ -92,375 +74,204 @@
 </div>
 
 <style>
-    /* Main Container */
-    .job-grid-container {
-        margin-top: 20px;
-        padding: 0 8px;
-    }
+/* Container for grid view */
+.job-grid-container {
+    margin: 20px auto;
+    padding: 0;
+}
 
-    /* Card Wrapper with Hover Animation */
-    .job-card-wrapper {
-        height: 100%;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+/* New Job Card Styling */
+.job-card-new {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #e5e7eb;
+    height: 100%; /* Ensure cards in the same row have the same height */
+}
+.job-card-new:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: #00b894;
+}
 
-        .job-card-wrapper:hover {
-            transform: translateY(-4px);
-        }
+/* Logo */
+.job-logo-new {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 5px;
+    border: 1px solid #f0f0f0;
+}
+.job-logo-new img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-    /* Main Job Card */
-    .job-card {
-        display: flex;
-        flex-direction: column;
-        background: #fff !important;
-        border-radius: 16px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-        transition: all 0.2s;
-    }
+/* Job Info Section */
+.job-info-new {
+    flex: 1;
+}
+.job-title-new {
+    font-size: 1.15rem; /* 18px */
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.job-title-new a {
+    color: #1f2937;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.job-title-new a:hover {
+    color: #00b894;
+}
 
-        .job-card:hover {
-            border-color: #00b894;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.13);
-            color: inherit;
-            text-decoration: none;
-        }
+.company-name-new {
+    color: #6b7280;
+    font-size: 0.95rem; /* 15px */
+    margin-bottom: 12px;
+}
 
-    /* Card Header */
-    .job-card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 16px;
-    }
+/* Tags */
+.job-tags-new {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.job-tag-new {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.hot-tag-new {
+    background: #fff1f2;
+    color: #ef4444;
+    font-weight: 600;
+}
+.salary-tag-new {
+    color: #059669;
+    background-color: #d1fae5;
+    font-weight: 600;
+}
+.applicant-tag-new {
+    color: #3b82f6;
+    background-color: #dbeafe;
+    font-weight: 600;
+}
 
-    .company-logo {
-        position: relative;
-        width: 54px;
-        height: 54px;
-    }
+/* Actions section (favorite button) */
+.job-actions-new {
+    margin-left: auto;
+    padding-left: 16px;
+    align-self: center;
+}
+.favorite-btn-new {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+    transition: color 0.2s, transform 0.2s;
+}
+.favorite-btn-new:hover {
+    color: #ef4444; /* red on hover */
+    transform: scale(1.1);
+}
+.favorite-btn-new.favorited {
+    color: #ef4444;
+}
+.favorite-btn-new.favorited svg {
+    fill: #ef4444;
+}
+.favorite-btn-new svg {
+    width: 24px;
+    height: 24px;
+}
 
-        .company-logo img {
-            width: 54px;
-            height: 54px;
-            border-radius: 10px;
-            object-fit: contain;
-            background: #ffffff;
-            border: 1px solid #eee;
-            position: relative;
-            z-index: 2;
-        }
-
-    /* Favorite Button */
-    .favorite-btn {
-        background: #ffffff;
-        border: 2px solid #e5e7eb;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #9ca3af;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        padding: 0;
-        fill: none; /* Ensure heart is not filled by default */
-    }
-
-        .favorite-btn:hover {
-            background: #f3f4f6;
-            color: #10b981;
-            transform: scale(1.05);
-        }
-
-        .favorite-btn.favorited {
-            background: #10b981;
-            border-color: #10b981;
-            color: white;
-            fill: white; /* Fill the heart when favorited */
-        }
-
-    /* Card Body */
-    .job-card-body {
-        padding: 18px 18px 18px 18px;
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .job-title {
-        font-size: 1.05em;
-        font-weight: 600;
-        color: #222;
-        margin: 0 0 8px 0;
-        line-height: 1.4;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        min-height: 2.6em;
-        text-transform: none !important;
-    }
-
-    .job-title a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .job-title a:hover {
-        color: #00b894;
-    }
-
-    .company-name {
-        color: #ff9800;
-        font-size: 0.98em;
-        font-weight: 500;
-        margin: 0 0 12px 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        letter-spacing: 0.01em;
-    }
-
-    /* Job Tags */
-    .job-tags {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 0;
-    }
-
-    .job-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 5px 12px;
-        border-radius: 50rem; /* pill-shaped */
-        font-size: 0.85em;
-        font-weight: 500;
-        border: 1px solid transparent;
-        transition: all 0.2s ease;
-    }
-
-    .salary-tag {
-        background-color: #e7f8f0;
-        color: #16a34a;
-        border-color: #d4f0e1;
-    }
-
-    .location-tag {
-        background-color: #eaf2ff;
-        color: #2563eb;
-        border-color: #dbe8ff;
-    }
-    
-    .applicant-tag {
-        background-color: #f3f4f6;
-        color: #4b5563;
-        border-color: #e5e7eb;
-    }
-
-    .job-card:hover .job-tag {
-        transform: translateY(-1px);
-    }
-
-    /* Card Footer */
-    .job-card-footer {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-top: auto;
-        padding-top: 8px;
-    }
-
-    .apply-indicator {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: #667eea;
-        font-size: 0.875rem;
-        font-weight: 600;
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s ease;
-    }
-
-    .job-card:hover .apply-indicator {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    /* Responsive Design */
-    @@media (max-width: 767.98px) {
-        .job-grid-container
-
-    {
-        padding: 0 4px;
-    }
-
-    .job-card {
-        padding: 20px;
-    }
-
-    .company-logo {
-        width: 48px;
-        height: 48px;
-    }
-
-        .company-logo img {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-        }
-
-    .logo-ring {
-        border-radius: 16px;
-    }
-
-    .job-title {
-        font-size: 1.125rem;
-    }
-
-    .favorite-btn {
-        width: 36px;
-        height: 36px;
-    }
-
-    .job-tags {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-    }
-
-    }
-
-    @@media (min-width: 1200px) {
-        .job-grid-container .col-lg-4
-
-    {
-        flex: 0 0 auto;
-        width: 33.333333%;
-    }
-
-    }
-
-    /* Dark mode support */
-    @@media (prefers-color-scheme: dark) {
-        .job-card {
-            background: #ffffff !important;
-            border-color: #e0e0e0;
-        }
-        .job-title {
-            color: #222;
-        }
-        .company-logo img {
-            border-color: #e0e0e0;
-        }
-        .favorite-btn {
-            background: #ffffff;
-            border-color: #00b894;
-            color: #00b894;
-        }
-    }
-
-    /* Loading animation for images */
-    .company-logo img {
-        background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
-        background-size: 200% 100%;
-        animation: shimmer 2s infinite;
-    }
-
-    @@keyframes shimmer {
-        0%
-
-    {
-        background-position: -200% 0;
-    }
-
-    100% {
-        background-position: 200% 0;
-    }
-
-    }
-
-    .company-logo img[src] {
-        animation: none;
-        background: #ffffff;
-    }
-
-    .btn-outline-success.w-100 {
-        margin-top: 16px;
-        border-radius: 8px;
-        font-weight: 500;
-    }
 </style>
 
 <script>
-    if (typeof window.toggleSaveJob !== 'function') {
-        window.toggleSaveJob = function (button) {
-            const jobId = button.getAttribute('data-job-id');
-
-            fetch(`/Job/ToggleSaveJob/${jobId}`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.status === 401 || !response.ok) {
-                    return response.json().then(err => {
-                        if (err.redirectTo) {
-                            window.location.href = err.redirectTo;
-                        } else {
-                            throw new Error('Lỗi không xác định.');
-                        }
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.success) {
-                    button.classList.toggle('favorited', data.saved);
-
-                    // Update FAB count
-                    var badge = document.getElementById('fab-saved-count');
-                    if (badge) {
-                        let count = parseInt(badge.textContent) || 0;
-                        badge.textContent = data.saved ? count + 1 : Math.max(0, count - 1);
+if (typeof window.toggleSaveJob !== 'function') {
+    window.toggleSaveJob = function (button) {
+        const jobId = button.getAttribute('data-job-id');
+        const heartIcon = button.querySelector('svg');
+        const isSaved = button.classList.contains('favorited');
+        fetch(`/Job/ToggleSaveJob/${jobId}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0]?.value
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    if (err.redirectTo) {
+                        window.location.href = err.redirectTo;
+                    } else {
+                        throw new Error('Lỗi không xác định.');
                     }
-
-                    // If on saved jobs page and an item was unsaved, remove it from the view
-                    if (window.location.pathname.toLowerCase().includes('/job/savedjobs') && !data.saved) {
-                        const jobCard = button.closest('.col-12');
-                        if (jobCard) {
-                            jobCard.style.transition = 'opacity 0.3s ease-out';
-                            jobCard.style.opacity = '0';
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.success) {
+                var badge = document.getElementById('fab-saved-count');
+                let count = parseInt(badge?.textContent) || 0;
+                if (isSaved) {
+                    button.classList.remove('favorited');
+                    heartIcon.style.fill = 'none';
+                    // Nếu đang ở trang SavedJobs, xóa card khỏi DOM
+                    if (window.location.pathname.toLowerCase().includes('/job/savedjobs')) {
+                        const card = button.closest('.col-12, .col-12.col-lg-6');
+                        if (card) {
+                            card.style.transition = 'opacity 0.3s';
+                            card.style.opacity = '0';
                             setTimeout(() => {
-                                jobCard.remove();
-                                // Check if the grid is now empty
-                                const jobGridContainer = document.querySelector('.job-grid-container');
-                                if (jobGridContainer && jobGridContainer.children.length === 0) {
-                                    const gridWrapper = document.getElementById('saved-jobs-grid');
-                                    const emptyMessage = document.getElementById('no-saved-jobs-message');
-                                    if (gridWrapper) gridWrapper.style.display = 'none';
-                                    if (emptyMessage) emptyMessage.style.display = 'block';
+                                card.remove();
+                                // Nếu không còn job nào, hiển thị thông báo
+                                const grid = document.getElementById('saved-jobs-grid');
+                                const emptyMsg = document.getElementById('no-saved-jobs-message');
+                                if (grid && grid.querySelectorAll('.col-12, .col-12.col-lg-6').length === 0) {
+                                    grid.style.display = 'none';
+                                    if (emptyMsg) emptyMsg.style.display = 'block';
+                                }
+                                // Cập nhật badge số lượng đúng với số card còn lại
+                                if (badge) {
+                                    let newCount = grid ? grid.querySelectorAll('.col-12, .col-12.col-lg-6').length : 0;
+                                    badge.textContent = newCount;
                                 }
                             }, 300);
                         }
+                    } else {
+                        if (badge) badge.textContent = Math.max(0, count - 1);
                     }
+                } else {
+                    button.classList.add('favorited');
+                    heartIcon.style.fill = '#ef4444';
+                    if (badge) badge.textContent = count + 1;
                 }
-            })
-            .catch(error => {
-                console.error('Lỗi khi lưu việc làm:', error);
-            });
-        }
+            }
+        })
+        .catch(error => alert('Lỗi khi lưu việc làm: ' + error));
     }
+}
 </script>

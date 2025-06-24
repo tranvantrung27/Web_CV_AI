@@ -28,12 +28,13 @@ body {
 /* Floating Action Buttons */
 .floating-action-buttons {
     position: fixed;
-    bottom: 90px;
+    bottom: 120px;
     right: 20px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     z-index: 1050;
+    transition: bottom 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
 .fab-item {
@@ -65,4 +66,11 @@ body {
     font-size: 10px;
     padding: 3px 6px;
     border: 2px solid #fff;
+}
+
+@media (max-width: 768px) {
+    .floating-action-buttons {
+        right: 12px;
+        bottom: 100px;
+    }
 }

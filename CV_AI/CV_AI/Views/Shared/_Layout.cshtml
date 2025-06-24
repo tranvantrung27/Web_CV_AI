@@ -332,6 +332,25 @@
         setInterval(loadNotifications, 60000);
         loadNotifications();
     });
+
+    // Tự động đẩy floating-action-buttons lên khi chạm footer
+    function adjustFloatingButtons() {
+        var fab = document.querySelector('.floating-action-buttons');
+        var footer = document.querySelector('footer');
+        if (!fab || !footer) return;
+        var fabRect = fab.getBoundingClientRect();
+        var footerRect = footer.getBoundingClientRect();
+        var windowHeight = window.innerHeight;
+        var overlap = (fabRect.bottom + 24) - footerRect.top;
+        if (overlap > 0) {
+            fab.style.bottom = (120 + overlap) + 'px';
+        } else {
+            fab.style.bottom = '120px';
+        }
+    }
+    window.addEventListener('scroll', adjustFloatingButtons);
+    window.addEventListener('resize', adjustFloatingButtons);
+    document.addEventListener('DOMContentLoaded', adjustFloatingButtons);
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
