@@ -18,6 +18,7 @@ namespace CV_AI.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<JobPostCategory> JobPostCategories { get; set; }
         public DbSet<SavedJob> SavedJobs { get; set; }
+        public DbSet<CV_AI.Models.Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

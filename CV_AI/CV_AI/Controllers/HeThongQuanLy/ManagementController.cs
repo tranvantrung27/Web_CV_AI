@@ -4,15 +4,18 @@ using System.Linq;
 using CV_AI.Models.ViewModels;
 using CV_AI.Models;
 using Microsoft.EntityFrameworkCore;
+using CV_AI.Services;
 namespace CV_AI.Controllers
 {
     public class ManagementController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly EmailService _emailService;
 
-        public ManagementController(ApplicationDbContext context)
+        public ManagementController(ApplicationDbContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -129,12 +132,42 @@ namespace CV_AI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AcceptApplication(int applicationId)
         {
-            var application = await _context.Applications.FindAsync(applicationId);
+            var application = await _context.Applications
+                .Include(a => a.Candidate).ThenInclude(c => c.User)
+                .Include(a => a.JobPost)
+                .FirstOrDefaultAsync(a => a.ID_Application == applicationId);
+
             if (application != null)
             {
                 application.Status = "Accepted";
                 await _context.SaveChangesAsync();
-                // TODO: Thêm logic tạo thông báo cho ứng viên
+
+                // Gửi email
+                var email = application.Candidate?.User?.Email;
+                var name = application.Candidate?.User?.FullName;
+                if (!string.IsNullOrEmpty(email))
+                {
+                    await _emailService.SendEmailAsync(
+                        email,
+                        "Kết quả ứng tuyển",
+                        $"Chào {name},<br>Bạn đã được <b>chấp nhận</b> vào vị trí \"{application.JobPost?.Title}\".<br>Chúc mừng bạn!"
+                    );
+                }
+
+                // Tạo thông báo
+                if (application.Candidate?.User != null)
+                {
+                    var notification = new Notification
+                    {
+                        UserId = application.Candidate.User.Id,
+                        Message = $"Bạn đã được chấp nhận vào vị trí \"{application.JobPost?.Title}\".",
+                        CreatedAt = DateTime.Now,
+                        IsRead = false
+                    };
+                    _context.Notifications.Add(notification);
+                    await _context.SaveChangesAsync();
+                }
+
                 TempData["SuccessMessage"] = "Đã chấp nhận ứng viên thành công.";
             }
             return RedirectToAction("ManageApplicants", new { id = application?.ID_JobPost });
@@ -144,12 +177,42 @@ namespace CV_AI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RejectApplication(int applicationId)
         {
-            var application = await _context.Applications.FindAsync(applicationId);
+            var application = await _context.Applications
+                .Include(a => a.Candidate).ThenInclude(c => c.User)
+                .Include(a => a.JobPost)
+                .FirstOrDefaultAsync(a => a.ID_Application == applicationId);
+
             if (application != null)
             {
                 application.Status = "Rejected";
                 await _context.SaveChangesAsync();
-                // TODO: Thêm logic tạo thông báo cho ứng viên
+
+                // Gửi email
+                var email = application.Candidate?.User?.Email;
+                var name = application.Candidate?.User?.FullName;
+                if (!string.IsNullOrEmpty(email))
+                {
+                    await _emailService.SendEmailAsync(
+                        email,
+                        "Kết quả ứng tuyển",
+                        $"Chào {name},<br>Rất tiếc, bạn đã <b>không được chọn</b> cho vị trí \"{application.JobPost?.Title}\".<br>Chúc bạn may mắn lần sau!"
+                    );
+                }
+
+                // Tạo thông báo
+                if (application.Candidate?.User != null)
+                {
+                    var notification = new Notification
+                    {
+                        UserId = application.Candidate.User.Id,
+                        Message = $"Bạn đã bị từ chối cho vị trí \"{application.JobPost?.Title}\".",
+                        CreatedAt = DateTime.Now,
+                        IsRead = false
+                    };
+                    _context.Notifications.Add(notification);
+                    await _context.SaveChangesAsync();
+                }
+
                 TempData["SuccessMessage"] = "Đã từ chối ứng viên.";
             }
             return RedirectToAction("ManageApplicants", new { id = application?.ID_JobPost });

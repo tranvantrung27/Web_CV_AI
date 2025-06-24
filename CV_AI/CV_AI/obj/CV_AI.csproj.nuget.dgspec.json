@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
+    "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
   },
   "projects": {
-    "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
+    "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectUniqueName": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "projectName": "CV_AI",
-        "projectPath": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectPath": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\DA_Web\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
+        "outputPath": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -53,6 +53,10 @@
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.12.1, )"
             },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
@@ -110,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

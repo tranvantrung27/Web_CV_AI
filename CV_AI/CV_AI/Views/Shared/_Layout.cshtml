@@ -112,26 +112,11 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button" aria-expanded="false">
                                     <i class="fas fa-bell"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">3</span>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" id="notification-count">0</span>
                                 </a>
-                                <ul class="dropdown-menu notification-dropdown dropdown-menu-start" aria-labelledby="notificationDropdown">
+                                <ul class="dropdown-menu notification-dropdown dropdown-menu-start" aria-labelledby="notificationDropdown" id="notification-list">
                                     <li class="dropdown-header">Thông báo mới</li>
-                                    <li>
-                                        <a class="dropdown-item notification-item" href="#">
-                                            <div class="notification-content">
-                                                <div class="notification-text">CV của bạn đã được tạo thành công</div>
-                                                <small class="text-muted">2 phút trước</small>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item notification-item" href="#">
-                                            <div class="notification-content">
-                                                <div class="notification-text">Có template mới được cập nhật</div>
-                                                <small class="text-muted">1 giờ trước</small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <li><div class="text-center text-muted py-2" id="notification-empty">Không có thông báo mới</div></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-center" href="#">Xem tất cả thông báo</a></li>
                                 </ul>
@@ -313,6 +298,41 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/header.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+    $(document).ready(function () {
+        function loadNotifications() {
+            $.get('/Notifications/GetLatest', function (data) {
+                let $list = $('#notification-list');
+                let $count = $('#notification-count');
+                $list.find('.notification-item').remove();
+                if (data.notifications && data.notifications.length > 0) {
+                    $count.text(data.notifications.length);
+                    $('#notification-empty').hide();
+                    data.notifications.forEach(function (n) {
+                        $list.find('hr').first().before(
+                            $('<li class="notification-item">').html(
+                                `<a class="dropdown-item" href='#'>
+                                    <div class="notification-content">
+                                        <div class="notification-text">${n.Message}</div>
+                                        <small class="text-muted">${n.TimeAgo}</small>
+                                    </div>
+                                </a>`
+                            )
+                        );
+                    });
+                } else {
+                    $count.text('0');
+                    $('#notification-empty').show();
+                }
+            });
+        }
+        $('#notificationDropdown').on('click', function () {
+            loadNotifications();
+        });
+        setInterval(loadNotifications, 60000);
+        loadNotifications();
+    });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
