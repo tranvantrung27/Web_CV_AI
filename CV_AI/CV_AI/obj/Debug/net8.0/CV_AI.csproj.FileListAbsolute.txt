@@ -468,3 +468,4 @@ D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\refint\CV_AI.dll
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\CV_AI.pdb
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\CV_AI.genruntimeconfig.cache
 D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\ref\CV_AI.dll
+D:\Web_CV_AI\CV_AI\CV_AI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
