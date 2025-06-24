@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CV_AI.Data;
 using CV_AI.Models;
 using CV_AI.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CV_AI.Controllers
 {
@@ -15,77 +16,41 @@ namespace CV_AI.Controllers
             _context = context;
         }
 
-        // GET: Job/Index - Danh sách tin tuyển dụng
-        public async Task<IActionResult> Index(string? searchTerm, string? location, int? categoryId, int page = 1)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var query = _context.JobPosts
-                .Include(jp => jp.Employer)
-                .Include(jp => jp.JobPostCategories)
-                .ThenInclude(jpc => jpc.Category)
-                .Where(jp => jp.IsActive && (jp.ExpirationDate == null || jp.ExpirationDate > DateTime.Now));
-
-            // Apply filters
-            if (!string.IsNullOrEmpty(searchTerm))
+            base.OnActionExecuting(context);
+            if (User.Identity.IsAuthenticated && User.IsInRole("Candidate"))
             {
-                query = query.Where(jp => jp.Title.Contains(searchTerm) || jp.Description.Contains(searchTerm));
+                var candidateId = HttpContext.Session.GetString("UserID");
+                if (!string.IsNullOrEmpty(candidateId))
+                {
+                    var savedJobCount = _context.SavedJobs.Count(sj => sj.ID_Candidate == candidateId);
+                    ViewBag.SavedJobCount = savedJobCount;
+                }
             }
-
-            if (!string.IsNullOrEmpty(location))
-            {
-                query = query.Where(jp => jp.Location != null && jp.Location.Contains(location));
-            }
-
-            if (categoryId.HasValue)
-            {
-                query = query.Where(jp => jp.JobPostCategories.Any(jpc => jpc.ID_Category == categoryId));
-            }
-
-            // Pagination
-            int pageSize = 10;
-            var totalJobs = await query.CountAsync();
-            var totalPages = (int)Math.Ceiling((double)totalJobs / pageSize);
-
-            var jobs = await query
-                .OrderByDescending(jp => jp.PostedDate)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            var categories = await _context.Categories.ToListAsync();
-
-            ViewBag.SearchTerm = searchTerm;
-            ViewBag.Location = location;
-            ViewBag.CategoryId = categoryId;
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
-            ViewBag.Categories = categories;
-
-            return View(jobs);
         }
 
         // GET: Job/Details/5 - Chi tiết tin tuyển dụng
         public async Task<IActionResult> Details(int id)
         {
             var jobPost = await _context.JobPosts
-                .Include(jp => jp.Employer)
-                .Include(jp => jp.JobPostCategories)
+                .Include(j => j.Employer)
+                .Include(j => j.JobPostCategories)
                 .ThenInclude(jpc => jpc.Category)
-                .FirstOrDefaultAsync(jp => jp.ID_JobPost == id && jp.IsActive);
-
+                .FirstOrDefaultAsync(m => m.ID_JobPost == id);
+    
             if (jobPost == null)
             {
                 return NotFound();
             }
 
-            // Check if user has applied for this job
             var userId = HttpContext.Session.GetString("UserID");
             var userRole = HttpContext.Session.GetString("UserRole");
-            
-            if (!string.IsNullOrEmpty(userId) && userRole == "Candidate")
+
+            if (userRole == "Candidate" && !string.IsNullOrEmpty(userId))
             {
-                var hasApplied = await _context.Applications
-                    .AnyAsync(a => a.ID_JobPost == id && a.ID_Candidate == userId);
-                ViewBag.HasApplied = hasApplied;
+                ViewBag.HasApplied = await _context.Applications.AnyAsync(a => a.ID_JobPost == id && a.ID_Candidate == userId);
+                ViewBag.IsSaved = await _context.SavedJobs.AnyAsync(sj => sj.ID_JobPost == id && sj.ID_Candidate == userId);
             }
 
             return View(jobPost);
@@ -346,6 +311,63 @@ namespace CV_AI.Controllers
             await _context.SaveChangesAsync();
             TempData["SuccessMessage"] = "Cập nhật tin tuyển dụng thành công!";
             return RedirectToAction("Details", new { id = jobPost.ID_JobPost });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleSaveJob(int id)
+        {
+            var candidateId = HttpContext.Session.GetString("UserID");
+            var userRole = HttpContext.Session.GetString("UserRole");
+
+            if (userRole != "Candidate" || string.IsNullOrEmpty(candidateId))
+            {
+                return Json(new { success = false, message = "Vui lòng đăng nhập với tư cách ứng viên.", redirectTo = Url.Action("Login", "Account") });
+            }
+
+            var savedJob = await _context.SavedJobs
+                .FirstOrDefaultAsync(sj => sj.ID_JobPost == id && sj.ID_Candidate == candidateId);
+
+            bool isSaved;
+            if (savedJob != null)
+            {
+                _context.SavedJobs.Remove(savedJob);
+                isSaved = false;
+            }
+            else
+            {
+                var newSavedJob = new SavedJob
+                {
+                    ID_JobPost = id,
+                    ID_Candidate = candidateId,
+                };
+                _context.SavedJobs.Add(newSavedJob);
+                isSaved = true;
+            }
+
+            await _context.SaveChangesAsync();
+            return Json(new { success = true, saved = isSaved });
+        }
+
+        public async Task<IActionResult> SavedJobs()
+        {
+            var candidateId = HttpContext.Session.GetString("UserID");
+            var userRole = HttpContext.Session.GetString("UserRole");
+
+            if (userRole != "Candidate" || string.IsNullOrEmpty(candidateId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var savedJobPosts = await _context.SavedJobs
+                .Where(sj => sj.ID_Candidate == candidateId)
+                .Include(sj => sj.JobPost)
+                    .ThenInclude(jp => jp.Employer)
+                .Select(sj => sj.JobPost)
+                .ToListAsync();
+            
+            ViewBag.SavedJobIds = savedJobPosts.Select(jp => jp.ID_JobPost).ToHashSet();
+
+            return View(savedJobPosts);
         }
     }
 } 

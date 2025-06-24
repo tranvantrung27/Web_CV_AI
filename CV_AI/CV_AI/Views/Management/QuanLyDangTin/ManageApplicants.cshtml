@@ -1,0 +1,75 @@
+@model IEnumerable<CV_AI.Models.Application>
+@{
+    var jobPost = ViewBag.JobPost as CV_AI.Models.JobPost;
+    ViewData["Title"] = "Quản lý ứng viên";
+}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="text-primary"><i class="fas fa-users me-2"></i>Quản lý ứng viên cho tin: <span class="text-success">@jobPost?.Title</span></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    @if (!Model.Any())
+                    {
+                        <div class="alert alert-info">Chưa có ứng viên nào ứng tuyển vào tin này.</div>
+                    }
+                    else
+                    {
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var app in Model)
+                                {
+                                    <tr>
+                                        <td>@app.Candidate?.User?.FullName</td>
+                                        <td>@app.Candidate?.User?.Email</td>
+                                        <td>@app.Candidate?.Phone</td>
+                                        <td>
+                                            @if (app.Status == "Accepted")
+                                            {
+                                                <span class="badge bg-success">Đã chấp nhận</span>
+                                            }
+                                            else if (app.Status == "Rejected")
+                                            {
+                                                <span class="badge bg-danger">Đã từ chối</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">Chờ xử lý</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (app.Status == "Pending")
+                                            {
+                                                <form asp-action="AcceptApplication" asp-controller="Management" method="post" class="d-inline">
+                                                    <input type="hidden" name="applicationId" value="@app.ID_Application" />
+                                                    <button type="submit" class="btn btn-success btn-sm">Chấp nhận</button>
+                                                </form>
+                                                <form asp-action="RejectApplication" asp-controller="Management" method="post" class="d-inline ms-1">
+                                                    <input type="hidden" name="applicationId" value="@app.ID_Application" />
+                                                    <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

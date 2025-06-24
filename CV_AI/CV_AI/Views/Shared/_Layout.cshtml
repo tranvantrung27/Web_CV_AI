@@ -49,12 +49,12 @@
                                 <i class="fas fa-home me-1"></i> Trang chủ
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "index" ? "active" : "")"
-                               asp-area="" asp-controller="Job" asp-action="Index">
-                                <i class="fas fa-briefcase me-1"></i> Tìm việc làm
-                            </a>
-                        </li>
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link nav-link-custom @(currentController == "job" && currentAction == "index" ? "active" : "")" *@
+                        @*        asp-area="" asp-controller="Job" asp-action="Index"> *@
+                        @*         <i class="fas fa-briefcase me-1"></i> Tìm việc làm *@
+                        @*     </a> *@
+                        @* </li> *@
                         @if (userRole == "Employer")
                         {
                             <li class="nav-item">
@@ -94,9 +94,9 @@
 
                     <!-- Search Bar -->
                     <div class="search-container me-4">
-                        <form class="d-flex search-form" asp-controller="Job" asp-action="Index" method="get">
+                        <form class="d-flex search-form" action="/Home/Index" method="get">
                             <div class="search-wrapper">
-                                <input class="form-control search-input" type="search" name="searchTerm" placeholder="Tìm kiếm việc làm..." aria-label="Search">
+                                <input class="form-control search-input" type="search" name="keyword" placeholder="Tìm kiếm việc làm..." aria-label="Search">
                                 <button class="btn search-btn" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -247,10 +247,10 @@
                 <div class="footer-section">
                     <h3>Dịch vụ</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Tạo CV miễn phí</a></li>
-                        <li><a href="#">Tìm việc làm</a></li>
-                        <li><a href="#">Đăng tin tuyển dụng</a></li>
-                        <li><a href="#">Mẫu CV chuyên nghiệp</a></li>
+                        <li><a asp-controller="CreateCVWithAI" asp-action="Index">Tạo CV miễn phí</a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Tìm việc làm</a></li>
+                        <li><a asp-controller="Job" asp-action="Create">Đăng tin tuyển dụng</a></li>
+                        <li><a asp-controller="DownloadTemplates" asp-action="Index">Mẫu CV chuyên nghiệp</a></li>
                         <li><a href="#">Tư vấn nghề nghiệp</a></li>
                     </ul>
                 </div>
@@ -292,7 +292,22 @@
             </div>
         </div>
     </footer>
-
+    <!-- Floating Action Buttons -->
+    @if (Context.Session.GetString("UserRole") == "Candidate")
+    {
+    <div class="floating-action-buttons">
+        <a href="/Job/SavedJobs" class="fab-item" title="Danh sách việc làm đã lưu" id="fab-saved-jobs">
+            <i class="fas fa-heart"></i>
+            <span class="badge bg-success fab-badge" id="fab-saved-count">@ViewBag.SavedJobCount</span>
+        </a>
+        <a href="#" class="fab-item" title="Góp ý">
+            <i class="fas fa-comment-dots"></i>
+        </a>
+        <a href="#" class="fab-item" title="Hỗ trợ">
+            <i class="fas fa-headset"></i>
+        </a>
+    </div>
+    }
     <!-- JavaScript Files -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

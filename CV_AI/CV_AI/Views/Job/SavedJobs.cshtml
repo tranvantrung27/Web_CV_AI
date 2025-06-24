@@ -1,0 +1,34 @@
+@model IEnumerable<CV_AI.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Việc làm đã lưu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="display-5 fw-bold">
+                <i class="fas fa-heart text-danger me-2"></i>
+                Việc làm đã lưu
+            </h1>
+            <p class="text-muted">Xem lại danh sách những việc làm mà bạn đã lưu trước đó.</p>
+        </div>
+    </div>
+
+    <div id="saved-jobs-grid" @if (!Model.Any()) { <text>style="display: none;"</text> }>
+        @await Html.PartialAsync("_JobPostGridPartial", Model)
+    </div>
+
+    <div id="no-saved-jobs-message" @if (Model.Any()) { <text>style="display: none;"</text> }>
+        <div class="text-center py-5">
+            <i class="fas fa-inbox fa-3x text-light mb-3"></i>
+            <h4 class="fw-light">Bạn chưa lưu việc làm nào.</h4>
+            <p class="text-muted">Hãy bắt đầu tìm kiếm và lưu lại những cơ hội nghề nghiệp mà bạn quan tâm!</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">
+                <i class="fas fa-search me-1"></i>
+                Tìm việc ngay
+            </a>
+        </div>
+    </div>
+</div> 

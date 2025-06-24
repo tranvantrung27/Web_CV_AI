@@ -4,6 +4,7 @@
     ViewData["Title"] = Model.Title;
     var userRole = Context.Session.GetString("UserRole");
     var hasApplied = ViewBag.HasApplied ?? false;
+    var isSaved = ViewBag.IsSaved ?? false;
 }
 
 <style>
@@ -121,8 +122,10 @@
                             </form>
                         }
                         
-                        <button class="btn btn-outline-secondary w-100 mb-2">
-                            <i class="fas fa-heart"></i> Lưu tin tuyển dụng
+                        <button id="save-job-btn" class="btn @(isSaved ? "btn-success" : "btn-outline-secondary") w-100 mb-2"
+                                data-job-id="@Model.ID_JobPost" onclick="toggleSaveJob(this)">
+                            <i class="fas fa-heart"></i>
+                            <span id="save-job-text">@(isSaved ? "Bỏ lưu tin" : "Lưu tin tuyển dụng")</span>
                         </button>
                         
                         <button class="btn btn-outline-info w-100">
@@ -164,3 +167,56 @@
         </div>
     </div>
 </div> 
+
+@section Scripts {
+    <script>
+        if (typeof window.toggleSaveJob !== 'function') {
+            window.toggleSaveJob = function (button) {
+                const jobId = button.getAttribute('data-job-id');
+
+                fetch(`/Job/ToggleSaveJob/${jobId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0]?.value
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                         return response.json().then(err => {
+                            if (err.redirectTo) {
+                                window.location.href = err.redirectTo;
+                            } else {
+                                throw new Error('Lỗi không xác định.');
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.success) {
+                        const saveBtn = document.getElementById('save-job-btn');
+                        const saveText = document.getElementById('save-job-text');
+
+                        if (data.saved) {
+                            saveBtn.classList.remove('btn-outline-secondary');
+                            saveBtn.classList.add('btn-success');
+                            saveText.textContent = 'Bỏ lưu tin';
+                        } else {
+                            saveBtn.classList.remove('btn-success');
+                            saveBtn.classList.add('btn-outline-secondary');
+                            saveText.textContent = 'Lưu tin tuyển dụng';
+                        }
+
+                        var badge = document.getElementById('fab-saved-count');
+                        if (badge) {
+                            let count = parseInt(badge.textContent) || 0;
+                            badge.textContent = data.saved ? count + 1 : Math.max(0, count - 1);
+                        }
+                    }
+                })
+                .catch(error => console.error('Lỗi khi lưu việc làm:', error));
+            };
+        }
+    </script>
+} 
