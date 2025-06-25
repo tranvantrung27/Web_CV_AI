@@ -1,0 +1,155 @@
+@model CV_AI.Models.User
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-body p-4">
+                    <h2 class="mb-3 text-center fw-bold" style="letter-spacing:1px;">Thông tin tài khoản</h2>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+                    <form asp-action="Profile" method="post" autocomplete="off">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating position-relative">
+                                    <i class="fa fa-user form-icon"></i>
+                                    <input asp-for="FullName" class="form-control ps-5" placeholder="Họ tên" />
+                                    <label asp-for="FullName">Họ và tên</label>
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating position-relative">
+                                    <i class="fa fa-envelope form-icon"></i>
+                                    <input asp-for="Email" class="form-control ps-5" placeholder="Email" />
+                                    <label asp-for="Email">Địa chỉ Email</label>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.Role == "Candidate")
+                        {
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-phone form-icon"></i>
+                                        <input asp-for="Candidate.Phone" class="form-control ps-5" placeholder="Số điện thoại" />
+                                        <label asp-for="Candidate.Phone">Số điện thoại</label>
+                                        <span asp-validation-for="Candidate.Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-link form-icon"></i>
+                                        <input asp-for="Candidate.CV_Link" class="form-control ps-5" placeholder="Link CV" />
+                                        <label asp-for="Candidate.CV_Link">Link CV</label>
+                                        <span asp-validation-for="Candidate.CV_Link" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.Role == "Employer")
+                        {
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-building form-icon"></i>
+                                        <input asp-for="Employer.CompanyName" class="form-control ps-5" placeholder="Tên công ty" />
+                                        <label asp-for="Employer.CompanyName">Tên công ty</label>
+                                        <span asp-validation-for="Employer.CompanyName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-globe form-icon"></i>
+                                        <input asp-for="Employer.CompanyWebsite" class="form-control ps-5" placeholder="Website công ty" />
+                                        <label asp-for="Employer.CompanyWebsite">Website công ty</label>
+                                        <span asp-validation-for="Employer.CompanyWebsite" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-map-marker-alt form-icon"></i>
+                                        <input asp-for="Employer.CompanyAddress" class="form-control ps-5" placeholder="Địa chỉ công ty" />
+                                        <label asp-for="Employer.CompanyAddress">Địa chỉ công ty</label>
+                                        <span asp-validation-for="Employer.CompanyAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating position-relative">
+                                        <i class="fa fa-info-circle form-icon"></i>
+                                        <textarea asp-for="Employer.Description" class="form-control ps-5" placeholder="Mô tả công ty" style="height: 100px"></textarea>
+                                        <label asp-for="Employer.Description">Mô tả ngắn về công ty</label>
+                                        <span asp-validation-for="Employer.Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-gradient btn-lg shadow-sm">
+                                <i class="fa fa-save me-2"></i>Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.card {
+    border: none;
+}
+.form-floating { margin-bottom: 1.1rem; }
+.form-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b0b8c1;
+    font-size: 1.1rem;
+    z-index: 2;
+    pointer-events: none;
+}
+.form-floating > .form-control, .form-floating > .form-select {
+    padding-left: 2.7rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(79,140,255,0.04);
+    background: #f7faff;
+    font-size: 1rem;
+}
+.form-floating > label {
+    left: 2.7rem;
+    font-size: 0.98rem;
+    color: #6c757d;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #19c37d;
+    box-shadow: 0 0 0 2px #19c37d33;
+    background: #f0f7ff;
+}
+.btn-gradient {
+    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+    transition: all 0.2s;
+}
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #00b894 0%, #19c37d 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25,195,125,0.15);
+}
+</style>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

@@ -74,3 +74,40 @@ body {
         bottom: 100px;
     }
 }
+
+.btn-danger-black-text {
+    color: #222 !important;
+    background-color: #fff3e0 !important;
+    border: 1.5px solid #ff7043 !important;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-danger-black-text:hover, .btn-danger-black-text:focus {
+    background-color: #ff7043 !important;
+    color: #fff !important;
+}
+
+.job-table {
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.06);
+}
+.job-table th, .job-table td {
+    vertical-align: middle !important;
+    font-size: 1rem;
+}
+.job-title-link {
+    color: #1a237e;
+    transition: color 0.15s;
+}
+.job-title-link:hover {
+    color: #1976d2;
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    .job-table th, .job-table td {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.3rem;
+    }
+    .job-title-link { font-size: 1rem; }
+}

@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                     <div class="form-floating">
+                    <div class="form-floating">
                         <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Xác nhận mật khẩu" />
                         <label asp-for="ConfirmPassword">Xác nhận mật khẩu</label>
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
@@ -79,14 +79,14 @@
                     </div>
                 </div>
                 <div class="col-12">
-                     <div class="form-floating">
+                    <div class="form-floating">
                         <input asp-for="CompanyAddress" class="form-control" placeholder="Địa chỉ công ty" />
                         <label asp-for="CompanyAddress">Địa chỉ công ty</label>
                         <span asp-validation-for="CompanyAddress" class="text-danger"></span>
                     </div>
                 </div>
-                 <div class="col-12">
-                     <div class="form-floating">
+                <div class="col-12">
+                    <div class="form-floating">
                         <textarea asp-for="Description" class="form-control" placeholder="Mô tả công ty" style="height: 100px"></textarea>
                         <label asp-for="Description">Mô tả ngắn về công ty</label>
                         <span asp-validation-for="Description" class="text-danger"></span>
@@ -98,7 +98,7 @@
                 <button type="submit" class="btn btn-primary btn-lg auth-btn">Đăng ký</button>
             </div>
 
-             <div class="text-center mt-4">
+            <div class="text-center mt-4">
                 <p class="text-muted">Đã có tài khoản? <a asp-action="Login" class="auth-link">Đăng nhập ngay</a></p>
             </div>
         </form>
@@ -106,109 +106,111 @@
 </div>
 
 <style>
-body {
-    background-color: #f8f9fa;
-}
+    body {
+        background-color: #f8f9fa;
+    }
 
-.auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-    padding: 2rem 0;
-}
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+        padding: 2rem 0;
+    }
 
-.auth-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    padding: 2.5rem 3rem;
-    max-width: 800px;
-    width: 100%;
-}
+    .auth-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        padding: 2.5rem 3rem;
+        max-width: 800px;
+        width: 100%;
+    }
 
-.auth-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
+    .auth-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
 
-.auth-subtitle {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    text-align: center;
-    margin-bottom: 2rem;
-}
+    .auth-subtitle {
+        font-size: 1.1rem;
+        color: #7f8c8d;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-.form-control, .form-select {
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-    transition: all 0.2s ease;
-}
+    .form-control, .form-select {
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        transition: all 0.2s ease;
+    }
 
-.form-control:focus, .form-select:focus {
-    border-color: #00b894;
-    box-shadow: 0 0 0 0.25rem rgba(0, 184, 148, 0.15);
-}
-/* Adjust floating label styles */
-.form-floating > .form-control,
-.form-floating > .form-select {
-    height: calc(3.5rem + 2px);
-    padding: 1rem 0.75rem;
-}
+        .form-control:focus, .form-select:focus {
+            border-color: #00b894;
+            box-shadow: 0 0 0 0.25rem rgba(0, 184, 148, 0.15);
+        }
+    /* Adjust floating label styles */
+    .form-floating > .form-control,
+    .form-floating > .form-select {
+        height: calc(3.5rem + 2px);
+        padding: 1rem 0.75rem;
+    }
 
-.form-floating > label {
-    padding: 1rem 0.75rem;
-    color: #6c757d;
-}
+    .form-floating > label {
+        padding: 1rem 0.75rem;
+        color: #6c757d;
+    }
 
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label,
-.form-floating > .form-select ~ label {
-    opacity: .65;
-    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
-}
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label,
+    .form-floating > .form-select ~ label {
+        opacity: .65;
+        transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+    }
 
 
-.auth-btn {
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    border: none;
-    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
-}
+    .auth-btn {
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
+    }
 
-.auth-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
-}
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+        }
 
-.auth-link {
-    color: #00b894;
-    font-weight: 600;
-    text-decoration: none;
-}
+    .auth-link {
+        color: #00b894;
+        font-weight: 600;
+        text-decoration: none;
+    }
 
-.auth-link:hover {
-    text-decoration: underline;
-}
+        .auth-link:hover {
+            text-decoration: underline;
+        }
 
-span.text-danger {
-    font-size: 0.875em;
-    padding-left: 0.25rem;
-}
+    span.text-danger {
+        font-size: 0.875em;
+        padding-left: 0.25rem;
+    }
 
 </style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
         $(document).ready(function() {
             $('#roleSelect').change(function() {

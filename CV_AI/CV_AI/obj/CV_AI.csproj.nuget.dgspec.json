@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {}
   },
   "projects": {
-    "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
+    "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "projectUniqueName": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
         "projectName": "CV_AI",
-        "projectPath": "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Demo\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
+        "projectPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\CV_AI.csproj",
+        "packagesPath": "C:\\Users\\os\\.nuget\\packages\\",
+        "outputPath": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\os\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -89,6 +89,14 @@
             "Mscc.GenerativeAI": {
               "target": "Package",
               "version": "[2.6.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Xceed.Words.NET": {
+              "target": "Package",
+              "version": "[5.0.25228.6154, )"
             },
             "iTextSharp": {
               "target": "Package",

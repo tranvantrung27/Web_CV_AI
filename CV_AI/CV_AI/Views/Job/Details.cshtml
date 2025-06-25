@@ -8,12 +8,117 @@
 }
 
 <style>
-.card-header, .card-header h2, .job-detail-title {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    word-break: break-word;
-    display: block !important;
+.card {
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: none;
+    margin-bottom: 1.5rem;
+}
+.card-header {
+    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+    color: #fff;
+    border-radius: 18px 18px 0 0;
+    padding: 1.2rem 1.5rem;
+    border: none;
+}
+.card-header h2, .job-detail-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+.card-header h5, .card-header .text-muted {
+    color: #e0f7ef !important;
+    font-weight: 500;
+}
+.card-body {
+    background: #f7faff;
+    border-radius: 0 0 18px 18px;
+    padding: 2rem 1.5rem;
+}
+.badge.bg-primary {
+    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin-bottom: 0.3em;
+}
+hr {
+    border-top: 2px solid #e0e0e0;
+    margin: 1.5rem 0;
+}
+.btn-primary, .btn-success, .btn-outline-secondary, .btn-outline-info, .btn-warning, .btn-danger {
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.08rem;
+    padding: 0.7rem 0;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+    margin-bottom: 0.5rem;
+}
+.btn-primary {
+    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+    border: none;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #00b894 0%, #19c37d 100%);
+}
+.btn-success {
+    background: linear-gradient(90deg, #4f8cff 0%, #6ed0ff 100%);
+    border: none;
+}
+.btn-success:hover {
+    background: linear-gradient(90deg, #6ed0ff 0%, #4f8cff 100%);
+}
+.btn-outline-secondary, .btn-outline-info, .btn-warning, .btn-danger {
+    background: #fff;
+}
+.alert {
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.card .fa {
+    margin-right: 0.5em;
+}
+.card .fa-check-circle, .card .fa-info-circle {
+    color: #19c37d;
+}
+.card .fa-paper-plane {
+    color: #00b894;
+}
+.card .fa-heart {
+    color: #ff4757;
+}
+.card .fa-share {
+    color: #4f8cff;
+}
+.card .fa-edit {
+    color: #f1c40f;
+}
+.card .fa-trash-alt {
+    color: #e74c3c;
+}
+.card .fa-globe {
+    color: #00b894;
+}
+.card .fa-map-marker-alt {
+    color: #4f8cff;
+}
+.card .fa-money-bill-wave {
+    color: #00b894;
+}
+.card .fa-clock {
+    color: #4f8cff;
+}
+.card .fa-calendar-alt {
+    color: #f1c40f;
+}
+@@media (max-width: 768px) {
+    .card-body, .card-header { padding: 1rem !important; }
+    .job-detail-title { font-size: 1.3rem; }
 }
 </style>
 
@@ -28,45 +133,40 @@
             <!-- Job Details -->
             <div class="card">
                 <div class="card-header">
-                    <h2 class="job-detail-title">@Model.Title</h2>
+                    <h2 class="job-detail-title mb-0">@Model.Title</h2>
                     <h5 class="text-muted">@Model.Employer.CompanyName</h5>
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <i class="fas fa-map-marker-alt text-primary"></i>
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-map-marker-alt"></i>
                             <strong>Địa điểm:</strong> @(Model.Location ?? "Không xác định")
                         </div>
-                        <div class="col-md-6">
-                            <i class="fas fa-money-bill-wave text-success"></i>
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-money-bill-wave"></i>
                             <strong>Mức lương:</strong> @(Model.Salary ?? "Thương lượng")
                         </div>
                     </div>
-                    
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <i class="fas fa-clock text-info"></i>
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-clock"></i>
                             <strong>Đăng ngày:</strong> @Model.PostedDate.ToString("dd/MM/yyyy")
                         </div>
-                        <div class="col-md-6">
-                            <i class="fas fa-calendar-alt text-warning"></i>
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-calendar-alt"></i>
                             <strong>Hạn nộp:</strong> @(Model.ExpirationDate?.ToString("dd/MM/yyyy") ?? "Không giới hạn")
                         </div>
                     </div>
-
                     <hr>
-
-                    <h5>Mô tả công việc</h5>
+                    <h5 class="fw-bold">Mô tả công việc</h5>
                     <p>@Model.Description</p>
-
                     @if (!string.IsNullOrEmpty(Model.Requirements))
                     {
-                        <h5>Yêu cầu</h5>
+                        <h5 class="fw-bold">Yêu cầu</h5>
                         <p>@Model.Requirements</p>
                     }
-
                     <div class="mt-3">
-                        <h6>Ngành nghề:</h6>
+                        <h6 class="fw-bold">Ngành nghề:</h6>
                         @foreach (var jobCategory in Model.JobPostCategories)
                         {
                             <span class="badge bg-primary me-1">@jobCategory.Category.Name</span>
@@ -74,14 +174,13 @@
                     </div>
                 </div>
             </div>
-
             <!-- Company Information -->
             <div class="card mt-4">
                 <div class="card-header">
-                    <h5>Thông tin công ty</h5>
+                    <h5 class="fw-bold mb-0">Thông tin công ty</h5>
                 </div>
                 <div class="card-body">
-                    <h6>@Model.Employer.CompanyName</h6>
+                    <h6 class="fw-bold">@Model.Employer.CompanyName</h6>
                     @if (!string.IsNullOrEmpty(Model.Employer.CompanyAddress))
                     {
                         <p><i class="fas fa-map-marker-alt"></i> @Model.Employer.CompanyAddress</p>
@@ -97,12 +196,11 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
             <!-- Action Buttons -->
             <div class="card">
                 <div class="card-header">
-                    <h5>Hành động</h5>
+                    <h5 class="fw-bold mb-0">Hành động</h5>
                 </div>
                 <div class="card-body">
                     @if (userRole == "Candidate")
@@ -121,13 +219,11 @@
                                 </button>
                             </form>
                         }
-                        
                         <button id="save-job-btn" class="btn @(isSaved ? "btn-success" : "btn-outline-secondary") w-100 mb-2"
                                 data-job-id="@Model.ID_JobPost" onclick="toggleSaveJob(this)">
                             <i class="fas fa-heart"></i>
                             <span id="save-job-text">@(isSaved ? "Bỏ lưu tin" : "Lưu tin tuyển dụng")</span>
                         </button>
-                        
                         <button class="btn btn-outline-info w-100">
                             <i class="fas fa-share"></i> Chia sẻ
                         </button>
@@ -138,7 +234,7 @@
                             <i class="fas fa-info-circle"></i> Chỉ ứng viên mới có thể ứng tuyển
                         </div>
                         <form asp-action="Delete" asp-route-id="@Model.ID_JobPost" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin tuyển dụng này?');">
-                            <button type="submit" class="btn btn-danger w-100 mb-2">
+                            <button type="submit" class="btn btn-danger w-100 mb-2 btn-danger-black-text">
                                 <i class="fas fa-trash-alt"></i> Xóa tin tuyển dụng
                             </button>
                         </form>
@@ -154,11 +250,10 @@
                     }
                 </div>
             </div>
-
             <!-- Similar Jobs -->
             <div class="card mt-3">
                 <div class="card-header">
-                    <h5>Việc làm tương tự</h5>
+                    <h5 class="fw-bold mb-0">Việc làm tương tự</h5>
                 </div>
                 <div class="card-body">
                     <p class="text-muted">Tính năng này sẽ được phát triển sau</p>
@@ -166,14 +261,13 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 @section Scripts {
     <script>
         if (typeof window.toggleSaveJob !== 'function') {
             window.toggleSaveJob = function (button) {
                 const jobId = button.getAttribute('data-job-id');
-
                 fetch(`/Job/ToggleSaveJob/${jobId}`, {
                     method: 'POST',
                     headers: {
@@ -197,7 +291,6 @@
                     if (data && data.success) {
                         const saveBtn = document.getElementById('save-job-btn');
                         const saveText = document.getElementById('save-job-text');
-
                         if (data.saved) {
                             saveBtn.classList.remove('btn-outline-secondary');
                             saveBtn.classList.add('btn-success');
@@ -207,7 +300,6 @@
                             saveBtn.classList.add('btn-outline-secondary');
                             saveText.textContent = 'Lưu tin tuyển dụng';
                         }
-
                         var badge = document.getElementById('fab-saved-count');
                         if (badge) {
                             let count = parseInt(badge.textContent) || 0;

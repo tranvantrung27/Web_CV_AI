@@ -226,6 +226,64 @@ namespace CV_AI.Controllers
             }
         }
 
+        // GET: Account/Profile
+        public async Task<IActionResult> Profile()
+        {
+            var userId = User.Identity.IsAuthenticated ? _userManager.GetUserId(User) : HttpContext.Session.GetString("UserID");
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login");
+            }
+            var user = await _context.Users
+                .Include(u => u.Candidate)
+                .Include(u => u.Employer)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Account/Profile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(User model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _context.Users
+                .Include(u => u.Candidate)
+                .Include(u => u.Employer)
+                .FirstOrDefaultAsync(u => u.Id == model.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.FullName = model.FullName;
+            user.Email = model.Email;
+            // Cập nhật thông tin ứng viên
+            if (user.Role == "Candidate" && user.Candidate != null)
+            {
+                user.Candidate.Phone = model.Candidate?.Phone;
+                user.Candidate.CV_Link = model.Candidate?.CV_Link;
+            }
+            // Cập nhật thông tin nhà tuyển dụng
+            if (user.Role == "Employer" && user.Employer != null)
+            {
+                user.Employer.CompanyName = model.Employer?.CompanyName;
+                user.Employer.CompanyWebsite = model.Employer?.CompanyWebsite;
+                user.Employer.CompanyAddress = model.Employer?.CompanyAddress;
+                user.Employer.Description = model.Employer?.Description;
+            }
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Cập nhật hồ sơ thành công!";
+            return RedirectToAction("Profile");
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

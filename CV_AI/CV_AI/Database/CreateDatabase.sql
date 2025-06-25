@@ -93,7 +93,12 @@ INSERT INTO Categories (Name, Description) VALUES
 (N'Tài chính', N'Các công việc liên quan đến tài chính, kế toán'),
 (N'Giáo dục', N'Các công việc liên quan đến giảng dạy, đào tạo'),
 (N'Y tế', N'Các công việc liên quan đến chăm sóc sức khỏe'),
-(N'Du lịch', N'Các công việc liên quan đến du lịch, khách sạn');
+(N'Du lịch', N'Các công việc liên quan đến du lịch, khách sạn'),
+(N'Xây dựng', N'Các công việc liên quan đến xây dựng, kiến trúc'),
+(N'Luật', N'Các công việc liên quan đến pháp lý, luật sư'),
+(N'Nhân sự', N'Các công việc liên quan đến quản lý nhân sự, tuyển dụng'),
+(N'Bán Hàng', N'Các công việc liên quan đến bán hàng, bán lẻ'),
+(N'Logistics', N'Các công việc liên quan đến vận chuyển, kho bãi');
 
 -- Thêm tài khoản Admin mặc định
 INSERT INTO Users (FullName, Email, PasswordHash, Role) VALUES 

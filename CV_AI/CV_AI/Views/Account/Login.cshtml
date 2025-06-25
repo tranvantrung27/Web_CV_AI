@@ -8,7 +8,7 @@
     <div class="auth-card" style="max-width: 500px;">
         <h2 class="auth-title">Chào mừng trở lại!</h2>
         <p class="auth-subtitle">Đăng nhập để tiếp tục hành trình của bạn</p>
-        
+
         @if (TempData["SuccessMessage"] != null)
         {
             <div class="alert alert-success">
@@ -42,11 +42,11 @@
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-lg auth-btn">Đăng nhập</button>
             </div>
-            
+
             <div class="separator">HOẶC</div>
 
             <div class="d-grid">
-                 <a class="btn btn-google" href="@Url.Action("ExternalLogin", "Account", new { provider = "Google", returnUrl = "/" })">
+                <a class="btn btn-google" href="@Url.Action("ExternalLogin", "Account", new { provider = "Google", returnUrl = "/" })">
                     <i class="fab fa-google me-2"></i> Đăng nhập với Google
                 </a>
             </div>
@@ -59,152 +59,154 @@
 </div>
 
 <style>
-body {
-    background-color: #f8f9fa;
-}
+    body {
+        background-color: #f8f9fa;
+    }
 
-.auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-    padding: 2rem 0;
-}
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+        padding: 2rem 0;
+    }
 
-.auth-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    padding: 2.5rem 3rem;
-    width: 100%;
-}
+    .auth-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        padding: 2.5rem 3rem;
+        width: 100%;
+    }
 
-.auth-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
+    .auth-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
 
-.auth-subtitle {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    text-align: center;
-    margin-bottom: 2rem;
-}
+    .auth-subtitle {
+        font-size: 1.1rem;
+        color: #7f8c8d;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-.form-control, .form-select {
-    border-radius: 12px;
-    border: 1px solid #dee2e6;
-    transition: all 0.2s ease;
-}
+    .form-control, .form-select {
+        border-radius: 12px;
+        border: 1px solid #dee2e6;
+        transition: all 0.2s ease;
+    }
 
-.form-control:focus, .form-select:focus {
-    border-color: #00b894;
-    box-shadow: 0 0 0 0.25rem rgba(0, 184, 148, 0.15);
-}
+        .form-control:focus, .form-select:focus {
+            border-color: #00b894;
+            box-shadow: 0 0 0 0.25rem rgba(0, 184, 148, 0.15);
+        }
 
-.form-floating > .form-control {
-    height: calc(3.5rem + 2px);
-    padding: 1rem 0.75rem;
-}
+    .form-floating > .form-control {
+        height: calc(3.5rem + 2px);
+        padding: 1rem 0.75rem;
+    }
 
-.form-floating > label {
-    padding: 1rem 0.75rem;
-    color: #6c757d;
-}
+    .form-floating > label {
+        padding: 1rem 0.75rem;
+        color: #6c757d;
+    }
 
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label {
-    opacity: .65;
-    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
-}
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        opacity: .65;
+        transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+    }
 
-.auth-btn {
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    border: none;
-    color: #fff;
-    background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
-}
+    .auth-btn {
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        border: none;
+        color: #fff;
+        background: linear-gradient(90deg, #19c37d 0%, #00b894 100%);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
+    }
 
-.auth-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
-}
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+        }
 
-.btn-google {
-    padding: 0.8rem;
-    font-size: 1.05rem;
-    font-weight: 500;
-    border-radius: 12px;
-    border: 1px solid #dee2e6;
-    background-color: #ffffff;
-    color: #344054;
-    transition: all 0.3s ease;
-}
+    .btn-google {
+        padding: 0.8rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        border-radius: 12px;
+        border: 1px solid #dee2e6;
+        background-color: #ffffff;
+        color: #344054;
+        transition: all 0.3s ease;
+    }
 
-.btn-google:hover {
-    border-color: #adb5bd;
-    background-color: #f8f9fa;
-}
+        .btn-google:hover {
+            border-color: #adb5bd;
+            background-color: #f8f9fa;
+        }
 
-.btn-google .fa-google {
-    color: #DB4437;
-}
+        .btn-google .fa-google {
+            color: #DB4437;
+        }
 
 
-.separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #adb5bd;
-    margin: 1.5rem 0;
-}
+    .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #adb5bd;
+        margin: 1.5rem 0;
+    }
 
-.separator::before,
-.separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #dee2e6;
-}
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
 
-.separator:not(:empty)::before {
-    margin-right: .5em;
-}
+        .separator:not(:empty)::before {
+            margin-right: .5em;
+        }
 
-.separator:not(:empty)::after {
-    margin-left: .5em;
-}
+        .separator:not(:empty)::after {
+            margin-left: .5em;
+        }
 
-.auth-link {
-    color: #00b894;
-    font-weight: 600;
-    text-decoration: none;
-}
+    .auth-link {
+        color: #00b894;
+        font-weight: 600;
+        text-decoration: none;
+    }
 
-.auth-link:hover {
-    text-decoration: underline;
-}
+        .auth-link:hover {
+            text-decoration: underline;
+        }
 
-.form-check-input:checked {
-    background-color: #00b894;
-    border-color: #00b894;
-}
+    .form-check-input:checked {
+        background-color: #00b894;
+        border-color: #00b894;
+    }
 
-span.text-danger {
-    font-size: 0.875em;
-    padding-left: 0.25rem;
-}
+    span.text-danger {
+        font-size: 0.875em;
+        padding-left: 0.25rem;
+    }
 
 </style>
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 } 

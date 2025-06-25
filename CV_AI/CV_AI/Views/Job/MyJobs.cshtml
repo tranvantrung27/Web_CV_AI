@@ -4,48 +4,68 @@
     ViewData["Title"] = "Tin đã đăng";
 }
 
-<div class="container mt-4">
-    <h2 class="mb-4">Danh sách tin tuyển dụng của bạn</h2>
+<div class="container my-5">
+    <div class="d-flex align-items-center mb-4">
+        <i class="fas fa-clipboard-list fa-2x text-primary me-3"></i>
+        <h2 class="fw-bold mb-0" style="letter-spacing:1px;">Tin tuyển dụng của bạn</h2>
+    </div>
     @if (!Model.Any())
     {
-        <div class="alert alert-info">
-            Bạn chưa đăng tin tuyển dụng nào.
+        <div class="alert alert-info shadow-sm rounded-3 py-4 text-center">
+            <i class="fas fa-info-circle me-2"></i> Bạn chưa đăng tin tuyển dụng nào.
         </div>
     }
     else
     {
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Tiêu đề</th>
-                    <th>Ngày đăng</th>
-                    <th>Hạn nộp</th>
-                    <th>Trạng thái</th>
-                    <th>Ứng viên</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var job in Model)
-                {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle shadow-sm rounded-4 overflow-hidden job-table">
+                <thead class="table-light">
                     <tr>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@job.ID_JobPost">@job.Title</a>
-                        </td>
-                        <td>@job.PostedDate.ToString("dd/MM/yyyy")</td>
-                        <td>@(job.ExpirationDate?.ToString("dd/MM/yyyy") ?? "Không giới hạn")</td>
-                        <td>
-                            @(job.IsActive ? "Đang hiển thị" : "Đã ẩn")
-                        </td>
-                        <td>
-                            @job.Applications?.Count() ?? 0
-                        </td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="btn btn-sm btn-primary">Xem</a>
-                        </td>
+                        <th><i class="fas fa-briefcase me-1"></i> Tiêu đề</th>
+                        <th><i class="fas fa-calendar-alt me-1"></i> Ngày đăng</th>
+                        <th><i class="fas fa-hourglass-end me-1"></i> Hạn nộp</th>
+                        <th><i class="fas fa-eye me-1"></i> Trạng thái</th>
+                        <th><i class="fas fa-users me-1"></i> Ứng viên</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var job in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="fw-semibold text-decoration-none job-title-link">
+                                    @job.Title
+                                </a>
+                            </td>
+                            <td>@job.PostedDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @(job.ExpirationDate?.ToString("dd/MM/yyyy") ?? "<span class='badge bg-secondary'>Không giới hạn</span>")
+                            </td>
+                            <td>
+                                @if (job.IsActive)
+                                {
+                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i> Đang hiển thị</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary"><i class="fas fa-eye-slash me-1"></i> Đã ẩn</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">
+                                    <i class="fas fa-user-friends me-1"></i> @job.Applications?.Count() ?? 0
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@job.ID_JobPost" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                    <i class="fas fa-eye"></i> Xem
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 </div> 

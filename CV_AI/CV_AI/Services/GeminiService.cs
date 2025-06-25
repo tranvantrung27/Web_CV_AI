@@ -9,6 +9,7 @@ namespace CV_AI.Services
     public interface IGeminiService
     {
         Task<object?> AnalyzeCVAsync(string cvText, string jobDescription);
+        Task<string?> GenerateCVAsync(string prompt);
     }
 
     public class GeminiService : IGeminiService
@@ -52,6 +53,20 @@ namespace CV_AI.Services
                     error = "Failed to analyze CV with Gemini.",
                     details = ex.Message
                 };
+            }
+        }
+
+        public async Task<string?> GenerateCVAsync(string prompt)
+        {
+            try
+            {
+                var response = await _generativeModel.GenerateContent(prompt);
+                return response.Text;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error calling Gemini API (generate CV): {ex.Message}");
+                return null;
             }
         }
 

@@ -2,5 +2,132 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Tạo CV bằng AI";
+    var isLoading = ViewBag.IsLoading ?? false;
 }
-TẠO CV BẰNG AI
+ <partial name="_AnimatedBackground" />
+<div class="container py-5">
+
+    <div class="row justify-content-center g-4">
+        <div class="col-lg-6 order-lg-2">
+            <div class="card shadow-lg p-4 mb-4 border-0">
+                <h2 class="mb-4 text-center fw-bold" style="letter-spacing:1px;"><i class="fas fa-robot text-primary me-2"></i> Tạo CV bằng AI</h2>
+                <form method="post" id="cv-ai-form" autocomplete="off">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="FullName" class="form-control" id="inputFullName" placeholder="Họ và tên" required />
+                        <label for="inputFullName"><i class="fas fa-user me-2 text-primary"></i>Họ và tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="Position" class="form-control" id="inputPosition" placeholder="Vị trí ứng tuyển" required />
+                        <label for="inputPosition"><i class="fas fa-briefcase me-2 text-success"></i>Vị trí ứng tuyển</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="Skills" class="form-control" id="inputSkills" placeholder="Kỹ năng nổi bật" required />
+                        <label for="inputSkills"><i class="fas fa-lightbulb me-2 text-warning"></i>Kỹ năng nổi bật</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea name="Experience" class="form-control" id="inputExperience" placeholder="Kinh nghiệm làm việc" style="height: 90px;" required></textarea>
+                        <label for="inputExperience"><i class="fas fa-history me-2 text-info"></i>Kinh nghiệm làm việc</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea name="Education" class="form-control" id="inputEducation" placeholder="Học vấn" style="height: 90px;" required></textarea>
+                        <label for="inputEducation"><i class="fas fa-graduation-cap me-2 text-secondary"></i>Học vấn</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <textarea name="Objective" class="form-control" id="inputObjective" placeholder="Mục tiêu nghề nghiệp" style="height: 90px;"></textarea>
+                        <label for="inputObjective"><i class="fas fa-bullseye me-2 text-danger"></i>Mục tiêu nghề nghiệp</label>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-ai w-100 fw-bold py-2 fs-5" id="btnCreateCV">
+                        <span id="btnText"><i class="fas fa-magic me-2"></i>Tạo CV bằng AI</span>
+                        <span id="btnLoading" class="d-none"><span class="spinner-border spinner-border-sm me-2"></span>Đang tạo CV...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div id="cv-result-box">
+            @if (ViewBag.CVResult != null)
+            {
+                <div class="card shadow-lg p-4 h-100 d-flex flex-column border-0 animate__animated animate__fadeIn">
+                    <h4 class="mb-3 text-success fw-bold"><i class="fas fa-file-alt"></i> Kết quả CV do AI sinh ra</h4>
+                    <div class="bg-white p-4 rounded-4 border border-2 border-primary-subtle mb-3" style="min-height: 320px; font-size:1.08rem; font-family: 'Segoe UI', Arial, sans-serif; line-height:1.7;">
+                        <pre class="m-0 p-0 border-0 bg-transparent" style="white-space: pre-wrap; font-family:inherit; background:none;" id="cv-content">@ViewBag.CVResult</pre>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                        <form method="post" asp-action="SaveCV" asp-controller="CreateCVWithAI" class="d-inline">
+                            <input type="hidden" name="CVContent" value="@ViewBag.CVResult" />
+                            <button type="submit" class="btn btn-success rounded-pill px-4"><i class="fas fa-save me-1"></i> Lưu CV</button>
+                        </form>
+                        <form method="post" asp-action="EditCV" asp-controller="CreateCVWithAI" class="d-inline">
+                            <input type="hidden" name="CVContent" value="@ViewBag.CVResult" />
+                            <button type="submit" class="btn btn-warning rounded-pill px-4"><i class="fas fa-edit me-1"></i> Chỉnh sửa CV</button>
+                        </form>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card shadow-lg p-4 h-100 d-flex align-items-center justify-content-center text-muted bg-light border-0 animate__animated animate__fadeIn" id="cv-empty-box">
+                    <div class="text-center">
+                        <i class="fas fa-file-alt fa-4x mb-3 text-primary"></i>
+                        <div id="cv-empty-text" class="fs-5">CV của bạn sẽ xuất hiện ở đây sau khi tạo bằng AI.</div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-gradient-ai {
+    background: linear-gradient(90deg, #1976d2 0%, #00bcd4 100%);
+    color: #fff !important;
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 2px 8px #1976d240;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.btn-gradient-ai:hover, .btn-gradient-ai:focus {
+    background: linear-gradient(90deg, #00bcd4 0%, #1976d2 100%);
+    color: #fff !important;
+    box-shadow: 0 4px 16px #00bcd440;
+}
+.form-floating > label > i { min-width: 1.2em; }
+@@media (max-width: 991.98px) {
+    .row.justify-content-center.g-4 > div { margin-bottom: 2rem; }
+}
+.card .btn {
+    min-width: 120px;
+    font-size: 1.05rem;
+}
+.bg-white {
+    background: #fff !important;
+}
+.rounded-4 {
+    border-radius: 1.2rem !important;
+}
+.border-primary-subtle {
+    border-color: #b6d4fe !important;
+}
+</style>
+
+<script>
+document.getElementById('cv-ai-form').addEventListener('submit', function(e) {
+    var btn = document.getElementById('btnCreateCV');
+    var btnText = document.getElementById('btnText');
+    var btnLoading = document.getElementById('btnLoading');
+    var resultBox = document.getElementById('cv-result-box');
+    var emptyBox = document.getElementById('cv-empty-box');
+    var emptyText = document.getElementById('cv-empty-text');
+
+    btn.disabled = true;
+    btnText.classList.add('d-none');
+    btnLoading.classList.remove('d-none');
+
+    // Hiệu ứng loading ở khung kết quả
+    if (emptyBox && emptyText) {
+        emptyText.innerHTML = '<span class="spinner-border text-primary me-2"></span> Đang tạo CV bằng AI...';
+    }
+});
+</script>

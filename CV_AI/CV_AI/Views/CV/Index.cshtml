@@ -2,6 +2,7 @@
 @using CV_AI.Models.CV;
 
 @{
+    var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
     ViewData["Title"] = "Đánh giá CV";
     string? evaluationResult = TempData["EvaluationResult"] as string;
     string? evaluationModelJson = TempData["EvaluationModel"] as string;
@@ -18,6 +19,27 @@
             // If deserialization fails, use the old format
         }
     }
+}
+
+@if (!isAuthenticated)
+{
+    <partial name="_AnimatedBackground" />
+    <div class="auth-blur-bg"></div>
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh; z-index:2; position:relative;">
+        <div class="auth-warning-box-modern shadow-lg p-4 rounded-4 bg-white animate__animated animate__fadeInDown" style="max-width: 420px;">
+            <div class="mb-3 text-center position-relative">
+                <span class="auth-lock-outer">
+                    <i class="fas fa-lock fa-3x text-warning mb-2"></i>
+                    <span class="auth-lock-pulse"></span>
+                </span>
+            </div>
+            <h4 class="fw-bold text-warning text-center mb-2" style="letter-spacing:1px;">Bạn cần đăng nhập</h4>
+            <p class="text-center mb-4" style="color: #555;">
+                Vui lòng <a href="/Account/Login" class="fw-bold text-decoration-underline text-primary">đăng nhập</a> để sử dụng chức năng đánh giá CV bằng AI.
+            </p>
+        </div>
+    </div>
+    return;
 }
 
 <!-- Link tới file CSS riêng cho trang CV -->
