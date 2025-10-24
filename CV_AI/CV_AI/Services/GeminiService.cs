@@ -24,7 +24,7 @@ namespace CV_AI.Services
                 throw new InvalidOperationException("Gemini API key is not configured.");
             }
             var googleAI = new GoogleAI(apiKey: apiKey);
-            _generativeModel = googleAI.GenerativeModel(Model.Gemini15FlashLatest);
+            _generativeModel = googleAI.GenerativeModel(Model.Gemini20Flash);
         }
 
         public async Task<object?> AnalyzeCVAsync(string cvText, string jobDescription)

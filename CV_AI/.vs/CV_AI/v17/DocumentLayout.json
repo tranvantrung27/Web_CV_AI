@@ -1,84 +1,88 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Web_CV_AI\\CV_AI\\",
+  "WorkspaceRootPath": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\downloadtemplates\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\downloadtemplates\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\editcv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\editcv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\dichvu\\createcvwithai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\controllers\\dichvu\\createcvwithai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\createcvwithai\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\createcvwithai\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\cv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\cv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\20250624181708_capnhat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\20250624181708_capnhat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\downloadtemplates\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\downloadtemplates\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\editcv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\editcv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\dichvu\\createcvwithai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\controllers\\dichvu\\createcvwithai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\createcvwithai\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\createcvwithai\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\cv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\cv\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\migrations\\20250624181708_capnhat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\migrations\\20250624181708_capnhat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\hethongquanly\\managementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\controllers\\hethongquanly\\managementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\controllers\\hethongquanly\\managementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624122059_CV.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|d:\\web_cv_ai\\cv_ai\\cv_ai\\views\\management\\quanlydangtin\\manageapplicants.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|e:\\th\u01B0 mu\u0323c m\u01A1\u0301i\\web_cv_ai\\cv_ai\\cv_ai\\views\\management\\quanlydangtin\\manageapplicants.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F9C5EFFC-48A3-4BC7-B5C4-EE54C762B9EB}|CV_AI\\CV_AI.csproj|solutionrelative:cv_ai\\views\\management\\quanlydangtin\\manageapplicants.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -89,8 +93,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 10,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -98,10 +106,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Bookmark",
@@ -133,24 +137,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
-              "RelativeDocumentMoniker": "CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
-              "RelativeToolTip": "CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-25T08:47:39.989Z",
+              "DocumentIndex": 0,
+              "Title": "GeminiService.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\GeminiService.cs",
+              "RelativeDocumentMoniker": "CV_AI\\Services\\GeminiService.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\GeminiService.cs",
+              "RelativeToolTip": "CV_AI\\Services\\GeminiService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA3wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T14:44:35.248Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\EditCV\\Index.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\EditCV\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\EditCV\\Index.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\EditCV\\Index.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\EditCV\\Index.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\EditCV\\Index.cshtml",
               "ViewState": "AgIAAIQAAAAAAAAAAAAswJMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -158,11 +162,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\CreateCVWithAI\\Index.cshtml",
               "ViewState": "AgIAADUAAAAAAAAAAAAswFkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -170,11 +174,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "CreateCVWithAI.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
               "RelativeToolTip": "CV_AI\\Controllers\\DichVu\\CreateCVWithAI.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -182,11 +186,36 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\appsettings.json",
+              "RelativeDocumentMoniker": "CV_AI\\appsettings.json",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\appsettings.json",
+              "RelativeToolTip": "CV_AI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-24T11:54:25.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CV\\Index.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
+              "RelativeDocumentMoniker": "CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
+              "RelativeToolTip": "CV_AI\\Views\\DownloadTemplates\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T08:47:39.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CV\\Index.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\CV\\Index.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CV\\Index.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\CV\\Index.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\CV\\Index.cshtml",
               "ViewState": "AgIAACIBAAAAAAAAAAAmwAMBAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -194,37 +223,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAEwFcAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAEwFcAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-24T12:13:36.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T12:13:36.296Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "ApplicationDbContextModelSnapshot.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeToolTip": "CV_AI\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T06:16:52.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-25T06:16:52.209Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Job\\Details.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Job\\Details.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Job\\Details.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Job\\Details.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Job\\Details.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\Job\\Details.cshtml",
               "ViewState": "AgIAAOEAAAAAAAAAAAAEwO0AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -232,11 +259,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Register.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Register.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Account\\Register.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Register.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Register.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\Account\\Register.cshtml",
               "ViewState": "AgIAAM0AAAAAAAAAAAAUwNYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -244,11 +271,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Login.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Account\\Login.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Login.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAALoAAAAAAAAAAAAUwNMAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -256,11 +283,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "20250624181708_CapNhat.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624181708_CapNhat.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624181708_CapNhat.cs",
               "RelativeDocumentMoniker": "CV_AI\\Migrations\\20250624181708_CapNhat.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624181708_CapNhat.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624181708_CapNhat.cs",
               "RelativeToolTip": "CV_AI\\Migrations\\20250624181708_CapNhat.cs",
               "ViewState": "AgIAAKIBAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -268,11 +295,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ManagementController.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
               "RelativeDocumentMoniker": "CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
               "RelativeToolTip": "CV_AI\\Controllers\\HeThongQuanLy\\ManagementController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -280,11 +307,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "EmailService.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\EmailService.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "CV_AI\\Services\\EmailService.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\EmailService.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Services\\EmailService.cs",
               "RelativeToolTip": "CV_AI\\Services\\EmailService.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAgwBoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -292,11 +319,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Category.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Category.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Category.cs",
               "RelativeDocumentMoniker": "CV_AI\\Models\\Category.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Category.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Category.cs",
               "RelativeToolTip": "CV_AI\\Models\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -304,23 +331,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\appsettings.json",
-              "RelativeDocumentMoniker": "CV_AI\\appsettings.json",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\appsettings.json",
-              "RelativeToolTip": "CV_AI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-24T11:54:25.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "CV_AI\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "CV_AI\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAgwBQAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -328,11 +343,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Candidate.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Candidate.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Candidate.cs",
               "RelativeDocumentMoniker": "CV_AI\\Models\\Candidate.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Candidate.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Candidate.cs",
               "RelativeToolTip": "CV_AI\\Models\\Candidate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -340,11 +355,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Notification.cs",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Notification.cs",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Notification.cs",
               "RelativeDocumentMoniker": "CV_AI\\Models\\Notification.cs",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Notification.cs",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Models\\Notification.cs",
               "RelativeToolTip": "CV_AI\\Models\\Notification.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -352,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "20250624122059_CV.cs",
               "DocumentMoniker": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624122059_CV.cs",
               "ToolTip": "C:\\QTR\\DoAnWEB\\Web_CV_AI\\CV_AI\\CV_AI\\Migrations\\20250624122059_CV.cs",
@@ -361,11 +376,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "ManageApplicants.cshtml",
-              "DocumentMoniker": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
+              "DocumentMoniker": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
               "RelativeDocumentMoniker": "CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
-              "ToolTip": "D:\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
+              "ToolTip": "E:\\Th\u01B0 mu\u0323c m\u01A1\u0301i\\Web_CV_AI\\CV_AI\\CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
               "RelativeToolTip": "CV_AI\\Views\\Management\\QuanLyDangTin\\ManageApplicants.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
