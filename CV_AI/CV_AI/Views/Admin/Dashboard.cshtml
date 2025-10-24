@@ -1,0 +1,235 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Stats Cards Row -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card primary">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Tổng Người Dùng</div>
+                    <div class="stats-value">@ViewBag.TotalUsers</div>
+                    <small class="text-muted">
+                        <i class="fas fa-arrow-up text-success"></i>
+                        +@ViewBag.NewUsersLast30Days trong 30 ngày
+                    </small>
+                </div>
+                <div class="stats-icon primary">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card success">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Tin Tuyển Dụng</div>
+                    <div class="stats-value">@ViewBag.TotalJobPosts</div>
+                    <small class="text-muted">
+                        <i class="fas fa-check-circle text-success"></i>
+                        @ViewBag.ActiveJobPosts đang hoạt động
+                    </small>
+                </div>
+                <div class="stats-icon success">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card info">
+            <div class="stats-card info">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Ứng Viên</div>
+                    <div class="stats-value">@ViewBag.TotalCandidates</div>
+                    <small class="text-muted">Đã đăng ký</small>
+                </div>
+                <div class="stats-icon info">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card warning">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Nhà Tuyển Dụng</div>
+                    <div class="stats-value">@ViewBag.TotalEmployers</div>
+                    <small class="text-muted">Doanh nghiệp</small>
+                </div>
+                <div class="stats-icon warning">
+                    <i class="fas fa-building"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Second Row Stats -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-6 col-md-6">
+        <div class="stats-card danger">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Đơn Ứng Tuyển</div>
+                    <div class="stats-value">@ViewBag.TotalApplications</div>
+                    <small class="text-muted">
+                        <i class="fas fa-clock text-warning"></i>
+                        @ViewBag.PendingApplications chờ xử lý
+                    </small>
+                </div>
+                <div class="stats-icon danger">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="stats-card primary">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stats-title">Tin Mới Tuần Này</div>
+                    <div class="stats-value">@ViewBag.NewJobPostsLast7Days</div>
+                    <small class="text-muted">Trong 7 ngày qua</small>
+                </div>
+                <div class="stats-icon primary">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Top Employers & Recent Activities -->
+<div class="row g-4">
+    <!-- Top Employers -->
+    <div class="col-xl-6">
+        <div class="admin-table">
+            <div class="table-header">
+                <h5 class="table-title">
+                    <i class="fas fa-trophy text-warning"></i>
+                    Top Công Ty Tuyển Dụng
+                </h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Công ty</th>
+                            <th class="text-center">Số tin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int rank = 1;
+                            foreach (var employer in ViewBag.TopEmployers)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (rank == 1)
+                                        {
+                                            <span class="badge bg-warning text-dark">🥇</span>
+                                        }
+                                        else if (rank == 2)
+                                        {
+                                            <span class="badge bg-secondary">🥈</span>
+                                        }
+                                        else if (rank == 3)
+                                        {
+                                            <span class="badge bg-info">🥉</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@rank</span>
+                                        }
+                                    </td>
+                                    <td>@employer.CompanyName</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">@employer.JobCount</span>
+                                    </td>
+                                </tr>
+                                rank++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="col-xl-6">
+        <div class="admin-table">
+            <div class="table-header">
+                <h5 class="table-title">
+                    <i class="fas fa-clock text-info"></i>
+                    Hoạt Động Gần Đây
+                </h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Ứng viên</th>
+                            <th>Vị trí</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var app in ViewBag.RecentApplications)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-avatar" style="width:30px;height:30px;font-size:0.8rem;margin-right:0.5rem;">
+                                            @(app.Candidate?.User?.FullName?.Substring(0, 1).ToUpper() ?? "?")
+                                        </div>
+                                        <small>@(app.Candidate?.User?.FullName ?? "N/A")</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small>@(app.JobPost?.Title?.Length > 25 ? app.JobPost.Title.Substring(0, 25) + "..." : app.JobPost?.Title ?? "N/A")</small>
+                                </td>
+                                <td>
+                                    @if (app.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning">Chờ duyệt</span>
+                                    }
+                                    else if (app.Status == "Accepted")
+                                    {
+                                        <span class="badge bg-success">Chấp nhận</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Từ chối</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto refresh every 5 minutes
+        setTimeout(function() {
+            location.reload();
+        }, 300000);
+    </script>
+}
+

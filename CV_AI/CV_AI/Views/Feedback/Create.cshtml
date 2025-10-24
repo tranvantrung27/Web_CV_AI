@@ -1,0 +1,221 @@
+@model CV_AI.Models.Feedback
+
+@{
+    ViewData["Title"] = "Gửi góp ý";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white py-4">
+                    <h3 class="mb-0">
+                        <i class="fas fa-comment-dots me-2"></i>Gửi góp ý của bạn
+                    </h3>
+                    <p class="mb-0 mt-2">Chúng tôi luôn lắng nghe và cải thiện dịch vụ dựa trên ý kiến của bạn</p>
+                </div>
+                <div class="card-body p-4">
+                    <form id="feedbackForm">
+                        @Html.AntiForgeryToken()
+                        
+                        <!-- Category Selection -->
+                        <div class="mb-4">
+                            <label for="Category" class="form-label fw-bold">
+                                <i class="fas fa-tag me-2"></i>Loại góp ý
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select form-select-lg" id="Category" name="Category" required>
+                                <option value="">-- Chọn loại góp ý --</option>
+                                <option value="Bug Report">🐛 Báo lỗi (Bug Report)</option>
+                                <option value="Feature Request">💡 Đề xuất tính năng mới</option>
+                                <option value="General Feedback">📝 Góp ý chung</option>
+                                <option value="Complaint">⚠️ Khiếu nại</option>
+                            </select>
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="mb-4">
+                            <label for="Subject" class="form-label fw-bold">
+                                <i class="fas fa-heading me-2"></i>Tiêu đề
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" 
+                                   class="form-control form-control-lg" 
+                                   id="Subject" 
+                                   name="Subject" 
+                                   placeholder="Tóm tắt ngắn gọn góp ý của bạn"
+                                   maxlength="200"
+                                   required>
+                            <div class="form-text">
+                                <span id="subjectCount">0</span>/200 ký tự
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mb-4">
+                            <label for="Content" class="form-label fw-bold">
+                                <i class="fas fa-align-left me-2"></i>Nội dung chi tiết
+                                <span class="text-danger">*</span>
+                            </label>
+                            <textarea class="form-control" 
+                                      id="Content" 
+                                      name="Content" 
+                                      rows="8"
+                                      placeholder="Vui lòng mô tả chi tiết góp ý, vấn đề hoặc đề xuất của bạn..."
+                                      required></textarea>
+                            <div class="form-text">
+                                Hãy cung cấp càng nhiều thông tin càng tốt để chúng tôi có thể hỗ trợ bạn tốt nhất.
+                            </div>
+                        </div>
+
+                        <!-- Priority (hidden, will be set based on category) -->
+                        <input type="hidden" id="Priority" name="Priority" value="Medium">
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-3 justify-content-between">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <i class="fas fa-paper-plane me-2"></i>Gửi góp ý
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tips Card -->
+            <div class="card mt-4 border-info">
+                <div class="card-body">
+                    <h5 class="card-title text-info">
+                        <i class="fas fa-lightbulb me-2"></i>Mẹo để góp ý hiệu quả:
+                    </h5>
+                    <ul class="mb-0">
+                        <li>Mô tả rõ ràng và cụ thể vấn đề bạn gặp phải</li>
+                        <li>Nếu là lỗi, hãy cho biết các bước để tái hiện lỗi</li>
+                        <li>Đề xuất giải pháp nếu có thể</li>
+                        <li>Tránh ngôn từ không phù hợp</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+</style>
+
+@section Scripts {
+<script>
+$(document).ready(function() {
+    // Character counter for subject
+    $('#Subject').on('input', function() {
+        var count = $(this).val().length;
+        $('#subjectCount').text(count);
+    });
+
+    // Auto-set priority based on category
+    $('#Category').on('change', function() {
+        var category = $(this).val();
+        if (category === 'Bug Report' || category === 'Complaint') {
+            $('#Priority').val('High');
+        } else if (category === 'Feature Request') {
+            $('#Priority').val('Medium');
+        } else {
+            $('#Priority').val('Low');
+        }
+    });
+
+    // Form submission
+    $('#feedbackForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        var $submitBtn = $('#submitBtn');
+        var originalText = $submitBtn.html();
+        
+        // Disable button and show loading
+        $submitBtn.prop('disabled', true);
+        $submitBtn.html('<span class="spinner-border spinner-border-sm me-2"></span>Đang gửi...');
+        
+        $.ajax({
+            url: '@Url.Action("Create", "Feedback")',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: response.message,
+                        confirmButtonText: 'Xem danh sách feedback'
+                    }).then((result) => {
+                        window.location.href = '@Url.Action("Index", "Feedback")';
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: response.message
+                    });
+                    $submitBtn.prop('disabled', false);
+                    $submitBtn.html(originalText);
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Đã xảy ra lỗi khi gửi feedback. Vui lòng thử lại.'
+                });
+                $submitBtn.prop('disabled', false);
+                $submitBtn.html(originalText);
+            }
+        });
+    });
+
+    // Auto-save draft to localStorage
+    var draftKey = 'feedback_draft_' + '@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value';
+    
+    // Load draft if exists
+    var draft = localStorage.getItem(draftKey);
+    if (draft) {
+        try {
+            var draftData = JSON.parse(draft);
+            $('#Category').val(draftData.category);
+            $('#Subject').val(draftData.subject);
+            $('#Content').val(draftData.content);
+            $('#Subject').trigger('input');
+        } catch(e) {
+            console.log('Error loading draft:', e);
+        }
+    }
+    
+    // Save draft on input
+    var saveDraft = function() {
+        var draftData = {
+            category: $('#Category').val(),
+            subject: $('#Subject').val(),
+            content: $('#Content').val()
+        };
+        localStorage.setItem(draftKey, JSON.stringify(draftData));
+    };
+    
+    $('#Category, #Subject, #Content').on('input change', _.debounce(saveDraft, 1000));
+    
+    // Clear draft on successful submit
+    $('#feedbackForm').on('submit', function() {
+        localStorage.removeItem(draftKey);
+    });
+});
+</script>
+
+<!-- Include Lodash for debounce -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<!-- Include SweetAlert2 for beautiful alerts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+

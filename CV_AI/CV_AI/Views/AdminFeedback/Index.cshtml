@@ -1,0 +1,440 @@
+@model IEnumerable<CV_AI.Models.Feedback>
+@{
+    ViewData["Title"] = "Quản lý góp ý";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    var pendingCount = ViewBag.PendingCount;
+    var urgentCount = ViewBag.UrgentCount;
+    
+    var selectedCategory = ViewBag.Category as string;
+    var selectedStatus = ViewBag.Status as string;
+    var searchQuery = ViewBag.Search as string;
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Quản lý góp ý</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Quản lý góp ý</li>
+    </ol>
+    
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>Đang chờ xử lý</div>
+                        <div><strong>@pendingCount</strong></div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="?status=Pending">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>Khẩn cấp</div>
+                        <div><strong>@urgentCount</strong></div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="?priority=Urgent">Xem chi tiết</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-filter me-1"></i>
+            Bộ lọc
+        </div>
+        <div class="card-body">
+            <form method="get" id="filterForm">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="category">Loại góp ý</label>
+                        <select class="form-select" id="category" name="category" onchange="this.form.submit()">
+                            @{
+                                bool isBugReport = selectedCategory == "Bug Report";
+                                bool isFeatureRequest = selectedCategory == "Feature Request";
+                                bool isGeneralFeedback = selectedCategory == "General Feedback";
+                                bool isComplaint = selectedCategory == "Complaint";
+                            }
+                            <option value="">Tất cả</option>
+                            <option value="Bug Report" selected="@isBugReport">Báo lỗi</option>
+                            <option value="Feature Request" selected="@isFeatureRequest">Đề xuất tính năng</option>
+                            <option value="General Feedback" selected="@isGeneralFeedback">Góp ý chung</option>
+                            <option value="Complaint" selected="@isComplaint">Khiếu nại</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="status">Trạng thái</label>
+                        <select class="form-select" id="status" name="status" onchange="this.form.submit()">
+                            @{
+                                bool isPendingStatus = selectedStatus == "Pending";
+                                bool isInProgressStatus = selectedStatus == "In Progress";
+                                bool isResolvedStatus = selectedStatus == "Resolved";
+                                bool isClosedStatus = selectedStatus == "Closed";
+                            }
+                            <option value="">Tất cả</option>
+                            <option value="Pending" selected="@isPendingStatus">Đang chờ</option>
+                            <option value="In Progress" selected="@isInProgressStatus">Đang xử lý</option>
+                            <option value="Resolved" selected="@isResolvedStatus">Đã giải quyết</option>
+                            <option value="Closed" selected="@isClosedStatus">Đã đóng</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="search">Tìm kiếm</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm..." value="@searchQuery">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3 d-flex align-items-end">
+                        <a href="/Admin/AdminFeedback" class="btn btn-secondary w-100">
+                            <i class="fas fa-sync-alt"></i> Làm mới
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Danh sách góp ý
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="feedbackTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Người dùng</th>
+                            <th>Loại</th>
+                            <th>Trạng thái</th>
+                            <th>Mức độ</th>
+                            <th>Ngày tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            string statusClass = item.Status switch
+                            {
+                                "Pending" => "bg-warning text-dark",
+                                "In Progress" => "bg-info text-white",
+                                "Resolved" => "bg-success text-white",
+                                "Closed" => "bg-secondary text-white",
+                                _ => ""
+                            };
+                            
+                            string priorityClass = item.Priority switch
+                            {
+                                "Low" => "bg-success text-white",
+                                "Medium" => "bg-info text-white",
+                                "High" => "bg-warning text-dark",
+                                "Urgent" => "bg-danger text-white",
+                                _ => ""
+                            };
+                            
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>
+                                    <a href="#" class="view-feedback" data-id="@item.Id">
+                                        @item.Subject
+                                    </a>
+                                </td>
+                                <td>
+                                    <div>@item.UserName</div>
+                                    <small class="text-muted">@item.UserEmail</small>
+                                </td>
+                                <td>
+                                    @switch (item.Category)
+                                    {
+                                        case "Bug Report":
+                                            <span class="badge bg-danger">Báo lỗi</span>
+                                            break;
+                                        case "Feature Request":
+                                            <span class="badge bg-primary">Đề xuất tính năng</span>
+                                            break;
+                                        case "General Feedback":
+                                            <span class="badge bg-info">Góp ý chung</span>
+                                            break;
+                                        case "Complaint":
+                                            <span class="badge bg-warning text-dark">Khiếu nại</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">@item.Category</span>
+                                            break;
+                                    }
+                                </td>
+                                <td><span class="badge @statusClass">@item.Status</span></td>
+                                <td><span class="badge @priorityClass">@item.Priority</span></td>
+                                <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary view-feedback" data-id="@item.Id">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-feedback" data-id="@item.Id">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Chi tiết feedback -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Chi tiết góp ý</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Người gửi:</strong>
+                            <span id="modal-user"></span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Email:</strong>
+                            <span id="modal-email"></span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Loại góp ý:</strong>
+                            <span id="modal-category"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Ngày tạo:</strong>
+                            <span id="modal-created"></span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Trạng thái:</strong>
+                            <span id="modal-status"></span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Mức độ ưu tiên:</strong>
+                            <span id="modal-priority"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="mb-3">
+                    <h5 id="modal-subject"></h5>
+                    <div class="card bg-light mb-3">
+                        <div class="card-body" id="modal-content"></div>
+                    </div>
+                </div>
+                <div id="response-section">
+                    <h6>Phản hồi của Admin:</h6>
+                    <div class="card bg-light mb-3">
+                        <div class="card-body" id="modal-response"></div>
+                    </div>
+                </div>
+                <hr />
+                <form id="updateFeedbackForm">
+                    <input type="hidden" id="feedback-id" name="id" />
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="update-status" class="form-label">Cập nhật trạng thái</label>
+                            <select class="form-select" id="update-status" name="status">
+                                <option value="Pending">Đang chờ</option>
+                                <option value="In Progress">Đang xử lý</option>
+                                <option value="Resolved">Đã giải quyết</option>
+                                <option value="Closed">Đã đóng</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="update-priority" class="form-label">Mức độ ưu tiên</label>
+                            <select class="form-select" id="update-priority" name="priority">
+                                <option value="Low">Thấp</option>
+                                <option value="Medium">Trung bình</option>
+                                <option value="High">Cao</option>
+                                <option value="Urgent">Khẩn cấp</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin-response" class="form-label">Phản hồi</label>
+                        <textarea class="form-control" id="admin-response" name="adminResponse" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="update-feedback">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa góp ý này không?</p>
+                <p class="text-danger">Hành động này không thể hoàn tác!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Toastr for notifications -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // DataTable
+            $('#feedbackTable').DataTable({
+                order: [[0, 'desc']],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json'
+                }
+            });
+            
+            // Xem chi tiết feedback
+            $('.view-feedback').click(function() {
+                const id = $(this).data('id');
+                
+                $.ajax({
+                    url: '/Admin/AdminFeedback/Details/' + id,
+                    type: 'GET',
+                    success: function(data) {
+                        // Hiển thị dữ liệu trong modal
+                        $('#feedback-id').val(data.id);
+                        $('#modal-user').text(data.userName);
+                        $('#modal-email').text(data.userEmail);
+                        $('#modal-category').text(data.category);
+                        $('#modal-created').text(new Date(data.createdAt).toLocaleString('vi-VN'));
+                        $('#modal-status').text(data.status);
+                        $('#modal-priority').text(data.priority);
+                        $('#modal-subject').text(data.subject);
+                        $('#modal-content').html(data.content.replace(/\n/g, '<br>'));
+                        
+                        // Hiển thị phản hồi nếu có
+                        if (data.adminResponse) {
+                            $('#response-section').show();
+                            $('#modal-response').html(data.adminResponse.replace(/\n/g, '<br>'));
+                        } else {
+                            $('#response-section').hide();
+                        }
+                        
+                        // Cập nhật giá trị của form
+                        $('#update-status').val(data.status);
+                        $('#update-priority').val(data.priority);
+                        $('#admin-response').val(data.adminResponse || '');
+                        
+                        // Hiển thị modal
+                        $('#feedbackModal').modal('show');
+                    },
+                    error: function() {
+                        toastr.error('Không thể tải thông tin góp ý');
+                    }
+                });
+            });
+            
+            // Cập nhật feedback
+            $('#update-feedback').click(function() {
+                const id = $('#feedback-id').val();
+                const status = $('#update-status').val();
+                const priority = $('#update-priority').val();
+                const adminResponse = $('#admin-response').val();
+                
+                $.ajax({
+                    url: '/Admin/AdminFeedback/UpdateStatus',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        status: status,
+                        priority: priority,
+                        adminResponse: adminResponse,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success(response.message);
+                            $('#feedbackModal').modal('hide');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Đã xảy ra lỗi khi cập nhật');
+                    }
+                });
+            });
+            
+            // Xóa feedback
+            let deleteId;
+            
+            $('.delete-feedback').click(function() {
+                deleteId = $(this).data('id');
+                $('#deleteModal').modal('show');
+            });
+            
+            $('#confirm-delete').click(function() {
+                $.ajax({
+                    url: '/Admin/AdminFeedback/Delete/' + deleteId,
+                    type: 'POST',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success(response.message);
+                            $('#deleteModal').modal('hide');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Đã xảy ra lỗi khi xóa');
+                    }
+                });
+            });
+        });
+    </script>
+}
+

@@ -110,7 +110,7 @@
                         {
                             <!-- Notifications -->
                             <div class="nav-item dropdown">
-                                <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button" aria-expanded="false">
+                                <a class="nav-link nav-btn position-relative" href="#" id="notificationDropdown" role="button" aria-expanded="false" data-user-logged-in="true">
                                     <i class="fas fa-bell"></i>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" id="notification-count">0</span>
                                 </a>
@@ -285,14 +285,72 @@
             <i class="fas fa-heart"></i>
             <span class="badge bg-success fab-badge" id="fab-saved-count">@ViewBag.SavedJobCount</span>
         </a>
-        <a href="#" class="fab-item" title="Góp ý">
+        <a href="#" class="fab-item" title="Góp ý" data-bs-toggle="modal" data-bs-target="#feedbackModal">
             <i class="fas fa-comment-dots"></i>
         </a>
-        <a href="#" class="fab-item" title="Hỗ trợ">
-            <i class="fas fa-headset"></i>
+        <a href="@Url.Action("Index", "Feedback")" class="fab-item" title="Danh sách góp ý">
+            <i class="fas fa-list-alt"></i>
         </a>
     </div>
     }
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-primary text-white">
+                    <h5 class="modal-title" id="feedbackModalLabel">
+                        <i class="fas fa-comment-dots me-2"></i>Gửi góp ý nhanh
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quickFeedbackForm">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="mb-3">
+                            <label for="quickCategory" class="form-label">Loại góp ý <span class="text-danger">*</span></label>
+                            <select class="form-select" id="quickCategory" name="Category" required>
+                                <option value="">-- Chọn loại --</option>
+                                <option value="Bug Report">🐛 Báo lỗi</option>
+                                <option value="Feature Request">💡 Đề xuất tính năng</option>
+                                <option value="General Feedback">📝 Góp ý chung</option>
+                                <option value="Complaint">⚠️ Khiếu nại</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quickSubject" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="quickSubject" name="Subject" 
+                                   placeholder="Tóm tắt ngắn gọn..." maxlength="200" required>
+                            <div class="form-text"><span id="quickSubjectCount">0</span>/200</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quickContent" class="form-label">Nội dung <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="quickContent" name="Content" rows="5" 
+                                      placeholder="Mô tả chi tiết góp ý của bạn..." required></textarea>
+                        </div>
+
+                        <input type="hidden" name="Priority" value="Medium">
+
+                        <div class="alert alert-info mb-0">
+                            <small>
+                                <i class="fas fa-info-circle me-1"></i>
+                                Bạn cũng có thể sử dụng <a href="@Url.Action("Create", "Feedback")" target="_blank">form chi tiết</a> để gửi góp ý phức tạp hơn.
+                            </small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="quickSubmitBtn">
+                        <i class="fas fa-paper-plane me-2"></i>Gửi góp ý
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JavaScript Files -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -300,37 +358,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
     $(document).ready(function () {
-        function loadNotifications() {
-            $.get('/Notifications/GetLatest', function (data) {
-                let $list = $('#notification-list');
-                let $count = $('#notification-count');
-                $list.find('.notification-item').remove();
-                if (data.notifications && data.notifications.length > 0) {
-                    $count.text(data.notifications.length);
-                    $('#notification-empty').hide();
-                    data.notifications.forEach(function (n) {
-                        // $list.find('hr').first().before(
-                        //     $('<li class="notification-item">').html(
-                        //         `<a class="dropdown-item" href='#'>
-                        //             <div class="notification-content">
-                        //                 <div class="notification-text">${n.Message}</div>
-                        //                 <small class="text-muted">${n.TimeAgo}</small>
-                        //             </div>
-                        //         </a>`
-                        //     )
-                        // );
-                    });
-                } else {
-                    $count.text('0');
-                    $('#notification-empty').show();
-                }
-            });
-        }
-        $('#notificationDropdown').on('click', function () {
-            loadNotifications();
-        });
-        setInterval(loadNotifications, 60000);
-        loadNotifications();
+        // Notification logic is now handled in header.js
     });
 
     // Tự động đẩy floating-action-buttons lên khi chạm footer
@@ -351,7 +379,88 @@
     window.addEventListener('scroll', adjustFloatingButtons);
     window.addEventListener('resize', adjustFloatingButtons);
     document.addEventListener('DOMContentLoaded', adjustFloatingButtons);
+
+    // Quick Feedback Modal
+    $('#quickSubject').on('input', function() {
+        $('#quickSubjectCount').text($(this).val().length);
+    });
+
+    $('#quickSubmitBtn').on('click', function() {
+        var form = $('#quickFeedbackForm');
+        if (!form[0].checkValidity()) {
+            form[0].reportValidity();
+            return;
+        }
+
+        var $btn = $(this);
+        var originalText = $btn.html();
+        $btn.prop('disabled', true);
+        $btn.html('<span class="spinner-border spinner-border-sm me-2"></span>Đang gửi...');
+
+        $.ajax({
+            url: '@Url.Action("Create", "Feedback")',
+            type: 'POST',
+            data: form.serialize(),
+            success: function(response) {
+                if (response.success) {
+                    $('#feedbackModal').modal('hide');
+                    form[0].reset();
+                    $('#quickSubjectCount').text('0');
+                    
+                    // Show toast notification
+                    var toast = $('<div class="toast-notification success">' +
+                        '<i class="fas fa-check-circle me-2"></i>' + response.message +
+                        '</div>');
+                    $('body').append(toast);
+                    setTimeout(function() {
+                        toast.addClass('show');
+                    }, 100);
+                    setTimeout(function() {
+                        toast.removeClass('show');
+                        setTimeout(function() { toast.remove(); }, 300);
+                    }, 3000);
+                } else {
+                    alert(response.message);
+                }
+                $btn.prop('disabled', false);
+                $btn.html(originalText);
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi khi gửi feedback. Vui lòng thử lại.');
+                $btn.prop('disabled', false);
+                $btn.html(originalText);
+            }
+        });
+    });
     </script>
+
+    <style>
+    .toast-notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+    .toast-notification.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .toast-notification.success {
+        border-left: 4px solid #28a745;
+        color: #28a745;
+    }
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    </style>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

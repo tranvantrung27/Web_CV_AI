@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --primary-color: #4e73df;
+            --primary-dark: #2e59d9;
+            --success-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --info-color: #36b9cc;
+            --dark-color: #5a5c69;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fc;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--sidebar-bg) 0%, #34495e 100%);
+            color: var(--sidebar-text);
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background-color: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-brand h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-section-title {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #95a5a6;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            margin: 0.25rem 0.75rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(78, 115, 223, 0.3);
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .admin-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .admin-topbar {
+            background-color: #fff;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .topbar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .topbar-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: #858796;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Content Area */
+        .admin-main {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stats-card.primary { border-left-color: var(--primary-color); }
+        .stats-card.success { border-left-color: var(--success-color); }
+        .stats-card.warning { border-left-color: var(--warning-color); }
+        .stats-card.danger { border-left-color: var(--danger-color); }
+        .stats-card.info { border-left-color: var(--info-color); }
+
+        .stats-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .stats-icon.primary { background-color: var(--primary-color); }
+        .stats-icon.success { background-color: var(--success-color); }
+        .stats-icon.warning { background-color: var(--warning-color); }
+        .stats-icon.danger { background-color: var(--danger-color); }
+        .stats-icon.info { background-color: var(--info-color); }
+
+        .stats-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #858796;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        /* Table Styles */
+        .admin-table {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .table-header {
+            background-color: #f8f9fc;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .table-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .badge {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        .btn-action {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            margin: 0 0.25rem;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .admin-sidebar.show {
+                transform: translateX(0);
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .admin-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .admin-sidebar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .admin-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+
+        .admin-sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h4><i class="fas fa-user-shield"></i> Admin Panel</h4>
+        </div>
+
+        <ul class="sidebar-nav">
+            <li class="nav-section-title">TỔNG QUAN</li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")" 
+                   asp-controller="Admin" asp-action="Dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-section-title">QUẢN LÝ</li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Users" ? "active" : "")" 
+                   asp-controller="Admin" asp-action="Users">
+                    <i class="fas fa-users"></i>
+                    <span>Quản lý Người dùng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "JobPosts" ? "active" : "")" 
+                   asp-controller="Admin" asp-action="JobPosts">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Quản lý Tin tuyển dụng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Applications" ? "active" : "")" 
+                   asp-controller="Admin" asp-action="Applications">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Quản lý Đơn ứng tuyển</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminFeedback" ? "active" : "")" 
+                   asp-controller="AdminFeedback" asp-action="Index">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Quản lý Góp ý</span>
+                </a>
+            </li>
+
+            <li class="nav-section-title">HỆ THỐNG</li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+            <h1 class="topbar-title">@ViewData["Title"]</h1>
+            <div class="topbar-user">
+                <div class="user-info">
+                    <div class="user-name">@Context.Session.GetString("UserName")</div>
+                    <div class="user-role">Administrator</div>
+                </div>
+                <div class="user-avatar">
+                    @(Context.Session.GetString("UserName")?.Substring(0, 1).ToUpper())
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="admin-main">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

@@ -2,7 +2,14 @@
 @using CV_AI.Models.CV;
 
 @{
-    var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+    // Kiểm tra cả User.Identity và Session
+    var userId = Context.Session.GetString("UserID");
+    var userIdentityAuth = User?.Identity?.IsAuthenticated ?? false;
+    var isAuthenticated = userIdentityAuth || !string.IsNullOrEmpty(userId);
+    
+    // Debug - xóa dòng này sau khi test
+    var debugInfo = $"User.Identity.IsAuthenticated: {userIdentityAuth}, SessionUserID: {userId}, Final: {isAuthenticated}";
+    
     ViewData["Title"] = "Đánh giá CV";
     string? evaluationResult = TempData["EvaluationResult"] as string;
     string? evaluationModelJson = TempData["EvaluationModel"] as string;
@@ -37,6 +44,10 @@
             <p class="text-center mb-4" style="color: #555;">
                 Vui lòng <a href="/Account/Login" class="fw-bold text-decoration-underline text-primary">đăng nhập</a> để sử dụng chức năng đánh giá CV bằng AI.
             </p>
+            <!-- Debug Info - Remove after testing -->
+            <div class="alert alert-info small" style="font-size: 0.8rem;">
+                <strong>Debug:</strong> @debugInfo
+            </div>
         </div>
     </div>
     return;

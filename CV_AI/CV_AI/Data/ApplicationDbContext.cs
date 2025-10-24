@@ -20,6 +20,7 @@ namespace CV_AI.Data
         public DbSet<SavedJob> SavedJobs { get; set; }
         public DbSet<CV_AI.Models.Notification> Notifications { get; set; }
         public DbSet<SavedCV> SavedCVs { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

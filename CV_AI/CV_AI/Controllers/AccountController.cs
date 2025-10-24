@@ -37,33 +37,46 @@ namespace CV_AI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hashedPassword = HashPassword(model.Password);
                 var user = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == model.Email && u.PasswordHash == hashedPassword && u.IsActive);
+                    .FirstOrDefaultAsync(u => u.Email == model.Email && u.IsActive);
 
-                if (user != null)
+                if (user != null && !string.IsNullOrEmpty(user.PasswordHash))
                 {
-                    // Set session
-                    HttpContext.Session.SetString("UserID", user.Id);
-                    HttpContext.Session.SetString("UserEmail", user.Email);
-                    HttpContext.Session.SetString("UserRole", user.Role);
-                    HttpContext.Session.SetString("UserName", user.FullName);
+                    // Kiểm tra password bằng cả 2 cách: Identity PasswordHasher và SHA256
+                    var passwordHasher = new PasswordHasher<User>();
+                    var verifyResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+                    
+                    bool isPasswordValid = verifyResult == PasswordVerificationResult.Success || 
+                                          verifyResult == PasswordVerificationResult.SuccessRehashNeeded ||
+                                          user.PasswordHash == HashPassword(model.Password); // Fallback cho user cũ dùng SHA256
 
-                    // Mặc dù dùng session, vẫn tạo cookie xác thực để [Authorize] hoạt động
-                    var claims = new List<Claim>
+                    if (isPasswordValid)
                     {
-                        new Claim(ClaimTypes.Name, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role),
-                    };
-                    var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-                    await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
+                        // Set session
+                        HttpContext.Session.SetString("UserID", user.Id);
+                        HttpContext.Session.SetString("UserEmail", user.Email ?? "");
+                        HttpContext.Session.SetString("UserRole", user.Role);
+                        HttpContext.Session.SetString("UserName", user.FullName);
 
-                    return RedirectToAction("Index", "Home");
+                        // Mặc dù dùng session, vẫn tạo cookie xác thực để [Authorize] hoạt động
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.Email ?? ""),
+                            new Claim(ClaimTypes.Role, user.Role),
+                        };
+                        var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+                        await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
+
+                        // Redirect based on role
+                        if (user.Role == "Admin")
+                        {
+                            return RedirectToAction("Dashboard", "Admin");
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Email hoặc mật khẩu không đúng");
-                }
+                
+                ModelState.AddModelError("", "Email hoặc mật khẩu không đúng");
             }
             return View(model);
         }
@@ -81,6 +94,13 @@ namespace CV_AI.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Prevent users from registering as Admin
+                if (model.Role == "Admin")
+                {
+                    ModelState.AddModelError("Role", "Không thể đăng ký với vai trò Quản trị viên");
+                    return View(model);
+                }
+
                 // Check if email already exists
                 if (await _context.Users.AnyAsync(u => u.Email == model.Email))
                 {
@@ -168,6 +188,11 @@ namespace CV_AI.Controllers
             if (result.Succeeded)
             {
                 var email = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Email);
+                if (string.IsNullOrEmpty(email))
+                {
+                    ModelState.AddModelError(string.Empty, "Không thể lấy email từ thông tin đăng nhập ngoài.");
+                    return RedirectToAction("Login");
+                }
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null)
                 {
@@ -180,6 +205,12 @@ namespace CV_AI.Controllers
                     HttpContext.Session.SetString("UserEmail", user.Email ?? "");
                     HttpContext.Session.SetString("UserRole", user.Role);
                     HttpContext.Session.SetString("UserName", user.FullName);
+                    
+                    // Redirect based on role
+                    if (user.Role == "Admin")
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
                 }
                 return RedirectToAction("Index", "Home");
             }

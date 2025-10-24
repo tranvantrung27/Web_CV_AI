@@ -11,6 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+    {
+        policy.WithOrigins("http://localhost:5000", "https://localhost:7000", "http://localhost:5068")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 // Add HttpClient
 builder.Services.AddHttpClient();
 
@@ -55,6 +67,22 @@ builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 
+// Seed Admin user
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<User>>();
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        await AdminSeeder.SeedAdminUser(userManager, context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error seeding admin: {ex.Message}");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -67,6 +95,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Use CORS
+app.UseCors("AllowLocalhost");
 
 app.UseSession();
 app.UseCookiePolicy(new CookiePolicyOptions

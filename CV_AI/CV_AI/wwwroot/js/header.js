@@ -278,9 +278,16 @@ function initializeNotifications() {
     const notificationList = $('#notification-list');
     const notificationBadge = $('#notification-count');
 
+    // Only initialize if notification dropdown exists (which means user is logged in)
     if (notificationDropdown.length === 0) {
         return;
     }
+    
+    // Double check user is logged in via data attribute
+    if (!notificationDropdown.data('user-logged-in')) {
+        return;
+    }
+    
     loadNotifications();
 
     function loadNotifications() {
@@ -321,8 +328,14 @@ function initializeNotifications() {
                     notificationList.html('<li><div class="text-center text-muted py-2">Không có thông báo mới</div></li>');
                 }
             },
-            error: function() {
-                notificationList.html('<li><a class="dropdown-item text-danger" href="#">Lỗi khi tải thông báo</a></li>');
+            error: function(xhr, status, error) {
+                // Only show error if it's not 401 (unauthorized)
+                if (xhr.status !== 401) {
+                    notificationList.html('<li><a class="dropdown-item text-danger" href="#">Lỗi khi tải thông báo</a></li>');
+                } else {
+                    // User not logged in, hide badge and show nothing
+                    updateNotificationBadge(0);
+                }
             }
         });
     }
@@ -360,7 +373,14 @@ function initializeResponsiveMenu() {
 
     // Smooth scroll for anchor links
     $('a[href^="#"]').on('click', function (e) {
-        const target = $(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        
+        // Skip if href is just "#" or empty
+        if (!href || href === '#' || href.length <= 1) {
+            return;
+        }
+        
+        const target = $(href);
         if (target.length) {
             e.preventDefault();
             $('html, body').stop().animate({

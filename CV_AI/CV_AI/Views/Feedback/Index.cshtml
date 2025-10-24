@@ -1,0 +1,257 @@
+@model IEnumerable<CV_AI.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Danh sách góp ý";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-comments me-2"></i>Góp ý của tôi
+                    </h2>
+                    <p class="text-muted">Quản lý và theo dõi các góp ý bạn đã gửi</p>
+                </div>
+                <div>
+                    <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>Gửi góp ý mới
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Loại góp ý</label>
+                            <select name="category" class="form-select">
+                                <option value="">Tất cả</option>
+                                @{
+                                    var selectedBugReport = ViewBag.Category == "Bug Report";
+                                    var selectedFeature = ViewBag.Category == "Feature Request";
+                                    var selectedGeneral = ViewBag.Category == "General Feedback";
+                                    var selectedComplaint = ViewBag.Category == "Complaint";
+                                }
+                                <option value="Bug Report" selected="@selectedBugReport">Báo lỗi</option>
+                                <option value="Feature Request" selected="@selectedFeature">Đề xuất tính năng</option>
+                                <option value="General Feedback" selected="@selectedGeneral">Góp ý chung</option>
+                                <option value="Complaint" selected="@selectedComplaint">Khiếu nại</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Trạng thái</label>
+                            <select name="status" class="form-select">
+                                <option value="">Tất cả</option>
+                                @{
+                                    var selectedPending = ViewBag.Status == "Pending";
+                                    var selectedInProgress = ViewBag.Status == "In Progress";
+                                    var selectedResolved = ViewBag.Status == "Resolved";
+                                    var selectedClosed = ViewBag.Status == "Closed";
+                                }
+                                <option value="Pending" selected="@selectedPending">Đang chờ</option>
+                                <option value="In Progress" selected="@selectedInProgress">Đang xử lý</option>
+                                <option value="Resolved" selected="@selectedResolved">Đã giải quyết</option>
+                                <option value="Closed" selected="@selectedClosed">Đã đóng</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Tìm kiếm</label>
+                            <input type="text" name="search" class="form-control" 
+                                   placeholder="Tìm theo tiêu đề hoặc nội dung..." 
+                                   value="@ViewBag.Search">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-info w-100">
+                                <i class="fas fa-search me-2"></i>Lọc
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback List -->
+    <div class="row">
+        <div class="col-12">
+            @if (Model.Any())
+            {
+                <div class="row g-4">
+                    @foreach (var feedback in Model)
+                    {
+                        <div class="col-lg-6 col-xl-4">
+                            <div class="card h-100 feedback-card shadow-sm">
+                                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                    <div>
+                                        @switch (feedback.Category)
+                                        {
+                                            case "Bug Report":
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-bug me-1"></i>Báo lỗi
+                                                </span>
+                                                break;
+                                            case "Feature Request":
+                                                <span class="badge bg-info">
+                                                    <i class="fas fa-lightbulb me-1"></i>Tính năng
+                                                </span>
+                                                break;
+                                            case "Complaint":
+                                                <span class="badge bg-warning">
+                                                    <i class="fas fa-exclamation-triangle me-1"></i>Khiếu nại
+                                                </span>
+                                                break;
+                                            default:
+                                                <span class="badge bg-secondary">
+                                                    <i class="fas fa-comment me-1"></i>Góp ý chung
+                                                </span>
+                                                break;
+                                        }
+                                    </div>
+                                    <div>
+                                        @switch (feedback.Status)
+                                        {
+                                            case "Pending":
+                                                <span class="badge bg-warning text-dark">Đang chờ</span>
+                                                break;
+                                            case "In Progress":
+                                                <span class="badge bg-primary">Đang xử lý</span>
+                                                break;
+                                            case "Resolved":
+                                                <span class="badge bg-success">Đã giải quyết</span>
+                                                break;
+                                            case "Closed":
+                                                <span class="badge bg-secondary">Đã đóng</span>
+                                                break;
+                                        }
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@feedback.Subject</h5>
+                                    <p class="card-text text-muted">
+                                        @(feedback.Content.Length > 150 ? feedback.Content.Substring(0, 150) + "..." : feedback.Content)
+                                    </p>
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            @feedback.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                        </small>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(feedback.AdminResponse))
+                                    {
+                                        <div class="alert alert-success mb-3">
+                                            <strong><i class="fas fa-reply me-2"></i>Phản hồi:</strong>
+                                            <p class="mb-0 mt-2">@feedback.AdminResponse</p>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="card-footer bg-white d-flex gap-2 justify-content-between">
+                                    <a href="@Url.Action("Details", new { id = feedback.Id })" 
+                                       class="btn btn-sm btn-outline-primary flex-grow-1">
+                                        <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                    </a>
+                                    @if (feedback.Status == "Pending")
+                                    {
+                                        <button type="button" 
+                                                class="btn btn-sm btn-outline-danger" 
+                                                onclick="deleteFeedback(@feedback.Id)">
+                                            <i class="fas fa-trash me-1"></i>Xóa
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="card text-center py-5">
+                    <div class="card-body">
+                        <i class="fas fa-inbox fa-5x text-muted mb-4"></i>
+                        <h4 class="text-muted">Chưa có góp ý nào</h4>
+                        <p class="text-muted mb-4">Bạn chưa gửi góp ý nào. Hãy chia sẻ ý kiến của bạn để giúp chúng tôi cải thiện dịch vụ!</p>
+                        <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus me-2"></i>Gửi góp ý đầu tiên
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+.feedback-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e0e0e0;
+}
+
+.feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+</style>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function deleteFeedback(id) {
+    Swal.fire({
+        title: 'Xác nhận xóa?',
+        text: "Bạn có chắc chắn muốn xóa góp ý này?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Feedback")' + '/' + id,
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công!',
+                            text: response.message,
+                            timer: 2000
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Đã xảy ra lỗi khi xóa feedback.'
+                    });
+                }
+            });
+        }
+    });
+}
+</script>
+@Html.AntiForgeryToken()
+}
+

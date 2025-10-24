@@ -1,0 +1,275 @@
+@model CV_AI.Models.Feedback
+
+@{
+    ViewData["Title"] = "Chi tiết góp ý";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Back Button -->
+            <div class="mb-3">
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                </a>
+            </div>
+
+            <!-- Feedback Details Card -->
+            <div class="card shadow-lg border-0">
+                <!-- Header -->
+                <div class="card-header bg-gradient-primary text-white py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h3 class="mb-2">@Model.Subject</h3>
+                            <div class="d-flex gap-2 flex-wrap">
+                                @switch (Model.Category)
+                                {
+                                    case "Bug Report":
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-bug me-1"></i>Báo lỗi
+                                        </span>
+                                        break;
+                                    case "Feature Request":
+                                        <span class="badge bg-info">
+                                            <i class="fas fa-lightbulb me-1"></i>Đề xuất tính năng
+                                        </span>
+                                        break;
+                                    case "Complaint":
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="fas fa-exclamation-triangle me-1"></i>Khiếu nại
+                                        </span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-light text-dark">
+                                            <i class="fas fa-comment me-1"></i>Góp ý chung
+                                        </span>
+                                        break;
+                                }
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-flag me-1"></i>Độ ưu tiên: @Model.Priority
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            @switch (Model.Status)
+                            {
+                                case "Pending":
+                                    <span class="badge bg-warning text-dark fs-6">
+                                        <i class="fas fa-clock me-1"></i>Đang chờ
+                                    </span>
+                                    break;
+                                case "In Progress":
+                                    <span class="badge bg-info fs-6">
+                                        <i class="fas fa-spinner me-1"></i>Đang xử lý
+                                    </span>
+                                    break;
+                                case "Resolved":
+                                    <span class="badge bg-success fs-6">
+                                        <i class="fas fa-check-circle me-1"></i>Đã giải quyết
+                                    </span>
+                                    break;
+                                case "Closed":
+                                    <span class="badge bg-secondary fs-6">
+                                        <i class="fas fa-times-circle me-1"></i>Đã đóng
+                                    </span>
+                                    break;
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Timeline -->
+                    <div class="mb-4">
+                        <h5 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-history me-2"></i>Thời gian
+                        </h5>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <i class="fas fa-paper-plane text-primary"></i>
+                                <strong>Đã gửi:</strong>
+                                <span class="text-muted">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                <div class="timeline-item">
+                                    <i class="fas fa-edit text-info"></i>
+                                    <strong>Cập nhật lần cuối:</strong>
+                                    <span class="text-muted">@Model.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                                </div>
+                            }
+                            @if (Model.ResolvedAt.HasValue)
+                            {
+                                <div class="timeline-item">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    <strong>Đã giải quyết:</strong>
+                                    <span class="text-muted">@Model.ResolvedAt.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="mb-4">
+                        <h5 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-file-alt me-2"></i>Nội dung góp ý
+                        </h5>
+                        <div class="p-3 bg-light rounded">
+                            <p class="mb-0 white-space-pre-line">@Model.Content</p>
+                        </div>
+                    </div>
+
+                    <!-- Admin Response -->
+                    @if (!string.IsNullOrEmpty(Model.AdminResponse))
+                    {
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2 mb-3 text-success">
+                                <i class="fas fa-reply me-2"></i>Phản hồi từ Admin
+                            </h5>
+                            <div class="alert alert-success">
+                                <p class="mb-0 white-space-pre-line">@Model.AdminResponse</p>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Status == "Pending")
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Góp ý của bạn đang chờ được xem xét. Chúng tôi sẽ phản hồi sớm nhất có thể.
+                        </div>
+                    }
+                    else if (Model.Status == "In Progress")
+                    {
+                        <div class="alert alert-primary">
+                            <i class="fas fa-spinner me-2"></i>
+                            Góp ý của bạn đang được xử lý. Vui lòng theo dõi để nhận phản hồi.
+                        </div>
+                    }
+
+                    <!-- Contact Info -->
+                    <div class="mt-4 p-3 bg-light rounded">
+                        <h6 class="mb-2">
+                            <i class="fas fa-user me-2"></i>Thông tin liên hệ
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-1">
+                                    <strong>Họ tên:</strong> @Model.UserName
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-1">
+                                    <strong>Email:</strong> @Model.UserEmail
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="card-footer bg-white d-flex justify-content-between">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại
+                    </a>
+                    @if (Model.Status == "Pending")
+                    {
+                        <button type="button" class="btn btn-danger" onclick="deleteFeedback(@Model.Id)">
+                            <i class="fas fa-trash me-2"></i>Xóa góp ý
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.timeline {
+    padding-left: 0;
+    list-style: none;
+}
+
+.timeline-item {
+    padding: 10px 0;
+    border-left: 2px solid #e9ecef;
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.timeline-item i {
+    position: absolute;
+    left: -10px;
+    background: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.white-space-pre-line {
+    white-space: pre-line;
+}
+</style>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function deleteFeedback(id) {
+    Swal.fire({
+        title: 'Xác nhận xóa?',
+        text: "Bạn có chắc chắn muốn xóa góp ý này? Hành động này không thể hoàn tác.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Feedback")' + '/' + id,
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công!',
+                            text: response.message,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = '@Url.Action("Index")';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Đã xảy ra lỗi khi xóa feedback.'
+                    });
+                }
+            });
+        }
+    });
+}
+</script>
+@Html.AntiForgeryToken()
+}
+

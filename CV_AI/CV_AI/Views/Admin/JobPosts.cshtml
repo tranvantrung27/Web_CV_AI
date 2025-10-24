@@ -1,0 +1,166 @@
+@model IEnumerable<CV_AI.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Quản lý Tin tuyển dụng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="admin-table">
+    <div class="table-header d-flex justify-content-between align-items-center">
+        <h5 class="table-title mb-0">
+            <i class="fas fa-briefcase"></i>
+            Danh sách Tin tuyển dụng (@Model.Count())
+        </h5>
+        <div class="d-flex gap-2">
+            <form method="get" class="d-flex gap-2">
+                <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm..." 
+                       value="@ViewBag.SearchTerm" style="min-width: 250px;">
+                <select name="isActive" class="form-select" style="min-width: 150px;">
+                    <option value="">Tất cả</option>
+                    <option value="true" selected="@(ViewBag.IsActive == true)">Đang hoạt động</option>
+                    <option value="false" selected="@(ViewBag.IsActive == false)">Đã đóng</option>
+                </select>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Tìm
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Tiêu đề</th>
+                    <th>Công ty</th>
+                    <th>Lương</th>
+                    <th>Địa điểm</th>
+                    <th>Ngày đăng</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in Model)
+                {
+                    <tr>
+                        <td><strong>#@job.ID_JobPost</strong></td>
+                        <td>
+                            <div>
+                                <strong>@job.Title</strong>
+                                @if (job.JobPostCategories != null && job.JobPostCategories.Any())
+                                {
+                                    <div class="mt-1">
+                                        @foreach (var jpc in job.JobPostCategories)
+                                        {
+                                            <span class="badge bg-secondary me-1" style="font-size:0.7rem;">
+                                                @(jpc.Category?.Name ?? "N/A")
+                                            </span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @if (job.Employer != null)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-building text-muted me-2"></i>
+                                    <span>@job.Employer.CompanyName</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">N/A</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(job.Salary))
+                            {
+                                <small>@job.Salary</small>
+                            }
+                            else
+                            {
+                                <small class="text-muted">Thỏa thuận</small>
+                            }
+                        </td>
+                        <td>
+                            <small>
+                                <i class="fas fa-map-marker-alt text-danger"></i>
+                                @job.Location
+                            </small>
+                        </td>
+                        <td>
+                            <small>@job.PostedDate.ToString("dd/MM/yyyy")</small>
+                        </td>
+                        <td>
+                            @if (job.IsActive)
+                            {
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle"></i> Đang tuyển
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    <i class="fas fa-times-circle"></i> Đã đóng
+                                </span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <a href="/Job/Details/@job.ID_JobPost" class="btn btn-sm btn-info btn-action" target="_blank">
+                                <i class="fas fa-eye"></i> Xem
+                            </a>
+                            <button class="btn btn-sm btn-warning btn-action" onclick="toggleJobPostStatus(@job.ID_JobPost)">
+                                <i class="fas fa-@(job.IsActive ? "ban" : "check")"></i>
+                                @(job.IsActive ? "Đóng" : "Mở")
+                            </button>
+                            <button class="btn btn-sm btn-danger btn-action" onclick="deleteJobPost(@job.ID_JobPost, '@job.Title')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Không tìm thấy tin tuyển dụng nào</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function toggleJobPostStatus(jobPostId) {
+            if (confirm('Bạn có chắc muốn thay đổi trạng thái tin tuyển dụng này?')) {
+                $.post('/Admin/ToggleJobPostStatus', { jobPostId: jobPostId }, function(response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra!');
+                    }
+                });
+            }
+        }
+
+        function deleteJobPost(jobPostId, jobTitle) {
+            if (confirm(`Bạn có chắc muốn XÓA tin tuyển dụng "${jobTitle}"?\n\nHành động này KHÔNG THỂ HOÀN TÁC!`)) {
+                $.post('/Admin/DeleteJobPost', { jobPostId: jobPostId }, function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra!');
+                    }
+                });
+            }
+        }
+    </script>
+}
+

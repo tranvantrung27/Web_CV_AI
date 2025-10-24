@@ -25,10 +25,10 @@
                 <a href="#">
                     <i class="fas fa-user-cog me-2"></i>Quản lý tài khoản
                 </a>
-                <a asp-controller="Management" asp-action="ManagePosts" class="@(ViewContext.RouteData.Values["action"].ToString() == "ManagePosts" ? "active" : "")">
+                <a asp-controller="Management" asp-action="ManagePosts" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "ManagePosts" ? "active" : "")">
                     <i class="fas fa-newspaper me-2"></i>Quản lý Đăng tin
                 </a>
-                <a href="#">
+                <a asp-controller="Job" asp-action="MyJobs" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Job" && ViewContext.RouteData.Values["action"]?.ToString() == "MyJobs" ? "active" : "")">
                     <i class="fas fa-briefcase me-2"></i>Quản lý việc làm
                 </a>
                 <a href="/" class="sidebar-link">
