@@ -17,6 +17,8 @@ namespace CV_AI.Models
 
         public bool IsActive { get; set; } = true;
 
+        public string? AvatarPath { get; set; }
+
         // Navigation properties
         public virtual Candidate? Candidate { get; set; }
         public virtual Employer? Employer { get; set; }

@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CV_AI",
+    "\\CV_AI\\CV_AI",
+    "\\CV_AI\\CV_AI\\Services"
   ],
-  "SelectedNode": "\\CV_AI.sln",
+  "SelectedNode": "\\CV_AI\\CV_AI\\Services\\GeminiService.cs",
   "PreviewInSolutionExplorer": false
 }

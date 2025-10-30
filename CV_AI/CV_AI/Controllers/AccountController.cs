@@ -8,6 +8,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CV_AI.Controllers
 {
@@ -16,12 +19,14 @@ namespace CV_AI.Controllers
         private readonly ApplicationDbContext _context;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly IWebHostEnvironment _env;
 
-        public AccountController(ApplicationDbContext context, SignInManager<User> signInManager, UserManager<User> userManager)
+        public AccountController(ApplicationDbContext context, SignInManager<User> signInManager, UserManager<User> userManager, IWebHostEnvironment env)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
+            _env = env;
         }
 
         // GET: Account/Login
@@ -279,12 +284,9 @@ namespace CV_AI.Controllers
         // POST: Account/Profile
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Profile(User model)
+        public async Task<IActionResult> Profile(User model, IFormFile? avatarFile)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            // Luôn lấy user thực tế từ DB để có Role hiện tại
             var user = await _context.Users
                 .Include(u => u.Candidate)
                 .Include(u => u.Employer)
@@ -293,8 +295,64 @@ namespace CV_AI.Controllers
             {
                 return NotFound();
             }
+
+            // Bỏ validate cho Role vì không hiển thị trong form nhưng có [Required]
+            ModelState.Remove("Role");
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             user.FullName = model.FullName;
             user.Email = model.Email;
+
+            // Handle avatar upload
+            if (avatarFile != null && avatarFile.Length > 0)
+            {
+                var extension = Path.GetExtension(avatarFile.FileName).ToLowerInvariant();
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError("", "Định dạng ảnh không hợp lệ. Chỉ chấp nhận JPG, PNG, WEBP.");
+                    return View(model);
+                }
+                if (avatarFile.Length > 2 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("", "Kích thước ảnh tối đa 2MB.");
+                    return View(model);
+                }
+
+                var avatarsDir = Path.Combine(_env.WebRootPath, "images", "avatars");
+                Directory.CreateDirectory(avatarsDir);
+
+                var fileName = $"{user.Id}_{DateTime.UtcNow.Ticks}{extension}";
+                var filePath = Path.Combine(avatarsDir, fileName);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await avatarFile.CopyToAsync(stream);
+                }
+
+                // Delete old avatar if within avatars dir
+                if (!string.IsNullOrEmpty(user.AvatarPath))
+                {
+                    try
+                    {
+                        var oldPath = user.AvatarPath.Replace('/', Path.DirectorySeparatorChar);
+                        if (oldPath.StartsWith(Path.DirectorySeparatorChar))
+                        {
+                            oldPath = oldPath.TrimStart(Path.DirectorySeparatorChar);
+                        }
+                        var absoluteOld = Path.Combine(_env.WebRootPath, oldPath);
+                        if (absoluteOld.StartsWith(avatarsDir) && System.IO.File.Exists(absoluteOld))
+                        {
+                            System.IO.File.Delete(absoluteOld);
+                        }
+                    }
+                    catch { }
+                }
+
+                user.AvatarPath = $"/images/avatars/{fileName}";
+            }
             // Cập nhật thông tin ứng viên
             if (user.Role == "Candidate" && user.Candidate != null)
             {

@@ -12,8 +12,15 @@
                     {
                         <div class="alert alert-success">@TempData["SuccessMessage"]</div>
                     }
-                    <form asp-action="Profile" method="post" autocomplete="off">
+                    <form asp-action="Profile" method="post" autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" asp-for="Id" />
+                        <div class="d-flex flex-column align-items-center mb-3">
+                            <img id="avatarPreview" data-default="@(string.IsNullOrEmpty(Model.AvatarPath) ? "1" : "0")" src="@(string.IsNullOrEmpty(Model.AvatarPath) ? "/images/avatars/default-avatar.svg" : Model.AvatarPath)" alt="Avatar" referrerpolicy="no-referrer" style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.08);" />
+                            <div class="mt-2" style="max-width: 360px; width: 100%;">
+                                <input id="avatarFileInput" class="form-control" type="file" name="avatarFile" accept=".jpg,.jpeg,.png,.webp" onchange="window.__previewAvatar && window.__previewAvatar(this)" />
+                                <small class="text-muted">Tối đa 2MB. Định dạng: JPG, PNG, WEBP</small>
+                            </div>
+                        </div>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating position-relative">
@@ -152,4 +159,59 @@
 </style>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    (function () {
+        const input = document.getElementById('avatarFileInput');
+        const img = document.getElementById('avatarPreview');
+        if (!input || !img) return;
+        let currentUrl = null;
+
+        // Random avatar each page view (only when using default placeholder)
+        function trySetRandomAvatar() {
+            const isDefault = img.getAttribute('data-default') === '1' || (img.src && img.src.indexOf('default-avatar.svg') >= 0);
+            if (!isDefault) return;
+            const seed = Math.random().toString(36).slice(2) + Date.now();
+            const diceBearUrl = 'https://api.dicebear.com/7.x/identicon/svg?seed=' + seed + '&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9&cacheBust=' + Math.random();
+            const fallbackUrl = 'https://ui-avatars.com/api/?name=U&background=random&format=png&rounded=true&size=120&bold=true&length=1';
+            const testImg = new Image();
+            testImg.onload = function(){ img.src = diceBearUrl; };
+            testImg.onerror = function(){ img.src = fallbackUrl; };
+            testImg.src = diceBearUrl;
+        }
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(trySetRandomAvatar, 0);
+        } else {
+            document.addEventListener('DOMContentLoaded', trySetRandomAvatar);
+        }
+        window.__previewAvatar = function(el){
+            const file = el && el.files && el.files[0];
+            if (!file) return;
+            const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!allowed.includes(file.type)) {
+                alert('Chỉ chấp nhận JPG, PNG, WEBP');
+                el.value = '';
+                return;
+            }
+            if (currentUrl) URL.revokeObjectURL(currentUrl);
+            currentUrl = URL.createObjectURL(file);
+            img.src = currentUrl;
+        }
+        input.addEventListener('change', function () {
+            const file = this.files && this.files[0];
+            if (!file) return;
+            const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!allowed.includes(file.type)) {
+                alert('Chỉ chấp nhận JPG, PNG, WEBP');
+                this.value = '';
+                return;
+            }
+            if (currentUrl) URL.revokeObjectURL(currentUrl);
+            currentUrl = URL.createObjectURL(file);
+            img.src = currentUrl;
+        });
+        window.addEventListener('beforeunload', function () {
+            if (currentUrl) URL.revokeObjectURL(currentUrl);
+        });
+    })();
+    </script>
 } 
